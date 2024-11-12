@@ -28,11 +28,60 @@
   color: #61dafb;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.bgImage {
+  position: relative;
+  z-index: 0;
+  /* Ensures content appears above pseudo-elements */
+}
+
+.bgImage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../public/images/bgImage.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(2px) brightness(0.9);
+  /* Example filter - adjust as needed */
+  z-index: -2;
+  /* Places this pseudo-element behind .bgImage content and ::after */
+}
+
+.bgImage::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 117, 188, 0.5);
+  /* Semi-transparent overlay with your desired color */
+  pointer-events: none;
+  /* Allows interactions with underlying content */
+  z-index: -1;
+  /* Keeps it above the filtered image background */
 }
