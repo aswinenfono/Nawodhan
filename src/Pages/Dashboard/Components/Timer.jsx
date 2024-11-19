@@ -40,12 +40,12 @@ const Timer = ({ setButtons }) => {
     }, []);
 
     return (
-        <div className='p-[20px] h-[67vh]'>
+        <div className='py-[20px] h-[67vh]'>
             <ParagraphComp text='Apply for RFP' className='text-xl font-schibsted text-[#0F75BC] font-bold' />
-            <div className='flex justify-center'>
-                <div className='mt-[100px] w-[40%] p-[20px] rounded-lg bg-[#D9EFFF] flex flex-col justify-center gap-[20px]'>
-                    <ParagraphComp text='RFP Submission Opens on November 15 at 6:00 PM. Please prepare your proposals for submission by this time.' className='text-lg text-center font-schibsted text-[#0F75BC] font-[500]' />
-                    <div className='flex justify-center gap-[10px]'>
+            <div className='flex  justify-center'>
+                <div className='mt-[100px] py-[40px] w-[40%] p-[20px] rounded-lg bg-[#D9EFFF] flex flex-col justify-center gap-[20px]'>
+                    <ParagraphComp text='RFP Submission Opens on November 15 at 6:00 PM. Please prepare your proposals for submission by this time.' className='text-[17px] text-center font-schibsted text-[#0F75BC] font-[500]' />
+                    <div className='flex mt-[2] justify-center gap-[10px]'>
                         <div className='rounded-lg h-[100px] w-[100px] bg-[#0F75BC] flex flex-col justify-center items-center p-[20px]'>
                             <ParagraphComp className='text-[white] leading-[45px] mt-[0px] font-semibold text-[50px]' text={String(timeLeft.days).padStart(2, '0')} />
                             <ParagraphComp className='text-[white] text-[15px]' text='DAYS' />

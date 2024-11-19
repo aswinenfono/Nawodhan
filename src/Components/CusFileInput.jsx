@@ -1,15 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { styled, TextField, InputAdornment } from '@mui/material';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ClearIcon from '@mui/icons-material/Clear';
 import ButtonComp from './ButtonComp';
+import { ParagraphComp } from './ParagraphComp';
 
 const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => ({
     '& .MuiOutlinedInput-root': {
         minHeight: '56px',
         borderRadius: '8px',
-        backgroundColor: 'white',
         '& fieldset': {
             border: '2px solid #0F75BC',
         },
@@ -37,7 +34,6 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
             color: 'gray',
             top: '-10px',
             transform: 'translateY(0) scale(0.75)',
-            backgroundColor: 'white',
         }),
     },
     '& .MuiInputLabel-root.Mui-focused': {
@@ -112,7 +108,8 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
                 name={name}
                 {...props}
             />
-            <div className='flex'>
+            <div className=''>
+                <ParagraphComp className='text-md mb-[10px]  text-[#373737c1] ' text={label} />
                 <CustomTextField
                     className='w-[100%] cursor-pointer'
                     required={required}

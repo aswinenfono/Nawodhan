@@ -6,6 +6,7 @@ import ApplyForRFP from './Components/ApplyForRFP'
 import SubmissionForm from './Components/SubmissionForm'
 import Timer from './Components/Timer'
 import LandsDetails from './Components/LandsDetails'
+import LandDetailsPlus from './Components/LandDetailsPlus'
 
 const Dashboard = () => {
     const [Buttons, setButtons] = useState({ 'Lands': { 'Lands': true } })
@@ -17,22 +18,26 @@ const Dashboard = () => {
                 </div>
                 <div className='w-[85%] p-[20px]'>
                     <Header setButtons={setButtons} Buttons={Buttons} />
-                    {Buttons?.['Lands']?.['Lands'] ?
+                    {Buttons.Lands?.Lands ?
                         <Lands setButtons={setButtons} />
                         :
-                        Buttons?.['Apply for RFP']?.['Apply for RFP'] ?
+                        Buttons['Apply for RFP']?.['Apply for RFP'] ?
                             <ApplyForRFP setButtons={setButtons} />
                             :
-                            Buttons?.['Lands']?.['Lands Details'] ?
+                            Buttons.Lands?.['Lands Details'] ?
                                 <LandsDetails setButtons={setButtons} />
                                 :
-                                Buttons?.['Apply for RFP']?.['Submission Form'] ?
-                                    <SubmissionForm setButtons={setButtons} />
+                                Buttons.Lands?.['Lands Details Plus'] ?
+                                    <LandDetailsPlus setButtons={setButtons} />
                                     :
-                                    Buttons?.['Apply for RFP']?.['Timer'] ?
-                                        <Timer setButtons={setButtons} />
-                                        : ''
+                                    Buttons['Apply for RFP']?.['Submission Form'] ?
+                                        <SubmissionForm setButtons={setButtons} />
+                                        :
+                                        Buttons['Apply for RFP']?.Timer ?
+                                            <Timer setButtons={setButtons} />
+                                            : ''
                     }
+
                 </div>
             </div>
         </>

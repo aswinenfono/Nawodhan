@@ -3,6 +3,7 @@ import { ParagraphComp } from '../../../Components/ParagraphComp'
 import ButtonComp from '../../../Components/ButtonComp'
 import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
 import AdsClickOutlinedIcon from '@mui/icons-material/AdsClickOutlined';
+import ImageComp from '../../../Components/ImageComp';
 const Header = ({ setButtons, Buttons }) => {
     const updateButton = (name) => {
         if (name === 'Apply for RFP') {
@@ -13,9 +14,12 @@ const Header = ({ setButtons, Buttons }) => {
     }
     return (
         <>
-            <div className='mt-[20px]   p-[20px] w-[100%] bg-[#0F75BC] rounded-lg'>
-                <ParagraphComp className='font-schibsted text-sm text-[white]' text='WELCOME AHAMMED' />
-                <ParagraphComp className='font-schibsted text-lg mt-[6px] font-semibold text-[white]' text='Welcome to Your Agricultural Dashboard' />
+            <div className='mt-[20px]  flex justify-between  w-[100%] bg-[#0F75BC] rounded-2xl'>
+                <div className='p-[20px]'>
+                    <ParagraphComp className='font-schibsted text-sm text-[white]' text='WELCOME AHAMMED' />
+                    <ParagraphComp className='font-schibsted text-xl mt-[6px] font-semibold text-[white]' text='Welcome to Your Agricultural Dashboard' />
+                </div>
+                <ImageComp className='h-[130px]' source='./images/Star Group.png' />
             </div>
             <div className='flex gap-[10px] mt-[30px]'>
                 <ButtonComp onClick={() => { updateButton('Lands') }} className={`w-[100%] shadow-md transition-[2s] p-[10px] justify-center flex gap-[7px] text-center  ${Buttons?.['Lands'] ? 'bg-[#0F75BC] text-white' : 'bg-[white] text-black'} rounded-lg`}  >

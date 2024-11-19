@@ -7,7 +7,6 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
     '& .MuiOutlinedInput-root': {
         minHeight: '56px',
         borderRadius: '8px',
-        backgroundColor: 'white',
         '& fieldset': {
             border: '2px solid #0F75BC'
 
@@ -36,7 +35,6 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
             color: 'gray', // Label color when focused
             top: '-10px', // Move label above input when focused
             transform: 'translateY(0) scale(0.75)', // Shrink and position label above input  
-            backgroundColor: 'white', // Set background color for date input
         }),
     },
     '& .MuiInputLabel-root.Mui-focused': {
@@ -169,12 +167,14 @@ const CusSelect = (
                     name={name}
                     paddingTop={paddingTop}
                     className={`w-full ${className}`}
-                    InputProps={{
-                        ...params.InputProps,
-                        readOnly: readOnly || false,
+                    slotProps={{
+                        input: {
+                            readOnly: readOnly
+                        }
                     }}
                 />
             )}
+
             isOptionEqualToValue={(option, value) => {
                 return (option?.[mappingKey] || option?.option) === (value?.[mappingKey] || value?.option);
             }}

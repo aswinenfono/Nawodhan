@@ -2,13 +2,13 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import React from 'react';
 import styled from 'styled-components';
-const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => ({
+const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType, value }) => ({
     '& .MuiOutlinedInput-root': {
         minHeight: '56px',
         borderRadius: '8px',
-        backgroundColor: 'white',
+        position: 'relative',
         '& fieldset': {
-        
+
             border: '2px solid #0F75BC'
 
         },
@@ -19,6 +19,12 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
             borderColor: 'gray', // Border color when focused
         },
         paddingTop: paddingTop, // Dynamically set the paddingTop value
+    },
+    '& .MuiOutlinedInput-input': {
+        padding: '12px 16px',
+        lineHeight: '1.5',
+        paddingRight: '0px',
+        backgroundColor: value ? 'transparent' : 'transparent', // Example: Changes background color conditionally
     },
     '& .MuiInputLabel-root': {
         color: 'gray', // Default label color
@@ -32,18 +38,17 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
         lineHeight: '1.5', // Set label line height
         pointerEvents: 'none', // Prevent label from being clickable
         width: 'max-content',
+        zIndex: '8',
         ...(inputType === 'date' && {
             color: 'gray', // Label color when focused
             top: '-10px', // Move label above input when focused
             transform: 'translateY(0) scale(0.75)', // Shrink and position label above input  
-            backgroundColor: 'white', // Set background color for date input
         }),
     },
     '& .MuiInputLabel-root.Mui-focused': {
         color: 'gray', // Label color when focused
         top: '-10px', // Move label above input when focused
         transform: 'translateY(0) scale(0.75)', // Shrink and position label above input
-        backgroundColor: 'white', // Set background color for date input
 
     },
     '& .MuiInputLabel-shrink': {
@@ -58,8 +63,8 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
     '& .MuiFormHelperText-root': {
         marginTop: '4px', // Adjust margin for helper text below input
     },
-}));
-
+}
+));
 const CusInput = ({ value,
     onChange,
     label,
@@ -71,6 +76,8 @@ const CusInput = ({ value,
     className,
     readOnly
 }) => {
+
+
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);

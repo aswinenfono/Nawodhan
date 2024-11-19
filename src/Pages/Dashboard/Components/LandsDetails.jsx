@@ -1,15 +1,13 @@
 import React from 'react'
 import { ParagraphComp } from '../../../Components/ParagraphComp'
 import CusSelect from '../../../Components/CusSelect'
+import ButtonComp from '../../../Components/ButtonComp'
 
-const LandsDetails = () => {
+const LandsDetails = ({ setButtons }) => {
     return (
         <>
             <div className='p-[20px] h-[68vh] overflow-y-scroll overflow-x-hidden'>
                 <ParagraphComp text='LANDS DETAILS' className='text-xl mt-[20px] text-[#0F75BC] font-bold' />
-                <div className='mt-[20px]'>
-                    <CusSelect options={[]} label=' Select Land owner type' />
-                </div>
                 <div className='p-[20px] mt-[20px] rounded-lg bg-[#D9EFFF]'>
                     <div className='flex'>
                         <div className='flex w-[200px] justify-between'>
@@ -75,8 +73,8 @@ const LandsDetails = () => {
                     </div>
                 </div>
 
-                <div className='w-[100%] flex mt-[20px] justify-between'>
-                    <div className='p-[20px] w-[49%] rounded-lg bg-[#D9EFFF]'>
+                <div className='w-[100%] flex'>
+                    <div className='p-[20px] w-[50%] bg-[#D9EFFF]'>
                         <ParagraphComp text='Basic Land Details' className='text-md mt-[20px] font-bold text-[black]' />
                         <div className='flex mt-[20px]'>
                             <div className='flex w-[200px] justify-between'>
@@ -124,7 +122,7 @@ const LandsDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='p-[20px] w-[49%] rounded-lg bg-[#D9EFFF]'>
+                    <div className='p-[20px] w-[50%] bg-[#D9EFFF]'>
                         <ParagraphComp text='Total Availability Of land' className='text-md mt-[20px] font-bold text-[black]' />
                         <div className='flex mt-[20px]'>
                             <div className='flex w-[200px] justify-between'>
@@ -166,7 +164,7 @@ const LandsDetails = () => {
                     </div>
                 </div>
 
-                <div className='p-[20px] w-[100%] mt-[30px] rounded-lg bg-[#D9EFFF]'>
+                <div className='p-[20px] w-[100%]   bg-[#D9EFFF]'>
                     <ParagraphComp text='Physical Status Of land' className='text-md mt-[20px] font-bold text-[black]' />
                     <div className='flex justify-between w-[100%]'>
                         <div className='w-[48%] mt-[20px]'>
@@ -177,7 +175,7 @@ const LandsDetails = () => {
                         </div>
                     </div>
                 </div>
-                <div className='p-[20px] w-[100%] mt-[30px] rounded-lg bg-[#D9EFFF]'>
+                <div className='p-[20px] w-[100%]   bg-[#D9EFFF]'>
                     <ParagraphComp text='Details of boundaries' className='text-md mt-[20px] font-bold text-[black]' />
                     <div className='flex justify-between w-[100%]'>
                         <div className='w-[50%]'>
@@ -221,6 +219,30 @@ const LandsDetails = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className='p-[20px] w-[100%]   bg-[#D9EFFF]'>
+                    <ParagraphComp text='Basic amenities availability status' className='text-md mt-[20px] font-bold text-[black]' />
+                    <div className='flex justify-between w-[100%]'>
+                        <div className='w-[48%] mt-[20px]'>
+                            <CusSelect options={[]} label='irrigation fecility available' />
+                        </div>
+                        <div className='w-[48%] mt-[20px]' >
+                            <CusSelect options={[]} label='Roads available' />
+                        </div>
+                    </div>
+                    <div className='flex justify-between w-[100%]'>
+                        <div className='w-[48%] mt-[20px]'>
+                            <CusSelect options={[]} label='Electricity Available' />
+                        </div>
+                        <div className='w-[48%] mt-[20px]' >
+                            <CusSelect options={[]} label='Fencing  available' />
+                        </div>
+                    </div>
+                </div>
+                <div className='flex mt-[30px] justify-end'>
+                    <ButtonComp onClick={() => { setButtons({ 'Lands': { 'Lands Details Plus': true } }) }} className='bg-[#0F75BC] px-[20px] p-[5px] flex justify-center gap-[10px] items-center text-white rounded-md border-none'  >
+                        Next
+                    </ButtonComp>
                 </div>
 
             </div >
