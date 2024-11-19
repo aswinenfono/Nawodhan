@@ -38,7 +38,7 @@ axios.interceptors.response.use(undefined, (err) => {
     if (statusCode === 401 && err.config && !err.config.__isRetryRequest) {
         // Got an unauthorized, logout the user
         localStorage.clear();
-        window.location.pathname = '/signin';
+        // window.location.pathname = '/signin';
     }
     return Promise.reject(err);
 });

@@ -1,7 +1,22 @@
 import React from 'react'
 import { ParagraphComp } from '../../../Components/ParagraphComp'
 import CusSelect from '../../../Components/CusSelect'
-const LandDetailsPlus = ({ setButtons }) => {
+import { useQuery } from 'react-query';
+const LandDetailsPlus = ({ setButtons, landId }) => {
+  const { isLoading, data: Lands, error } = useQuery({
+    queryKey: 'LandDetails',
+    queryFn: LandsList(landId),
+    cacheTime: 1000 * 60 * 5, // Cache for 5 minutes
+    staleTime: 0, // Data will be considered stale immediately
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Add loading state
+  }
+
+  if (error) {
+    return <div>Error fetching data.</div>; // Handle error state
+  }
   return (
     <>
       <div className='p-[20px] h-[68vh] overflow-y-scroll overflow-x-hidden'>
