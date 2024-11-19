@@ -46,7 +46,7 @@ const SignIn = () => {
 
     const handleCreateSuccess = (data) => {
         console.log(data)
-        enqueueSnackbar(data.message, { variant: 'success' });
+        enqueueSnackbar(data?.message, { variant: 'success' });
     };
 
     const handleCreateError = (error) => {
@@ -61,7 +61,7 @@ const SignIn = () => {
     });
 
     const submitData = (data) => {
-        confirmLogin({ ...data, redirect_to: '' });
+        confirmLogin(data);
     };
 
     if (regLoading) return <h4>Loading...</h4>;
