@@ -8,5 +8,5 @@ export const login = async (payload) => {
         method: 'POST',
         data: payload,
     });
-    return response?.data;
-} 
+    return response?.data
+};
