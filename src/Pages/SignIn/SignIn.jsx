@@ -7,10 +7,11 @@ import { Form, Formik, useFormikContext } from 'formik'
 import { ParagraphComp } from '../../Components/ParagraphComp'
 import { useMutation } from 'react-query'
 import { enqueueSnackbar } from 'notistack'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../Store/auth/Login'
 
 const SignIn = () => {
+    const navigate = useNavigate()
     const FormInputs = [
         {
             label: 'Email',
@@ -48,7 +49,7 @@ const SignIn = () => {
     }, {});
 
     const handleCreateSuccess = (data) => {
-        console.log(data)
+        navigate('/dashboard')
         enqueueSnackbar(data?.message, { variant: 'success' });
     };
 

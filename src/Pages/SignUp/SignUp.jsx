@@ -8,11 +8,11 @@ import { ParagraphComp } from '../../Components/ParagraphComp'
 import { useMutation } from 'react-query'
 import { createUser } from '../../Store/auth/registration'
 import { enqueueSnackbar } from 'notistack'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // import {che } from '../../../public/images/bgImage.png'
 const SignUp = () => {
-
-    const FormInputs = [    
+    const navigate = useNavigate()
+    const FormInputs = [
         {
             label: 'Full Name',
             name: 'full_name',
@@ -90,7 +90,7 @@ const SignUp = () => {
     };
 
     const handleCreateSuccess = (data) => {
-        console.log("data>>>>", data)
+        navigate('/signin')
         enqueueSnackbar(data.message?.[1], { variant: 'success' });
     };
 

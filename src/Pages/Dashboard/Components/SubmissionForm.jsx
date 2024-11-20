@@ -257,7 +257,7 @@ const SubmissionForm = () => {
 
 
                 <ModalComp width='70%' padding={'20px'} closeModal={closeModal} modalIsOpen={isModalOpen} >
-                    <div className='p-[20px]'>
+                    <div className='p-[20px] h-[80vh] overflow-x-hidden overflow-scroll'>
                         <ParagraphComp text='Declaration' className='text-center font-bold text-2xl' />
                         <ParagraphComp text='1. Having examined the quotation document, we the undersigned herewith submit our response to your quotation notification dated for Cultivator for the (hereinafter referred to as the “KABCO”), in full conformity with the said tender document. ' className='text-start mt-[20px] text-md' />
                         <ParagraphComp text='2. We have read the provisions of the quotation/tender document and confirm that these are acceptable to us.  ' className='text-start mt-[10px] text-md' />
