@@ -9,7 +9,6 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
         borderRadius: '8px',
         '& fieldset': {
             border: '2px solid #0F75BC'
-
         },
         '&:hover fieldset': {
             borderColor: '#0F75BC', // Border color when hovering
@@ -115,6 +114,7 @@ const CusSelect = (
 
     return (
         <Autocomplete
+            readOnly={readOnly}
             style={{ width: '100%', zIndex: '88' }}
             options={sortedOptions}
             getOptionLabel={(option) => `${option?.[mappingKey] || option?.option}${exDataKey && option?.[exDataKey] ? ` - ${option?.[exDataKey]}` : ''}`}
@@ -167,11 +167,6 @@ const CusSelect = (
                     name={name}
                     paddingTop={paddingTop}
                     className={`w-full ${className}`}
-                    slotProps={{
-                        input: {
-                            readOnly: readOnly
-                        }
-                    }}
                 />
             )}
 

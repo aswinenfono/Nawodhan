@@ -43,6 +43,9 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType, value
             color: 'gray', // Label color when focused
             top: '-10px', // Move label above input when focused
             transform: 'translateY(0) scale(0.75)', // Shrink and position label above input  
+            backgroundColor: 'white',
+            paddingRight: '10px',
+            paddingLeft: '10px'
         }),
     },
     '& .MuiInputLabel-root.Mui-focused': {

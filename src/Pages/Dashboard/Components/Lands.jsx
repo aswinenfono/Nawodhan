@@ -2,8 +2,11 @@ import React from 'react'
 import { ParagraphComp } from '../../../Components/ParagraphComp'
 import { useQuery } from 'react-query';
 import { LandsList } from '../../../Store/DashBoard/DashBoard';
+import { useNavigate } from 'react-router-dom';
 
-const Lands = ({ setButtons, setLandId }) => {
+const Lands = ({ setLandId }) => {
+    const navigate = useNavigate()
+
     const { isLoading, data: Lands, error } = useQuery({
         queryKey: 'LandsList',
         queryFn: LandsList,
@@ -22,15 +25,14 @@ const Lands = ({ setButtons, setLandId }) => {
 
     const updateData = (name) => {
         setLandId(name)
-        setButtons({ ['Lands']: { ['Lands Details Plus']: true } })
-
+        navigate(`/dashboard/land-details-plus/${name}`); // Pass the landId as a URL parameter
     }
     return (
         <>
             <div>
                 <ParagraphComp text='LANDS ' className='text-2xl font-semibold mt-[30px] text-[#0F75BC]' />
             </div>
-            <div className='w-[100%] border-[3px] h-[55vh] overflow-y-scroll mt-[20px] rounded-xl border-[#0F75BC] p-[20px]'>
+            <div className='w-[100%] border-[3px] p-[20px] h-[55vh] overflow-y-scroll mt-[20px] rounded-xl border-[#0F75BC] '>
                 <table className='w-[100%]'>
                     <thead>
                         <tr>

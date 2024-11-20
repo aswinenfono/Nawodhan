@@ -2,12 +2,16 @@ import React from 'react'
 import { ParagraphComp } from '../../../Components/ParagraphComp'
 import CusSelect from '../../../Components/CusSelect'
 import { useQuery } from 'react-query';
-const LandDetailsPlus = ({ setButtons, landId }) => {
-  const { isLoading, data: Lands, error } = useQuery({
-    queryKey: 'LandDetails',
-    queryFn: LandsList(landId),
+import { LandDetailed } from '../../../Store/DashBoard/DashBoard';
+import { useParams } from 'react-router-dom';
+const LandDetailsPlus = () => {
+  const { landId } = useParams()
+  const { isLoading, data: LandsDt, error } = useQuery({
+    queryKey: ['LandDetails', landId], // It's good practice to include variables in the query key for dependency tracking
+    queryFn: () => LandDetailed(landId), // Correctly passing the function reference
     cacheTime: 1000 * 60 * 5, // Cache for 5 minutes
     staleTime: 0, // Data will be considered stale immediately
+    enabled: !!landId
   });
 
   if (isLoading) {
@@ -22,7 +26,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
       <div className='p-[20px] h-[68vh] overflow-y-scroll overflow-x-hidden'>
         <ParagraphComp text='LANDS DETAILS' className='text-xl mt-[20px] text-[#0F75BC] font-bold' />
         <div className='w-[100%] mt-[20px] '>
-          <CusSelect readOnly={true} options={[{ option: 'Plus' }]} label='Select Land owner type' value='Plus' />
+          <CusSelect readOnly={true} options={[{ option: LandsDt?.data?.select_land_owner_type }]} label='Select Land owner type' value={LandsDt?.data?.select_land_owner_type} />
         </div>
         <div className='p-[20px] mt-[20px] rounded-lg bg-[#D9EFFF]'>
           <ParagraphComp className='font-bold text-xl' text='for Plus' />
@@ -32,7 +36,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
               : &nbsp;
             </div>
             <div>
-              {/* <ParagraphComp className='' text='Muammed Shamas' /> */}
+              <ParagraphComp className='' text={LandsDt?.data?.name_of_the_institution} />
             </div>
 
           </div>
@@ -42,7 +46,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
               : &nbsp;
             </div>
             <div>
-              {/* <ParagraphComp className='' text='+91 0987662636' /> */}
+              <ParagraphComp className='' text={LandsDt?.contact_person_name} />
             </div>
 
           </div>
@@ -52,7 +56,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
               : &nbsp;
             </div>
             <div>
-              {/* <ParagraphComp className='' text='user@gmail.com' /> */}
+              <ParagraphComp className='' text={LandsDt?.data?.contact_person_name_designation} />
             </div>
 
           </div>
@@ -62,7 +66,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
               : &nbsp;
             </div>
             <div>
-              {/* <ParagraphComp className='' text='Kozhikode' /> */}
+              <ParagraphComp className='' text={LandsDt?.data?.contact_person_mobile} />
             </div>
 
           </div>
@@ -72,7 +76,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
               : &nbsp;
             </div>
             <div>
-              {/* <ParagraphComp className='' text='Kozhikode' /> */}
+              <ParagraphComp className='' text={LandsDt?.data?.contact_person_mail_id} />
             </div>
 
           </div>
@@ -82,7 +86,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
               : &nbsp;
             </div>
             <div>
-              {/* <ParagraphComp className='' text='Kozhikode' /> */}
+              <ParagraphComp className='' text={LandsDt?.data?.office_address} />
             </div>
 
           </div>
@@ -97,7 +101,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.village} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
@@ -106,7 +110,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.taluk} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
@@ -115,7 +119,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.district} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
@@ -133,7 +137,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.survey_no} />
               </div>
             </div>
           </div>
@@ -145,7 +149,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.total_availability_of_land_in_acres_} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
@@ -154,7 +158,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.intercropping_area_available} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
@@ -163,7 +167,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.existing_crops_name_if_any} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
@@ -172,7 +176,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text='' />
+                <ParagraphComp className='' text={LandsDt?.data?.coordinates_of_the_proposed_land} />
               </div>
             </div>
 
@@ -200,7 +204,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                   : &nbsp;
                 </div>
                 <div>
-                  <ParagraphComp className='' text='' />
+                  <ParagraphComp className='' text={LandsDt?.data?.east} />
                 </div>
               </div>
               <div className='flex mt-[20px]'>
@@ -209,7 +213,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                   : &nbsp;
                 </div>
                 <div>
-                  <ParagraphComp className='' text='' />
+                  <ParagraphComp className='' text={LandsDt?.data?.west} />
                 </div>
               </div>
             </div>
@@ -220,7 +224,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                   : &nbsp;
                 </div>
                 <div>
-                  <ParagraphComp className='' text='' />
+                  <ParagraphComp className='' text={LandsDt?.data?.north} />
                 </div>
               </div>
               <div className='flex mt-[20px]'>
@@ -229,7 +233,7 @@ const LandDetailsPlus = ({ setButtons, landId }) => {
                   : &nbsp;
                 </div>
                 <div>
-                  <ParagraphComp className='' text='' />
+                  <ParagraphComp className='' text={LandsDt?.data?.south} />
                 </div>
               </div>
             </div>

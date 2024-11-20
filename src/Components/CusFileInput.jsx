@@ -29,7 +29,7 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
         transition: 'all 0.2s ease-in-out', // Smooth transition for focus effects
         lineHeight: '1.5', // Set label line height
         pointerEvents: 'none', // Prevent label from being clickable
-        width: 'max-content',
+        width: '68%',
         ...(inputType === 'date' && {
             color: 'gray',
             top: '-10px',
@@ -79,8 +79,15 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
 
     const calculatePaddingTop = (label) => {
         const lineCount = label.split('\n').length;
-        const basePadding = label.length >= 350 ? 50 : label.length > 200 ? 30 : '';
-        const extraPadding = (lineCount - 1) * 10;
+        const basePadding =
+            label.length >= 350
+                ? 50
+                : label.length > 200
+                    ? 30
+                    : label.length > 30
+                        ? 30
+                        : 10; // Handle short labels with a default small padding
+        const extraPadding = (lineCount - 1) * 10; // Add padding for multiline labels
         return `${basePadding + extraPadding}px`;
     };
 
@@ -108,34 +115,33 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
                 name={name}
                 {...props}
             />
-            <div className=''>
-                <ParagraphComp className='text-md mb-[10px]  text-[#373737c1] ' text={label} />
+            <div style={{ position: 'relative', width: '100%' }}>
                 <CustomTextField
-                    className='w-[100%] cursor-pointer'
+                    className="w-[100%]"
                     required={required}
                     {...props}
-                    InputProps={{
-                        style: {
-                            color: 'black',
-                            borderColor: 'gray',
-                            cursor: 'pointer',
-                        },
-                        // readOnly: true,
-                        endAdornment: (
-                            <InputAdornment position="end" style={{ cursor: 'pointer', height: '100%', alignItems: 'center' }}>
-                                <div className='flex gap-[10px] items-center'>
-                                    <ButtonComp className='bg-[#EDEDED] p-[10px] rounded-md' text='Upload File' />
-                                </div>
-                            </InputAdornment>
-                        ),
-                    }}
+                    label={label}
                     id="outlined-file-input"
                     variant="outlined"
-                    placeholder='No File Choosen'
+                    placeholder="No File Chosen"
                     value={value ? value.slice(0, 200) : ''}
-                    onClick={handleIconClick} // Directly pass the function
+                    onClick={handleIconClick}
                     paddingTop={paddingTop}
                 />
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        right: '16px', // Adjust spacing from the right edge of the field
+                        transform: 'translateY(-50%)', // Vertically center the button
+                    }}
+                >
+                    <ButtonComp
+                        className="bg-[#EDEDED] p-[10px] rounded-md"
+                        text="Upload File"
+                        onClick={handleIconClick}
+                    />
+                </div>
             </div>
         </>
     );

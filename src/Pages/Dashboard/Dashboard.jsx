@@ -1,48 +1,40 @@
-import React, { useState } from 'react'
-import SideBar from './Components/SideBar'
-import Header from './Components/Header'
-import Lands from './Components/Lands'
-import ApplyForRFP from './Components/ApplyForRFP'
-import SubmissionForm from './Components/SubmissionForm'
-import Timer from './Components/Timer'
-import LandsDetails from './Components/LandsDetails'
-import LandDetailsPlus from './Components/LandDetailsPlus'
+// Dashboard.jsx
+import React, { useState } from 'react';
+import { Navigate, Route, Routes, } from 'react-router-dom';
+import SideBar from './Components/SideBar';
+import Header from './Components/Header';
+import Lands from './Components/Lands';
+import ApplyForRFP from './Components/ApplyForRFP';
+import SubmissionForm from './Components/SubmissionForm';
+import Timer from './Components/Timer';
+import LandDetailsPlus from './Components/LandDetailsPlus';
 
 const Dashboard = () => {
-    const [Buttons, setButtons] = useState({ 'Lands': { 'Lands': true } })
+    // const [Buttons, setButtons] = useState({ 'Lands': { 'Lands': true } })
     const [landId, setLandId] = useState()
-
     return (
-        <>
-            <div className='flex w-[100%]'>
-                <div className='w-[15%]'>
-                    <SideBar />
-                </div>
-                <div className='w-[85%] p-[20px]'>
-                    <Header setButtons={setButtons} Buttons={Buttons} />
-                    {Buttons.Lands?.Lands ?
-                        <Lands setLandId={setLandId} setButtons={setButtons} />
-                        :
-                        Buttons['Apply for RFP']?.['Apply for RFP'] ?
-                            <ApplyForRFP setButtons={setButtons} />
-                            :
-                            // Buttons.Lands?.['Lands Details'] ?
-                            // <LandsDetails setButtons={setButtons} setLandId={setLandId} />
-                            Buttons.Lands?.['Lands Details Plus'] ?
-                                <LandDetailsPlus landId={landId} setButtons={setButtons} />
-                                :
-                                Buttons['Apply for RFP']?.['Submission Form'] ?
-                                    <SubmissionForm setButtons={setButtons} />
-                                    :
-                                    Buttons['Apply for RFP']?.Timer ?
-                                        <Timer setButtons={setButtons} />
-                                        : ''
-                    }
-
-                </div>
+        <div className="flex w-[100%]">
+            <div className="w-[15%]">
+                <SideBar />
             </div>
-        </>
-    )
-}
+            <div className="w-[85%]">
+                <div className='p-[20px]'>
+                    <Header />
+                </div>
+                <div className='p-[20px]'>
+                    <Routes>
+                        <Route path="lands" element={<Lands setLandId={setLandId} />} />
+                        <Route path="apply-for-rfp" element={<ApplyForRFP setLandId={setLandId} />} />
+                        <Route path="submission-form" element={<SubmissionForm />} />
+                        <Route path="timer" element={<Timer />} />
+                        <Route path="land-details-plus/:landId" element={<LandDetailsPlus landId={landId} />} />
+                        <Route path="/" element={<Navigate to="lands" replace />} />
+                    </Routes>
+                </div>
 
-export default Dashboard
+            </div>
+        </div>
+    );
+};
+
+export default Dashboard;

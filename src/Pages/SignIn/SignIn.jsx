@@ -34,6 +34,9 @@ const SignIn = () => {
             if (field?.validation?.toLowerCase() === 'mobile') {
                 fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
             }
+            if (field?.validation?.toLowerCase() === 'email') {
+                fieldValidation = fieldValidation.email('Invalid Email Id');
+            }
             schema[field?.name] = fieldValidation.required('This field is required');
             return schema;
         }, {})
@@ -55,9 +58,9 @@ const SignIn = () => {
     };
 
     const { mutateAsync: confirmLogin, isLoading: regLoading } = useMutation({
-        mutationFn: login,
-        onSuccess: handleCreateSuccess,
-        onError: handleCreateError,
+        mutationFn: login,  // Your login function
+        onSuccess: handleCreateSuccess,  // Success callback
+        onError: handleCreateError,      // Error callback
     });
 
     const submitData = (data) => {

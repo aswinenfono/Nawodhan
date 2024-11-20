@@ -5,131 +5,329 @@ import CusInput from '../../../Components/CusInput';
 import CustomFileInput from '../../../Components/CusFileInput';
 import ButtonComp from '../../../Components/ButtonComp';
 import ModalComp from '../../../Components/ModalComp';
+import * as Yup from 'yup';
+import { Form, Formik, useFormikContext } from 'formik';
+import { useMutation } from 'react-query';
+import { enqueueSnackbar } from 'notistack';
+import { TechnicalPost } from '../../../Store/DashBoard/DashBoard';
+import { useNavigate } from 'react-router-dom';
 const ApplyForRFP = ({ setButtons }) => {
-    const [isModalOpen, setIsModalOpen] = useState(true)
     const QualificationForm = [
 
         {
             label: 'Enter Your Name',
-            name: 'full_name',
+            name: 'name1',
             type: 'text',
         },
         {
             label: 'Age',
-            name: 'full_name',
-            type: 'text',
+            name: 'age',
+            type: 'number',
         },
         {
             label: 'Citizenship Status',
-            name: 'full_name',
+            name: 'citizenship_status',
             type: 'select',
+            options: [
+                {
+                    option: 'Indian'
+                },
+                {
+                    option: 'NRI'
+                }
+            ]
         },
         {
             label: 'Age Group',
-            name: 'full_name',
+            name: 'age_group',
             type: 'select',
-            parameter: 'Qualification and Scoring Matrix'
+            parameter: 'Qualification and Scoring Matrix',
+            options: [
+                {
+                    option: '18-27 years'
+                },
+                {
+                    option: '28-35 years'
+                },
+                {
+                    option: '36-45 years'
+                },
+                {
+                    option: '46-55 years'
+                },
+                {
+                    option: '56-60 years'
+                },
+            ]
         },
         {
             label: 'Educational Qualification',
-            name: 'full_name',
+            name: 'educational_qualification',
             type: 'select',
+            options: [
+                {
+                    option: 'Degree & above'
+                },
+                {
+                    option: '+2'
+                },
+                {
+                    option: '10 or below'
+                },
+
+            ]
         },
         {
             label: 'Years of Farming/Agricultural Experience',
-            name: 'full_name',
+            name: 'years_of_farmingagricultural_experience',
             type: 'select',
+            options: [
+                {
+                    option: '>20 years'
+                },
+                {
+                    option: '15-20 years'
+                },
+
+            ]
         },
         {
             label: 'Alliance or Tie-up with Forward Market',
-            name: 'full_name',
+            name: 'alliance_or_tie_up_with_forward_market',
             type: 'select',
+            options: [
+                {
+                    option: '>3 firms signed'
+                },
+                {
+                    option: '2-3 firms signed'
+                },
+
+            ]
         },
         {
             label: 'Attendance in International Seminars/Worksh...',
-            name: 'full_name',
+            name: 'attendance_in_international_seminarsworkshops',
             type: 'select',
+            options: [
+                {
+                    option: '>2 seminars/workshops'
+                },
+                {
+                    option: '1-2 seminars/workshops'
+                },
+
+            ]
         },
         {
             label: 'Attendance in National or State',
-            name: 'full_name',
+            name: 'attendance_in_national_or_state_seminarsworkshops',
             type: 'select',
+            options: [
+                {
+                    option: '>3 seminars/workshops'
+                },
+                {
+                    option: '2-3 seminars/workshops'
+                },
+
+            ]
         },
         {
             label: 'Membership in FPC, Startup, Krishikoottam',
-            name: 'full_name',
+            name: 'membership_in_fpc_startup_krishikoottam_kudumbashree_or_fig',
             type: 'select',
+            options: [
+                {
+                    option: 'Member'
+                },
+                {
+                    option: 'Non-member'
+                },
+
+            ]
         },
         {
             label: 'Experience in Hi-tech Farming Practices',
-            name: 'full_name',
+            name: 'experience_in_hi_tech_farming_practices',
             type: 'select',
+            options: [
+                {
+                    option: '>5 years'
+                },
+                {
+                    option: '3-4 years'
+                },
+
+            ]
         },
         {
             label: 'Innovative Techniques Used in Farming',
-            name: 'full_name',
+            name: 'innovative_techniques_used_in_farming',
             type: 'select',
+            options: [
+                {
+                    option: 'Innovative farming'
+                },
+                {
+                    option: 'Conventional farming'
+                },
+
+            ]
         },
         {
             label: 'Adoption of Organic Farming Practices with',
-            name: 'full_name',
+            name: 'adoption_of_organic_farming_practices_with_certifications',
             type: 'select',
+            options: [
+                {
+                    option: 'EU standards'
+                },
+                {
+                    option: 'NOP'
+                },
+
+            ]
         },
         {
             label: 'Use of Renewable Energy Resources',
-            name: 'full_name',
+            name: 'use_of_renewable_energy_resources',
             type: 'select',
+            options: [
+                {
+                    option: 'Usage of renewable energy'
+                },
+                {
+                    option: 'Normal practice'
+                },
+
+            ]
         },
         {
             label: 'Community Development and Leadership',
-            name: 'full_name',
+            name: 'community_development_and_leadership',
             type: 'select',
+            options: [
+                {
+                    option: 'Board member in any organization'
+                },
+                {
+                    option: 'Committee member on any organizational panel'
+                },
+
+            ]
         },
         {
             label: 'Financial Stability',
-            name: 'full_name',
+            name: 'financial_stability',
             type: 'select',
+            options: [
+                {
+                    option: 'Annual turnover >200 lakhs'
+                },
+                {
+                    option: '100-200 lakhs'
+                },
+                {
+                    option: '25-50 lakhs'
+                },
+
+            ]
         },
         {
             label: 'Additional Requirements for FPOs',
-            name: 'full_name',
+            name: 'additional_requirements_for_fpos',
             type: 'select',
+            options: [
+                {
+                    option: 'Registration Type'
+                },
+                {
+                    option: 'Companies Act, 2013'
+                },
+
+            ]
         },
         {
             label: 'Number of Members',
-            name: 'full_name',
-            type: 'text',
+            name: 'number_of_members',
+            type: 'number',
         },
         {
             label: 'Existing Infrastructure',
-            name: 'full_name',
-            type: 'text',
+            name: 'existing_infrastructure',
+            type: 'select',
+            options: [
+                {
+                    option: 'Collection Centre'
+                },
+                {
+                    option: 'Primary Processing Unit'
+                },
+
+            ]
         },
         {
             label: 'Compliance with Bookkeeping Requirements',
-            name: 'full_name',
-            type: 'text',
+            name: 'compliance_with_bookkeeping_requirements',
+            type: 'select',
+            options: [
+                {
+                    option: 'Yes'
+                },
+                {
+                    option: 'No'
+                },
+
+            ]
         },
         {
             parameter: 'Business Plan (For Youth/Agripreneurs Only)',
             label: 'Proposed Agribusiness Plan (Attach a details)',
             name: 'full_name',
-            type: 'select',
+            type: 'file',
         },
         {
             label: 'Educational Qualification (bachelor’s degree in',
-            name: 'full_name',
+            name: 'educational_qualification_bachelors_in_agriculture_or_other',
             type: 'select',
+            options: [
+                {
+                    option: 'Yes'
+                },
+                {
+                    option: 'No'
+                },
+
+            ]
         },
         {
             label: 'Experience in Agricultural Entrepreneurship',
-            name: 'full_name',
+            name: 'experience_in_agricultural_entrepreneurship',
             type: 'text',
         },
         {
             label: 'Years of experience',
-            name: 'full_name',
-            type: 'text',
+            name: 'years_of_experience',
+            type: 'select',
+            options: [
+                {
+                    option: '>20 years'
+                },
+                {
+                    option: '15-20 years'
+                },
+                {
+                    option: '10-15 years'
+                },
+                {
+                    option: '5-10 years'
+                },
+                {
+                    option: '3-5 years'
+                },
+
+            ]
         },
         {
             parameter: 'Attachments and Supporting Documents',
@@ -151,13 +349,70 @@ const ApplyForRFP = ({ setButtons }) => {
 
     ]
 
-    const closeModal = () => {
-        setIsModalOpen(false)
-    }
-    const openModal = () => {
-        setIsModalOpen(true)
+
+    const navigate = useNavigate()
+
+    const modelSchema = Yup.object(
+        QualificationForm.reduce((schema, field) => {
+            let fieldValidation = Yup.string();
+            // if (field.type.toLowerCase() === 'password') {
+            //     fieldValidation = Yup.string().min(8, 'Password must be at least 8 characters long');
+            // }
+            if (field?.validation?.toLowerCase() === 'mobile') {
+                fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
+            }
+            if (field?.validation?.toLowerCase() === 'email') {
+                fieldValidation = fieldValidation.email('Invalid Email Id');
+            }
+
+            schema[field?.name] = fieldValidation
+            return schema;
+        }, {})
+    );
+
+    const submitData = (data) => {
+        let values = {}
+        QualificationForm.map(ele => {
+            if (data?.[ele?.name]) {
+                values = { ...values, [ele?.name]: `${data?.[ele?.name]}` }
+            }
+        })
+        console.log('values>>>>', values)
+        confirmSubmit(data)
     }
 
+    const DisplayFormikValues = () => {
+        const { values, errors } = useFormikContext();
+        console.log(values, errors); // Access Formik values here
+        return null; // You can return JSX or null if you just want to log the values
+    };
+
+    const initialValues = QualificationForm.reduce((values, field) => {
+        values[field.name] = '';
+        return values;
+    }, {});
+
+
+
+
+
+    const handleCreateSuccess = (data) => {
+        navigate('/dashboard/submission-form')
+        enqueueSnackbar('Success', { variant: 'success' });
+    };
+    const handleCreateError = (error) => {
+        const message = error?.response?.data?.message || error?.message;
+        enqueueSnackbar(message, { variant: 'error' });
+    };
+
+    const { mutateAsync: confirmSubmit, isLoading: regLoading } = useMutation({
+        mutationFn: TechnicalPost,
+        onSuccess: handleCreateSuccess,
+        onError: (error) => {
+            console.error('Mutation Error:', error);
+            handleCreateError(error);
+        },
+    });
     return (
         <>
 
@@ -181,58 +436,56 @@ const ApplyForRFP = ({ setButtons }) => {
                 <ParagraphComp className='text-md mt-[30px] font-bold text-[#0F75BC] ' text='TECHNICAL PROPOSAL SUBMISSION FORM' />
                 <ParagraphComp className='text-md text-[black] font-schibsted ' text='Name of Services: Inviting Cultivators for NAWODHAN implementation' />
 
-                <div className='flex flex-wrap w-[100%] gap-[20px] mt-[20px]'>
-                    {QualificationForm.map(field =>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={modelSchema}
+                    onSubmit={(data) => {
+                        submitData(data)
+                    }}
+                >
+                    {({ values, errors, handleChange, touched, handleBlur, setFieldValue }) => (
+                        <Form className='w-[100%]'>
+                            <div className='flex flex-wrap w-[100%] gap-[20px] mt-[20px]'>
+                                {QualificationForm.map(field =>
 
-                        <>
-                            {field.parameter &&
-                                <div className='w-[100%]'>
-                                    <ParagraphComp className='text-md mt-[30px] font-semibold text-[#0F75BC] ' text={field?.parameter} />
-                                </div>
-                            }
-                            {field.type.toLocaleLowerCase() === 'select' ?
-                                <div className='w-[32%] mt-[20px]'>
-                                    <CusSelect mappingKey={'options'} options={[{ options: 'checking' }, { options: 'checking' }]} label={field?.label} />
-                                </div>
-                                :
-                                field.type.toLocaleLowerCase() === 'file' ?
-                                    <div className='w-[32%] mt-[20px]'>
-                                        <CustomFileInput label={field?.label} />
-                                    </div>
-                                    :
-                                    <div className='w-[32%] mt-[20px]'>
-                                        <CusInput label={field?.label} type={field?.type} />
-                                    </div>
-                            }
-                        </>
+                                    <>
+                                        {field.parameter &&
+                                            <div className='w-[100%]'>
+                                                <ParagraphComp className='text-md mt-[30px] font-semibold text-[#0F75BC] ' text={field?.parameter} />
+                                            </div>
+                                        }
+                                        {field.type.toLocaleLowerCase() === 'select' ?
+                                            <div className='w-[32%] mt-[20px]'>
+                                                <CusSelect value={values?.[field?.name]} onChange={handleChange} mappingKey={'option'} name={field?.name} options={field?.options?.length > 0 ? field?.options : [{ option: 'checking' }, { option: 'checking' }]} label={field?.label} />
+                                            </div>
+                                            :
+                                            field.type.toLocaleLowerCase() === 'file' ?
+                                                <div className='w-[32%] mt-[20px]'>
+                                                    <CustomFileInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} />
+                                                </div>
+                                                :
+                                                <div className='w-[32%] mt-[20px]'>
+                                                    <CusInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} type={field?.type} />
+                                                </div>
+                                        }
+                                    </>
+                                )}
 
+                            </div>
+                            <div className='flex justify-end mt-[30px] '>
+                                <ButtonComp type='submit' className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save & Next' />
+                            </div>
+                            <DisplayFormikValues />
+
+                        </Form>
                     )}
+                </Formik>
 
 
-                </div>
-                <div className='flex justify-end mt-[30px] '>
-                    <ButtonComp onClick={() => { setButtons({ ['Apply for RFP']: { ['Submission Form']: true } }) }} className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save & Next' />
-                </div>
+
             </div>
 
-            <ModalComp width='70%' padding={'20px'} closeModal={closeModal} modalIsOpen={isModalOpen} >
-                <div className='p-[20px]'>
-                    <ParagraphComp text='Declaration' className='text-center font-bold text-2xl' />
-                    <ParagraphComp text='1. Having examined the quotation document, we the undersigned herewith submit our response to your quotation notification dated for Cultivator for the (hereinafter referred to as the “KABCO”), in full conformity with the said tender document. ' className='text-start mt-[20px] text-md' />
-                    <ParagraphComp text='2. We have read the provisions of the quotation/tender document and confirm that these are acceptable to us.  ' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='3.We fully understand that additional conditions, variations, deviations, if any, found in our response to quotation/tender shall not be given effect to.  ' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='4. We agree to abide by this proposal, consisting of this letter, the detailed response to the quotation/tender and all other attachments, for a Period of from the closing date fixed for submission of proposal stipulated in the quotation/tender document. ' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='5. We hereby declare that we are not involved in any litigation with any Government in India and we are not under a declaration of ineligibility for corrupt or fraudulent Practices.' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='6. We hereby declare that all the information and statements made in this proposal are true and accept that any misinterpretation contained in it may lead to our disqualification.' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='7. We fully understand that the KABCO reserves the right to reject any or all of the proposals received in response to the quotation/tender and to cancel the selection process at any stage without assigning any reason thereof. ' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='8. We understand that mere submission of bid does not guarantee that any of the applicants shall be awarded the project/assignment .' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='9. We hereby declare that our proposal submitted in response to this proposal/tender is made in good faith and the information contained is true and correct to the best of our knowledge and belief. ' className='text-start mt-[10px] text-md' />
-                    <ParagraphComp text='10. We, along with any of our sub-cultivators, subcontractors, suppliers, or service providers for any part of the contract, are not subject to, and not controlled by any entity or individual that is subject to, a temporary suspension or a debarment imposed by the Govt. of India or Govt. of Kerala.' className='text-start mt-[10px] text-md' />
-                    <div className='flex justify-end mt-[30px] '>
-                        <ButtonComp onClick={() => { closeModal() }} className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Next' />
-                    </div>
-                </div>
-            </ModalComp>
+
         </>
     )
 }
