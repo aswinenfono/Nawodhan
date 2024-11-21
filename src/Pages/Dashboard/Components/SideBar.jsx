@@ -3,7 +3,10 @@ import HeaderCompo from '../../../Components/HeaderComp'
 import ButtonComp from '../../../Components/ButtonComp'
 import LogoutIcon from '@mui/icons-material/Logout';
 import { ParagraphComp } from '../../../Components/ParagraphComp';
+import { useNavigate } from 'react-router-dom';
 const SideBar = () => {
+    const navigate = useNavigate()
+    
     return (
         <div className='p-[10px] border-r-2 border-[#0F75BC]'>
             <div className='h-[100px] justify-center flex items-center'>
@@ -15,7 +18,7 @@ const SideBar = () => {
                     <ButtonComp className='text-start w-[100%] py-[10px] px-[10px] mt-[15px] font-semibold bg-[white] text-[#0F75BC] rounded-md' text='Profile' />
                 </div>
 
-                <ButtonComp className=' w-[100%] py-[10px] px-[10px] flex mb-[15px] text-center font-semibold bg-[white] text-[#0F75BC] rounded-md' >
+                <ButtonComp onClick={() => { navigate('/signin') }} className=' w-[100%] py-[10px] px-[10px] flex mb-[15px] text-center font-semibold bg-[white] text-[#0F75BC] rounded-md' >
                     <LogoutIcon className='text-[red] mr-[35px] ' />
                     <ParagraphComp className='' text='Logout' />
                 </ButtonComp>
