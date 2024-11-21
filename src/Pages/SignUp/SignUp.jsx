@@ -182,7 +182,7 @@ const SignUp = () => {
                                             <ParagraphComp className='text-sm mt-[10px] text-[black] text-center' >
                                                 Have an account ?
                                                 &nbsp;
-                                                <Link className='text-[#0F75BC]' to='signin'>
+                                                <Link className='text-[#0F75BC]' to='/signin'>
                                                     Sign In
                                                 </Link>
                                             </ParagraphComp>

@@ -14,6 +14,8 @@ import { Form, Formik, useFormikContext } from 'formik'
 import ModalComp from '../../../Components/ModalComp'
 const SubmissionForm = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [Smbple, setSmbple] = useState({})
+
 
     const SubmissionForm = [
         {
@@ -138,6 +140,14 @@ const SubmissionForm = () => {
         },
     });
 
+
+    const handleCheck = (e) => {
+        const { value, name } = e.target
+        setSmbple({ [name]: value })
+    }
+
+
+
     return (
         <>
             <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
@@ -172,11 +182,11 @@ const SubmissionForm = () => {
                         <Form className='w-[100%]'>
                             <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' />
                             <div className='w-[100%] mt-[20px]'>
-                                <CusInput type='text' label='amount in words and figures' />
+                                <CusInput onChange={handleCheck} value={Smbple?.amount} name={'amount'} type='text' label='amount in words and figures' />
                             </div>
                             <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Our attached Financial Proposal is for the amount of Rs. {Insert amount in words and figures' />
                             <div className='w-[100%] mt-[20px]'>
-                                <CusInput type='date' label='DATE' />
+                                <CusInput onChange={handleCheck} value={Smbple?.date} type='date' name='date' label='DATE' />
                             </div>
                             <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='The estimated amount of local indirect taxes is Rs. {Insert amount in words and figures' />
                             <ParagraphComp className='md  mt-[60px] leading-6 text-[black] font-schibsted' text='which shall be confirmed or adjusted, if needed, during negotiations. {Please note that all amounts shall be the same as in financial application form}.' />
