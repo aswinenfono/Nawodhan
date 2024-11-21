@@ -36,7 +36,8 @@ const Lands = ({ setLandId }) => {
                 <table className='w-[100%]'>
                     <thead>
                         <tr>
-                            <th className=' p-[10px]'>Land</th>
+                            <th className=' p-[10px]'>No</th>
+                            <th className=' p-[10px]'>Land Name</th>
                             <th className=' p-[10px]'>Land in Acre</th>
                             <th className=' p-[10px]'>Land IN UNIT</th>
                         </tr>
@@ -50,8 +51,9 @@ const Lands = ({ setLandId }) => {
                                             <p>{index + 1}</p>
                                         </div>
                                     </td>
+                                    <td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.land_name}</td>
                                     <td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_acres_}</td>
-                                    <td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.intercropping_area_available}</td>
+                                    <td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_units_}</td>
                                 </tr>
                                 <div className='mt-[10px]'></div>
                             </>
