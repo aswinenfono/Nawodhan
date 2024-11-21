@@ -274,7 +274,7 @@ const SubmissionForm = () => {
                             <span className='ml-[10px]'>Agree And Continue</span>
                         </label>
                         <div className='flex justify-end mt-[30px] '>
-                            <ButtonComp onClick={() => { closeModal() }} className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Next' />
+                            <ButtonComp onClick={() => { closeModal() }} className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' />
                         </div>
                     </div>
                 </ModalComp>
