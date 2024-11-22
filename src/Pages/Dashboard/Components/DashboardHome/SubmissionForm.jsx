@@ -152,25 +152,7 @@ const SubmissionForm = () => {
         <>
             <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
                 <ParagraphComp text='FINANCIAL PROPOSAL SUBMISSION FORM' className='text-md font-schibsted text-[#0F75BC] font-bold' />
-                <div className='flex justify-between'>
-                    <ParagraphComp className='text-md mt-[20px] font-schibsted leading-6 text-[black] ' >
-                        To: <br />
-                        <span className='font-bold' >The Director - Business,</span>
-                        <br />
-                        KERALA AGRO BUSINESS COMPANY
-                        <br />
-                        LIMITED 3 rd Floor Trans Tower, CV
-                        <br />
-                        Raman Pillai Rd, DPI, Vazhuthacaud
-                        <br />
-                        Thiruvananthapuram, Kerala 695014
-                        <br />
-                        Email: kabco.info@gmail.com
-                    </ParagraphComp>
-                    <div className='w-[400px]'>
-                        <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Location, Date' />
-                    </div>
-                </div>
+
                 <Formik
                     initialValues={initialValues}
                     validationSchema={modelSchema}
@@ -180,29 +162,7 @@ const SubmissionForm = () => {
                 >
                     {({ values, handleChange }) => (
                         <Form className='w-[100%]'>
-                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' />
-                            <div className='w-[100%] mt-[20px]'>
-                                <CusInput onChange={handleCheck} value={Smbple?.amount} name={'amount'} type='text' label='amount in words and figures' />
-                            </div>
-                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Our attached Financial Proposal is for the amount of Rs. {Insert amount in words and figures' />
-                            <div className='w-[100%] mt-[20px]'>
-                                <CusInput onChange={handleCheck} value={Smbple?.date} type='date' name='date' label='DATE' />
-                            </div>
-                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='The estimated amount of local indirect taxes is Rs. {Insert amount in words and figures' />
-                            <ParagraphComp className='md  mt-[60px] leading-6 text-[black] font-schibsted' text='which shall be confirmed or adjusted, if needed, during negotiations. {Please note that all amounts shall be the same as in financial application form}.' />
-                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Our Financial Proposal shall be valid and remain binding upon us, subject to the modifications resulting from bid negotiations, for the period of time specified in the Table 1.' />
-                            <div className='flex justify-end mt-[30px] '>
-                                {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' /> */}
-                            </div>
-                            <ParagraphComp text='FINANCIAL PROPOSAL SUBMISSION FORM 3.1' className='text-md text-[#0F75BC] font-bold' />
-                            <ParagraphComp className='text-sm mt-[15px] font-schibsted leading-6 text-[black] ' >
-                                Tender Inviting Authority: Kerla Agro Business Company (KABCO)
-                                <br />
-                                Name of Services: Inviting Cultivators for NAWODHAN implementation
-                                <br />
-                                RFP No.: 01/KABCO-NAWODHAN/CULTIVATORS/2024/RFP
-                                <br />
-                            </ParagraphComp>
+
                             <div className='flex flex-wrap w-[100%] justify-between mt-[20px]'>
                                 {SubmissionForm.map(field =>
 
@@ -231,6 +191,37 @@ const SubmissionForm = () => {
                                 )}
 
                             </div>
+
+
+
+                            <div className='flex justify-between'>
+                                <ParagraphComp className='text-md mt-[20px] font-schibsted leading-6 text-[black] ' >
+                                    To: <br />
+                                    <span className='font-bold' >The Director - Business,</span>
+                                    <br />
+                                    KERALA AGRO BUSINESS COMPANY
+                                    <br />
+                                    LIMITED 3 rd Floor Trans Tower, CV
+                                    <br />
+                                    Raman Pillai Rd, DPI, Vazhuthacaud
+                                    <br />
+                                    Thiruvananthapuram, Kerala 695014
+                                    <br />
+                                    Email: kabco.info@gmail.com
+                                </ParagraphComp>
+                                <div className='w-[400px]'>
+                                    <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Location, Date' />
+                                </div>
+                            </div>
+                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' />
+                            <div className='w-[100%] mt-[20px]'>
+                                <CusInput onChange={handleCheck} value={Smbple?.amount} name={'amount'} type='text' label='amount in words and figures' />
+                            </div>
+                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Our attached Financial Proposal is for the amount of Rs. {Insert amount in words and figures' />
+                            <div className='w-[100%] mt-[20px]'>
+                                <CusInput onChange={handleCheck} value={Smbple?.date} type='date' name='date' label='DATE' />
+                            </div>
+                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='The estimated amount of local indirect taxes is Rs. {Insert amount in words and figures' />
                             <div className='flex  justify-end mt-[30px] '>
                                 {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] flex justify-center gap-[10px] items-center text-white rounded-md border-none'  >
                         <AddCircleOutlineIcon className='text-[white]' />
@@ -240,8 +231,23 @@ const SubmissionForm = () => {
                                 <DisplayFormikValues />
 
                             </div>
+                            <ParagraphComp className='md  mt-[60px] leading-6 text-[black] font-schibsted' text='which shall be confirmed or adjusted, if needed, during negotiations. {Please note that all amounts shall be the same as in financial application form}.' />
+                            <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text='Our Financial Proposal shall be valid and remain binding upon us, subject to the modifications resulting from bid negotiations, for the period of time specified in the Table 1.' />
+                            <div className='flex justify-end mt-[30px] '>
+                                {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' /> */}
+                            </div>
+                            <ParagraphComp text='FINANCIAL PROPOSAL SUBMISSION FORM 3.1' className='text-md text-[#0F75BC] font-bold' />
+                            <ParagraphComp className='text-sm mt-[15px] font-schibsted leading-9 text-[black] ' >
+                                Tender Inviting Authority: Kerla Agro Business Company (KABCO)
+                                <br />
+                                Name of Services: Inviting Cultivators for NAWODHAN implementation
+                                <br />
+                                RFP No.: 01/KABCO-NAWODHAN/CULTIVATORS/2024/RFP
+                                <br />
+                            </ParagraphComp>
 
-                            <div className='rounded-lg mt-[20px] bg-[#D9EFFF] p-[10px]'>
+
+                            <div className='rounded-lg mt-[40px] bg-[#D9EFFF] p-[10px]'>
                                 <table className='w-[100%]'>
                                     <tr className='bg-[white]'>
                                         <th className='p-[10px]' >Description of Goods</th>
@@ -264,7 +270,6 @@ const SubmissionForm = () => {
                         </Form>
                     )}
                 </Formik>
-
 
                 <ModalComp width='70%' padding={'20px'} closeModal={closeModal} modalIsOpen={isModalOpen} >
                     <div className='p-[20px] h-[80vh] overflow-x-hidden overflow-scroll'>

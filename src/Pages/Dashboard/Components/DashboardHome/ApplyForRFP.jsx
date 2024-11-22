@@ -235,20 +235,7 @@ const ApplyForRFP = ({ setButtons }) => {
             ]
         },
         {
-            label: 'Additional Requirements for FPOs',
-            name: 'additional_requirements_for_fpos',
-            type: 'select',
-            options: [
-                {
-                    option: 'Registration Type'
-                },
-                {
-                    option: 'Companies Act, 2013'
-                },
-
-            ]
-        },
-        {
+            parameter: 'Additional Requirements for FPOs',
             label: 'Number of Members',
             name: 'number_of_members',
             type: 'number',

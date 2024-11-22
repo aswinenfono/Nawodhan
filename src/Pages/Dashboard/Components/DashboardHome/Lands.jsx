@@ -34,7 +34,7 @@ const Lands = ({ setLandId }) => {
                 <ParagraphComp text='LANDS ' className='text-2xl font-semibold mt-[30px] text-[#0F75BC]' />
 
             </div>
-            <div className='w-[100%] border-[3px] p-[20px] h-[55vh] overflow-y-scroll mt-[20px] rounded-xl border-[#0F75BC] '>
+            <div className='w-[100%] border-[3px] p-[20px]  mt-[20px] rounded-xl border-[#0F75BC] '>
                 <table className='w-[100%]'>
                     <thead>
                         <tr>

@@ -8,7 +8,7 @@ const AppRoute = () => {
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route element={<SignUp />} path='/signup' />
+                    <Route element={<SignUp />} path='/signup/*' />
                     <Route element={<SignIn />} path='/signin' />
                     <Route path="/dashboard/*" element={<Dashboard />} />
                     <Route path="/" element={<Navigate to="signin" replace />} />

@@ -22,7 +22,7 @@ const Dashboard = () => {
             <div className="w-[15%] transition-[2s]">
                 <SideBar />
             </div>
-            <div className="w-[85%]">
+            <div className="w-[85%] h-[100vh] overflow-scroll">
                 {shouldShowHeader && (
                     <div className="p-[20px]">
                         <Header />

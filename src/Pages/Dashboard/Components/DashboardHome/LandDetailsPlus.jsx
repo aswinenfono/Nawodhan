@@ -29,7 +29,7 @@ const LandDetailsPlus = () => {
           <CusSelect readOnly={true} options={[{ option: LandsDt?.data?.select_land_owner_type }]} label='Select Land owner type' value={LandsDt?.data?.select_land_owner_type} />
         </div>
         <div className='p-[20px] mt-[20px] rounded-lg bg-[#D9EFFF]'>
-          <ParagraphComp className='font-bold text-xl' text='for Plus' />
+          <ParagraphComp className='font-bold text-xl' text='About the Institution' />
           <div className='flex mt-[20px]'>
             <div className='flex w-[300px] justify-between'>
               <ParagraphComp className='font-semibold' text='Name Of Institution' />
