@@ -148,10 +148,10 @@ const Complete = () => {
                                             </div>
                                             :
                                             < div className='w-[100%] mt-[20px]' >
-                                                <CusInput value={values[inp?.name]} onChange={handleChange} className='w-[100%]' type={inp?.type} label={inp?.label} name={inp?.name} />
+                                                <CusSelect mappingKey='option' options={inp?.options} value={values[inp?.name]} onChange={handleChange} className='w-[100%]' type={inp?.type} label={inp?.label} name={inp?.name} />
                                                 {values?.[inp?.name] && errors?.[inp?.name] &&
                                                     <ParagraphComp className='text-[red] text-sm mt-[10px]' text={errors?.[inp?.name]} />
-                                                }
+                                                }   
                                             </div>
                                         }
                                     </>
