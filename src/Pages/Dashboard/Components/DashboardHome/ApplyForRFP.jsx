@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { ParagraphComp } from '../../../Components/ParagraphComp';
-import CusSelect from '../../../Components/CusSelect';
-import CusInput from '../../../Components/CusInput';
-import CustomFileInput from '../../../Components/CusFileInput';
-import ButtonComp from '../../../Components/ButtonComp';
-import ModalComp from '../../../Components/ModalComp';
+import { ParagraphComp } from '../../../../Components/ParagraphComp';
+import CusSelect from '../../../../Components/CusSelect';
+import CusInput from '../../../../Components/CusInput';
+import CustomFileInput from '../../../../Components/CusFileInput';
+import ButtonComp from '../../../../Components/ButtonComp';
+import ModalComp from '../../../../Components/ModalComp';
 import * as Yup from 'yup';
 import { Form, Formik, useFormikContext } from 'formik';
 import { useMutation } from 'react-query';
 import { enqueueSnackbar } from 'notistack';
-import { TechnicalPost } from '../../../Store/DashBoard/DashBoard';
+import { TechnicalPost } from '../../../../Store/DashBoard/DashBoard';
 import { useNavigate } from 'react-router-dom';
 const ApplyForRFP = ({ setButtons }) => {
     const QualificationForm = [

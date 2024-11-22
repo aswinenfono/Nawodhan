@@ -1,9 +1,9 @@
 import React from 'react';
-import { ParagraphComp } from '../../../Components/ParagraphComp';
-import ButtonComp from '../../../Components/ButtonComp';
+import { ParagraphComp } from '../../../../Components/ParagraphComp';
+import ButtonComp from '../../../../Components/ButtonComp';
 import NoteOutlinedIcon from '@mui/icons-material/NoteOutlined';
 import AdsClickOutlinedIcon from '@mui/icons-material/AdsClickOutlined';
-import ImageComp from '../../../Components/ImageComp';
+import ImageComp from '../../../../Components/ImageComp';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {

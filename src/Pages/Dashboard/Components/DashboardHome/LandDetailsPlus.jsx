@@ -1,8 +1,8 @@
 import React from 'react'
-import { ParagraphComp } from '../../../Components/ParagraphComp'
-import CusSelect from '../../../Components/CusSelect'
+import { ParagraphComp } from '../../../../Components/ParagraphComp'
+import CusSelect from '../../../../Components/CusSelect'
 import { useQuery } from 'react-query';
-import { LandDetailed } from '../../../Store/DashBoard/DashBoard';
+import { LandDetailed } from '../../../../Store/DashBoard/DashBoard';
 import { useParams } from 'react-router-dom';
 const LandDetailsPlus = () => {
   const { landId } = useParams()

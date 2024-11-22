@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { ParagraphComp } from '../../../Components/ParagraphComp'
-import CusInput from '../../../Components/CusInput'
-import ButtonComp from '../../../Components/ButtonComp'
-import CusSelect from '../../../Components/CusSelect'
-import InputComp from '../../../Components/InputComp'
-import CustomFileInput from '../../../Components/CusFileInput'
+import { ParagraphComp } from '../../../../Components/ParagraphComp'
+import CusInput from '../../../../Components/CusInput'
+import ButtonComp from '../../../../Components/ButtonComp'
+import CusSelect from '../../../../Components/CusSelect'
+import InputComp from '../../../../Components/InputComp'
+import CustomFileInput from '../../../../Components/CusFileInput'
 import * as Yup from 'yup';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useMutation } from 'react-query'
 import { enqueueSnackbar } from 'notistack'
-import { SubmissionFormPost } from '../../../Store/DashBoard/DashBoard'
+import { SubmissionFormPost } from '../../../../Store/DashBoard/DashBoard'
 import { Form, Formik, useFormikContext } from 'formik'
-import ModalComp from '../../../Components/ModalComp'
+import ModalComp from '../../../../Components/ModalComp'
 const SubmissionForm = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [Smbple, setSmbple] = useState({})

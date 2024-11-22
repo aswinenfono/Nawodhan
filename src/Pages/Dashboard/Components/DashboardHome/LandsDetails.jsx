@@ -1,7 +1,7 @@
 import React from 'react'
-import { ParagraphComp } from '../../../Components/ParagraphComp'
-import CusSelect from '../../../Components/CusSelect'
-import ButtonComp from '../../../Components/ButtonComp'
+import { ParagraphComp } from '../../../../Components/ParagraphComp'
+import CusSelect from '../../../../Components/CusSelect'
+import ButtonComp from '../../../../Components/ButtonComp'
 
 const LandsDetails = ({ setButtons }) => {
     return (

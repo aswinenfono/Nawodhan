@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ParagraphComp } from '../../../Components/ParagraphComp';
-import ButtonComp from '../../../Components/ButtonComp';
+import { ParagraphComp } from '../../../../Components/ParagraphComp';
+import ButtonComp from '../../../../Components/ButtonComp';
 
 const Timer = ({ setButtons }) => {
     const [timeLeft, setTimeLeft] = useState({

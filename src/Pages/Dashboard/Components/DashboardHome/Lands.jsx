@@ -1,8 +1,9 @@
 import React from 'react'
-import { ParagraphComp } from '../../../Components/ParagraphComp'
+import { ParagraphComp } from '../../../../Components/ParagraphComp'
 import { useQuery } from 'react-query';
-import { LandsList } from '../../../Store/DashBoard/DashBoard';
+import { LandsList } from '../../../../Store/DashBoard/DashBoard';
 import { useNavigate } from 'react-router-dom';
+import ImageComp from '../../../../Components/ImageComp';
 
 const Lands = ({ setLandId }) => {
     const navigate = useNavigate()
@@ -31,6 +32,7 @@ const Lands = ({ setLandId }) => {
         <>
             <div>
                 <ParagraphComp text='LANDS ' className='text-2xl font-semibold mt-[30px] text-[#0F75BC]' />
+
             </div>
             <div className='w-[100%] border-[3px] p-[20px] h-[55vh] overflow-y-scroll mt-[20px] rounded-xl border-[#0F75BC] '>
                 <table className='w-[100%]'>
