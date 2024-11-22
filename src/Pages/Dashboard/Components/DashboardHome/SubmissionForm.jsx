@@ -193,8 +193,28 @@ const SubmissionForm = () => {
                             </div>
 
 
+                            <div className='rounded-lg mt-[40px] bg-[#D9EFFF] p-[10px]'>
+                                <table className='w-[100%]'>
+                                    <tr className='bg-[white]'>
+                                        <th className='p-[10px]' >Description of Goods</th>
+                                        <th className='p-[10px]'>Specifications</th>
+                                        <th className='p-[10px]'>Unit</th>
+                                        <th className='p-[10px]'>Rate per unit</th>
+                                        <th className='p-[10px]'>Sub-unit</th>
+                                        <th className='p-[10px]'>Rate per Sub-unit</th>
+                                    </tr>
+                                    <tr >
+                                        <td className='p-[10px] text-center' >Goods #54344</td>
+                                        <td className='p-[10px] text-center'>Sample text</td>
+                                        <td className='p-[10px] text-center'>2000</td>
+                                        <td className='p-[10px] text-center'>2000</td>
+                                        <td className='p-[10px] text-center'>2000</td>
+                                        <td className='p-[10px] text-center'>32,467</td>
+                                    </tr>
+                                </table>
+                            </div>
 
-                            <div className='flex justify-between'>
+                            <div className='flex mt-[20px] justify-between'>
                                 <ParagraphComp className='text-md mt-[20px] font-schibsted leading-6 text-[black] ' >
                                     To: <br />
                                     <span className='font-bold' >The Director - Business,</span>
@@ -247,26 +267,6 @@ const SubmissionForm = () => {
                             </ParagraphComp>
 
 
-                            <div className='rounded-lg mt-[40px] bg-[#D9EFFF] p-[10px]'>
-                                <table className='w-[100%]'>
-                                    <tr className='bg-[white]'>
-                                        <th className='p-[10px]' >Description of Goods</th>
-                                        <th className='p-[10px]'>Specifications</th>
-                                        <th className='p-[10px]'>Unit</th>
-                                        <th className='p-[10px]'>Rate per unit</th>
-                                        <th className='p-[10px]'>Sub-unit</th>
-                                        <th className='p-[10px]'>Rate per Sub-unit</th>
-                                    </tr>
-                                    <tr >
-                                        <td className='p-[10px] text-center' >Goods #54344</td>
-                                        <td className='p-[10px] text-center'>Sample text</td>
-                                        <td className='p-[10px] text-center'>2000</td>
-                                        <td className='p-[10px] text-center'>2000</td>
-                                        <td className='p-[10px] text-center'>2000</td>
-                                        <td className='p-[10px] text-center'>32,467</td>
-                                    </tr>
-                                </table>
-                            </div>
                         </Form>
                     )}
                 </Formik>
