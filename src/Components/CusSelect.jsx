@@ -108,7 +108,7 @@ const CusSelect = (
     }) : options;
 
     const selectedOption = sortedOptions?.find(
-        (option) => (option?.[mappingKey] || option?.option) === valueMappingKey &&
+        (option) => (option?.[mappingKey] || option) === valueMappingKey &&
             (exDataKey ? option?.[exDataKey] === valueExDataKey : true)
     ) || null;
 
@@ -117,18 +117,18 @@ const CusSelect = (
             readOnly={readOnly}
             style={{ width: '100%', zIndex: '88' }}
             options={sortedOptions}
-            getOptionLabel={(option) => `${option?.[mappingKey] || option?.option}${exDataKey && option?.[exDataKey] ? ` - ${option?.[exDataKey]}` : ''}`}
+            getOptionLabel={(option) => `${option?.[mappingKey] || option}${exDataKey && option?.[exDataKey] ? ` - ${option?.[exDataKey]}` : ''}`}
             renderOption={(props, option, { selected }) => (
                 <li
                     {...props}
-                    key={option?.[mappingKey] || option?.option}
+                    key={option?.[mappingKey] || option}
                     style={{
                         backgroundColor: selected ? '#0000ff12' : 'inherit'
                     }}
                 >
                     <div className="flex justify-between w-full">
                         <div>
-                            {option?.[mappingKey] || option?.option}
+                            {option?.[mappingKey] || option}
                             {exDataKey && option?.[exDataKey] ? ` - ${option?.[exDataKey]}` : ''}
                         </div>
                         <div>
@@ -145,7 +145,7 @@ const CusSelect = (
                     target: {
                         name,
                         value: newValue
-                            ? `${newValue?.[mappingKey] || newValue?.option}${exDataKey && newValue?.[exDataKey] ? ` - ${newValue?.[exDataKey]}` : ''}`
+                            ? `${newValue?.[mappingKey] || newValue}${exDataKey && newValue?.[exDataKey] ? ` - ${newValue?.[exDataKey]}` : ''}`
                             : '',
                     },
                 });
@@ -154,7 +154,7 @@ const CusSelect = (
             filterOptions={(options, { inputValue }) =>
                 !disabledFilter && options
                     ? options?.filter((option) => {
-                        const label = option?.[exDataKey] || option?.[mappingKey] || option?.option;
+                        const label = option?.[exDataKey] || option?.[mappingKey] || option;
                         return label.toLowerCase().startsWith(inputValue.toLowerCase());
                     })
                     : options
@@ -171,7 +171,7 @@ const CusSelect = (
             )}
 
             isOptionEqualToValue={(option, value) => {
-                return (option?.[mappingKey] || option?.option) === (value?.[mappingKey] || value?.option);
+                return (option?.[mappingKey] || option) === (value?.[mappingKey] || value);
             }}
             sx={{ minWidth: '200px', scrollbarWidth: '5px', zIndex: '9999' }}
         />)

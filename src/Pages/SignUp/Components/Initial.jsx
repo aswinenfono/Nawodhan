@@ -9,26 +9,26 @@ import { useMutation } from 'react-query'
 import { createUser } from '../../../Store/auth/registration'
 import { enqueueSnackbar } from 'notistack'
 import { Link, Routes, useNavigate } from 'react-router-dom'
-const Initial = () => {
+const Initial = ({ setIntialForm }) => {
   const navigate = useNavigate()
   const FormInputs = [
 
     {
       label: 'Mobile Number',
-      name: 'number',
+      name: 'mobile_number',
       type: 'number',
       validation: 'mobile'
 
     },
     {
       label: 'Enter Pin',
-      name: 'pin',
+      name: 'password',
       type: 'password',
       validation: 'pin'
     },
     {
       label: 'Confirm Pin',
-      name: 'confirm_pin',
+      name: 'password_confirmation',
       type: 'password',
       validation: 'pin'
 
@@ -38,10 +38,10 @@ const Initial = () => {
     FormInputs.reduce((schema, field) => {
       let fieldValidation = Yup.string()
 
-      if (field.name.toLowerCase() === 'confirm_pin') {
+      if (field.name.toLowerCase() === 'password_confirmation') {
         fieldValidation = Yup.string().test(
           'match-dependent',
-          'Re-enter your password to confirm it matches the one you created above. This ensures your password is set correctly.',
+          'Re-enter your PIN to confirm it matches and is set correctly',
           function (value) {
             const { parent } = this;
             const dependentValue = parent?.['pin']; // Replace with actual key if necessary
@@ -51,12 +51,12 @@ const Initial = () => {
       }
 
       if (field?.validation?.toLowerCase() === 'pin') {
-        fieldValidation = fieldValidation.max(6, 'Your PIN must be exactly 6 digits long')
+        fieldValidation = fieldValidation.matches(/^\d{6}$/, 'Your PIN must be exactly 6 digits long')
       }
       else if (field?.validation?.toLowerCase() === 'email') {
         fieldValidation = fieldValidation.email('Invalid email address')
       }
-      else if (field?.validation?.toLowerCase() === 'number') {
+      else if (field?.validation?.toLowerCase() === 'mobile') {
         fieldValidation = fieldValidation.max(10, 'Invalid mobile number')
       }
       schema[field?.name] = fieldValidation.required()
@@ -99,20 +99,9 @@ const Initial = () => {
 
   const submitData = (data) => {
     const values = { ...data, redirect_to: '' }
-    // submitSubReg(values)
+    setIntialForm(values)
+    navigate('/signup/complete')
   }
-
-  // const {
-  //   mutateAsync: submitSubReg, // Use mutateAsync to work with async/await
-  //   isLoading: regLoading,
-  // } = useMutation({
-  //   mutationFn: createUser,
-  //   ...dataHandling,
-  // });
-
-  // console.log("regLoading>>>>", regLoading)
-
-  // if (regLoading) return (<> <h4>Loading...</h4></>)
   return (
     <>
       <div className='w-[100%] flex justify-center max-md:mt-[60px] '>
@@ -136,7 +125,7 @@ const Initial = () => {
                     < div className='w-[100%] mt-[20px]' >
                       <CusInput value={values[inp?.name]} onChange={handleChange} className='w-[100%]' required type={inp?.type} label={inp?.label} name={inp?.name} />
                       {values?.[inp?.name] && errors?.[inp?.name] &&
-                        <ParagraphComp className='text-[red] text-sm mt-[10px]' text={errors?.[inp?.name]} />
+                        <ParagraphComp className='text-[red] ml-[10px] text-sm mt-[5px]' text={errors?.[inp?.name]} />
                       }
                     </div>
                     {/* :
@@ -162,7 +151,7 @@ const Initial = () => {
                 )}
                 <div className='flex justify-center'>
                   <div className='w-[70%]  p-[20px]' >
-                    <ButtonComp onClick={() => {  navigate('/signup/complete') }} type='submit' className='p-[10px] w-[100%] border-none rounded-full shadow-lg text-white  bg-[#0F75BC] '>
+                    <ButtonComp type='submit' className='p-[10px] w-[100%] border-none rounded-full shadow-lg text-white  bg-[#0F75BC] '>
                       Save And Next
                     </ButtonComp>
                     <ParagraphComp className='text-sm mt-[10px] text-[black] text-center' >

@@ -403,7 +403,7 @@ const ApplyForRFP = ({ setButtons }) => {
     return (
         <>
 
-            <div className='w-[100%] h-[68vh] overflow-y-scroll overflow-x-hidden mt-[20px] rounded-xl p-[20px]'>
+            <div className='w-[100%] mt-[20px] rounded-xl p-[20px]'>
                 {/* <div className='flex justify-center'>
                     <div className='w-[500px] relative '>
                         <div className='flex justify-between'>
@@ -430,7 +430,7 @@ const ApplyForRFP = ({ setButtons }) => {
                         submitData(data)
                     }}
                 >
-                    {({ values, errors, handleChange, touched, handleBlur, setFieldValue }) => (
+                    {({ values,  handleChange }) => (
                         <Form className='w-[100%]'>
                             <div className='flex flex-wrap w-[100%] gap-[20px] mt-[20px]'>
                                 {QualificationForm.map(field =>

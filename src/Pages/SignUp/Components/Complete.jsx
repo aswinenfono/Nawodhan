@@ -5,31 +5,34 @@ import ButtonComp from '../../../Components/ButtonComp'
 import * as Yup from 'yup';
 import { Form, Formik, useFormikContext } from 'formik'
 import { ParagraphComp } from '../../../Components/ParagraphComp'
-import { useMutation } from 'react-query'
 import { enqueueSnackbar } from 'notistack'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CusSelect from '../../../Components/CusSelect';
-const Complete = () => {
+import { useMutation } from 'react-query';
+import { createUser } from '../../../Store/auth/registration';
+const Complete = ({ IntialForm }) => {
     const navigate = useNavigate()
     const FormInputs = [
 
         {
             label: 'Name',
-            name: 'name',
+            name: 'full_name',
             type: 'text',
             validation: 'mobile',
+            required: true
         },
         {
             label: 'Email',
             name: 'email',
             type: 'email',
             validation: 'email',
-
+            required: false
         },
         {
             label: 'Select type',
             name: 'type',
             type: 'select',
+            required: true,
             options: [
                 { option: 'FPO' },
                 { option: 'Individual farmer' },
@@ -38,6 +41,7 @@ const Complete = () => {
         }
 
     ]
+
     const modelSchema = Yup.object(
         FormInputs.reduce((schema, field) => {
             let fieldValidation = Yup.string()
@@ -63,8 +67,10 @@ const Complete = () => {
             else if (field?.validation?.toLowerCase() === 'number') {
                 fieldValidation = fieldValidation.max(10, 'Invalid mobile number')
             }
+            if (field?.required) {
+                fieldValidation = fieldValidation.required()
+            }
             schema[field?.name] = fieldValidation
-
             return schema
         }, {})
 
@@ -83,7 +89,7 @@ const Complete = () => {
     };
 
     const handleCreateSuccess = (data) => {
-        navigate('/signin')
+        navigate('/signup/pending')
         enqueueSnackbar(data.message?.[1], { variant: 'success' });
     };
 
@@ -102,21 +108,22 @@ const Complete = () => {
 
 
     const submitData = (data) => {
-        const values = { ...data, redirect_to: '' }
-        // submitSubReg(values)
+        const values = { ...data, ...IntialForm, redirect_to: '' }
+        console.log("values>>>>", values)
+        submitSubReg(values)
     }
 
-    // const {
-    //   mutateAsync: submitSubReg, // Use mutateAsync to work with async/await
-    //   isLoading: regLoading,
-    // } = useMutation({
-    //   mutationFn: createUser,
-    //   ...dataHandling,
-    // });
+    const {
+        mutateAsync: submitSubReg, // Use mutateAsync to work with async/await
+        isLoading: regLoading,
+    } = useMutation({
+        mutationFn: createUser,
+        ...dataHandling,
+    });
 
-    // console.log("regLoading>>>>", regLoading)
+    console.log("regLoading>>>>", regLoading)
 
-    // if (regLoading) return (<> <h4>Loading...</h4></>)
+    if (regLoading) return (<> <h4>Loading...</h4></>)
     return (
         <>
             <div className='w-[100%] flex justify-center max-md:mt-[60px] '>
@@ -141,24 +148,24 @@ const Complete = () => {
                                                 {inp.type === 'text'
 
                                                 }
-                                                <CusInput value={values[inp?.name]} onChange={handleChange} className='w-[100%]' type={inp?.type} label={inp?.label} name={inp?.name} />
+                                                <CusInput required={inp?.required ? true : false} value={values[inp?.name]} onChange={handleChange} className='w-[100%]' type={inp?.type} label={inp?.label} name={inp?.name} />
                                                 {values?.[inp?.name] && errors?.[inp?.name] &&
                                                     <ParagraphComp className='text-[red] text-[12px] ml-[10px] mt-[10px]' text={errors?.[inp?.name]} />
                                                 }
                                             </div>
                                             :
-                                            < div className='w-[100%] mt-[20px]' >
-                                                <CusSelect mappingKey='option' options={inp?.options} value={values[inp?.name]} onChange={handleChange} className='w-[100%]' type={inp?.type} label={inp?.label} name={inp?.name} />
+                                            <div className='w-[100%] mt-[20px]' >
+                                                <CusSelect required={inp?.required ? true : false} mappingKey='option' options={inp?.options} value={values[inp?.name]} onChange={handleChange} className='w-[100%]' type={inp?.type} label={inp?.label} name={inp?.name} />
                                                 {values?.[inp?.name] && errors?.[inp?.name] &&
                                                     <ParagraphComp className='text-[red] text-sm mt-[10px]' text={errors?.[inp?.name]} />
-                                                }   
+                                                }
                                             </div>
                                         }
                                     </>
                                 )}
                                 <div className='flex justify-center'>
                                     <div className='w-[70%]  p-[20px]' >
-                                        <ButtonComp onClick={() => { navigate('/signup/pending') }} type='submit' className='p-[10px] w-[100%] border-none rounded-full shadow-lg text-white  bg-[#0F75BC] '>
+                                        <ButtonComp type='submit' className='p-[10px] w-[100%] border-none rounded-full shadow-lg text-white  bg-[#0F75BC] '>
                                             Save
                                         </ButtonComp>
                                     </div>

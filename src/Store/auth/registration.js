@@ -1,11 +1,11 @@
 import { actionHandler } from "../api";
 
-const InitialRegUrl = `/api/method/frappe.core.doctype.user.user.sign_up`
+const createUserUrl = `/api/method/frappe.core.doctype.user.user.sign_up`
 
 export const createUser = async (payload) => {
     try {
         const { data } = await actionHandler({
-            url: InitialRegUrl,
+            url: createUserUrl,
             method: 'POST',
             data: payload,
         });
