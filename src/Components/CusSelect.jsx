@@ -155,7 +155,7 @@ const CusSelect = (
                 !disabledFilter && options
                     ? options?.filter((option) => {
                         const label = option?.[exDataKey] || option?.[mappingKey] || option;
-                        return label.toLowerCase().startsWith(inputValue.toLowerCase());
+                        return label?.toLowerCase()?.startsWith(inputValue?.toLowerCase());
                     })
                     : options
             }

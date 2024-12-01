@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import SignUp from '../Pages/SignUp/SignUp'
 import SignIn from '../Pages/SignIn/SignIn'
 import Dashboard from '../Pages/Dashboard/Dashboard'
+
 const AppRoute = () => {
     return (
         <>

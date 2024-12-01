@@ -9,13 +9,14 @@ import SubmissionForm from './Components/DashboardHome/SubmissionForm';
 import Timer from './Components/DashboardHome/Timer';
 import LandDetailsPlus from './Components/DashboardHome/LandDetailsPlus';
 import Profile from './Components/DashboardHome/DashboardProfile/Profile';
+import Faq from './Faq/Faq';
 
 const Dashboard = () => {
     const [landId, setLandId] = useState();
     const location = useLocation();
 
     // Determine if the Header should be displayed
-    const shouldShowHeader = location.pathname !== '/dashboard/profile';
+    const shouldShowHeader = location.pathname !== '/dashboard/profile' && location.pathname !== '/dashboard/faq';
 
     return (
         <div className="flex w-[100%]">
@@ -36,6 +37,7 @@ const Dashboard = () => {
                         <Route path="timer" element={<Timer />} />
                         <Route path="land-details-plus/:landId" element={<LandDetailsPlus landId={landId} />} />
                         <Route path="profile" element={<Profile landId={landId} />} />
+                        <Route path="faq" element={<Faq />} />
                         <Route path="/" element={<Navigate to="lands" replace />} />
                     </Routes>
                 </div>

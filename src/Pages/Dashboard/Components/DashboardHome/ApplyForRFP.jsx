@@ -4,7 +4,6 @@ import CusSelect from '../../../../Components/CusSelect';
 import CusInput from '../../../../Components/CusInput';
 import CustomFileInput from '../../../../Components/CusFileInput';
 import ButtonComp from '../../../../Components/ButtonComp';
-import ModalComp from '../../../../Components/ModalComp';
 import * as Yup from 'yup';
 import { Form, Formik, useFormikContext } from 'formik';
 import { useMutation } from 'react-query';
@@ -12,399 +11,402 @@ import { enqueueSnackbar } from 'notistack';
 import { TechnicalPost } from '../../../../Store/DashBoard/DashBoard';
 import { useNavigate } from 'react-router-dom';
 const ApplyForRFP = ({ setButtons }) => {
-    const QualificationForm = [
 
-        {
-            label: 'Enter Your Name',
-            name: 'name1',
-            type: 'text',
-        },
-        {
-            label: 'Age',
-            name: 'age',
-            type: 'number',
-        },
-        {
-            label: 'Citizenship Status',
-            name: 'citizenship_status',
-            type: 'select',
-            options: [
-                {
-                    option: 'Indian'
-                },
-                {
-                    option: 'NRI'
-                }
-            ]
-        },
-        {
-            label: 'Age Group',
-            name: 'age_group',
-            type: 'select',
-            parameter: 'Qualification and Scoring Matrix',
-            options: [
-                {
-                    option: '18-27 years'
-                },
-                {
-                    option: '28-35 years'
-                },
-                {
-                    option: '36-45 years'
-                },
-                {
-                    option: '46-55 years'
-                },
-                {
-                    option: '56-60 years'
-                },
-            ]
-        },
-        {
-            label: 'Educational Qualification',
-            name: 'educational_qualification',
-            type: 'select',
-            options: [
-                {
-                    option: 'Degree & above'
-                },
-                {
-                    option: '+2'
-                },
-                {
-                    option: '10 or below'
-                },
+	const language = localStorage.getItem('language');
 
-            ]
-        },
-        {
-            label: 'Years of Farming/Agricultural Experience',
-            name: 'years_of_farmingagricultural_experience',
-            type: 'select',
-            options: [
-                {
-                    option: '>20 years'
-                },
-                {
-                    option: '15-20 years'
-                },
+	const QualificationForm = [
 
-            ]
-        },
-        {
-            label: 'Alliance or Tie-up with Forward Market',
-            name: 'alliance_or_tie_up_with_forward_market',
-            type: 'select',
-            options: [
-                {
-                    option: '>3 firms signed'
-                },
-                {
-                    option: '2-3 firms signed'
-                },
+		{
+			label: language === 'en' ? 'Enter Your Name' : 'നിങ്ങളുടെ പേര് നൽകുക',
+			name: 'name1',
+			type: 'text',
+		},
+		{
+			label: language === 'en' ? 'Age' : 'പ്രായം',
+			name: 'age',
+			type: 'number',
+		},
+		{
+			label: language === 'en' ? 'Citizenship Status' : 'പൗരത്വ നില',
+			name: 'citizenship_status',
+			type: 'select',
+			options: [
+				{
+					option: 'Indian'
+				},
+				{
+					option: 'NRI'
+				}
+			]
+		},
+		{
+			label: language === 'en' ? 'Age Group' : 'പ്രായ ഗ്രൂപ്പ്',
+			name: 'age_group',
+			type: 'select',
+			parameter: language === 'en' ? 'Qualification and Scoring Matrix' : 'യോഗ്യതയും സ്കോറിംഗ് മെട്രിക്സും',
+			options: [
+				{
+					option: '18-27 years'
+				},
+				{
+					option: '28-35 years'
+				},
+				{
+					option: '36-45 years'
+				},
+				{
+					option: '46-55 years'
+				},
+				{
+					option: '56-60 years'
+				},
+			]
+		},
+		{
+			label: language === 'en' ? 'Educational Qualification' : 'വിദ്യാഭ്യാസ യോഗ്യത',
+			name: 'educational_qualification',
+			type: 'select',
+			options: [
+				{
+					option: 'Degree & above'
+				},
+				{
+					option: '+2'
+				},
+				{
+					option: '10 or below'
+				},
 
-            ]
-        },
-        {
-            label: 'Attendance in International Seminars/Worksh...',
-            name: 'attendance_in_international_seminarsworkshops',
-            type: 'select',
-            options: [
-                {
-                    option: '>2 seminars/workshops'
-                },
-                {
-                    option: '1-2 seminars/workshops'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Years of Farming/Agricultural Experience' : 'എത്ര വർഷങ്ങളുടെ കൃഷി/കാർഷിക പരിചയം',
+			name: 'years_of_farmingagricultural_experience',
+			type: 'select',
+			options: [
+				{
+					option: '>20 years'
+				},
+				{
+					option: '15-20 years'
+				},
 
-            ]
-        },
-        {
-            label: 'Attendance in National or State',
-            name: 'attendance_in_national_or_state_seminarsworkshops',
-            type: 'select',
-            options: [
-                {
-                    option: '>3 seminars/workshops'
-                },
-                {
-                    option: '2-3 seminars/workshops'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Alliance or Tie-up with Forward Market' : 'ഫോർവേഡ് മാർക്കറ്റുമായുള്ള സഖ്യം അല്ലെങ്കിൽ ടൈ-അപ്പ്',
+			name: 'alliance_or_tie_up_with_forward_market',
+			type: 'select',
+			options: [
+				{
+					option: '>3 firms signed'
+				},
+				{
+					option: '2-3 firms signed'
+				},
 
-            ]
-        },
-        {
-            label: 'Membership in FPC, Startup, Krishikoottam',
-            name: 'membership_in_fpc_startup_krishikoottam_kudumbashree_or_fig',
-            type: 'select',
-            options: [
-                {
-                    option: 'Member'
-                },
-                {
-                    option: 'Non-member'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Attendance in International Seminars/Workshops' : 'അന്താരാഷ്‌ട്രതല സെമിനാറുകളിലെ/വർക്ക്‌ഷോപ്പുകളിലെ ഹാജർ',
+			name: 'attendance_in_international_seminarsworkshops',
+			type: 'select',
+			options: [
+				{
+					option: '>2 seminars/workshops'
+				},
+				{
+					option: '1-2 seminars/workshops'
+				},
 
-            ]
-        },
-        {
-            label: 'Experience in Hi-tech Farming Practices',
-            name: 'experience_in_hi_tech_farming_practices',
-            type: 'select',
-            options: [
-                {
-                    option: '>5 years'
-                },
-                {
-                    option: '3-4 years'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Attendance in National or State' : 'ദേശീയ അല്ലെങ്കിൽ സംസ്ഥാനതല സെമിനാറുകളിലെ/വർക്ക്‌ഷോപ്പുകളിലെ ഹാജർ',
+			name: 'attendance_in_national_or_state_seminarsworkshops',
+			type: 'select',
+			options: [
+				{
+					option: '>3 seminars/workshops'
+				},
+				{
+					option: '2-3 seminars/workshops'
+				},
 
-            ]
-        },
-        {
-            label: 'Innovative Techniques Used in Farming',
-            name: 'innovative_techniques_used_in_farming',
-            type: 'select',
-            options: [
-                {
-                    option: 'Innovative farming'
-                },
-                {
-                    option: 'Conventional farming'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Membership in FPC, Startup, Krishikoottam' : 'എഫ്പിസി, സ്റ്റാർട്ടപ്പ്, കൃഷിക്കൂട്ടം എന്നിവയിൽ അംഗത്വം',
+			name: 'membership_in_fpc_startup_krishikoottam_kudumbashree_or_fig',
+			type: 'select',
+			options: [
+				{
+					option: 'Member'
+				},
+				{
+					option: 'Non-member'
+				},
 
-            ]
-        },
-        {
-            label: 'Adoption of Organic Farming Practices with',
-            name: 'adoption_of_organic_farming_practices_with_certifications',
-            type: 'select',
-            options: [
-                {
-                    option: 'EU standards'
-                },
-                {
-                    option: 'NOP'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Experience in Hi-tech Farming Practices' : 'ഹൈടെക് ഫാമിംഗ് രീതികളിൽ പരിചയം',
+			name: 'experience_in_hi_tech_farming_practices',
+			type: 'select',
+			options: [
+				{
+					option: '>5 years'
+				},
+				{
+					option: '3-4 years'
+				},
 
-            ]
-        },
-        {
-            label: 'Use of Renewable Energy Resources',
-            name: 'use_of_renewable_energy_resources',
-            type: 'select',
-            options: [
-                {
-                    option: 'Usage of renewable energy'
-                },
-                {
-                    option: 'Normal practice'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Innovative Techniques Used in Farming' : 'കൃഷിയിൽ ഉപയോഗിക്കുന്ന നൂതന സാങ്കേതിക വിദ്യകൾ',
+			name: 'innovative_techniques_used_in_farming',
+			type: 'select',
+			options: [
+				{
+					option: 'Innovative farming'
+				},
+				{
+					option: 'Conventional farming'
+				},
 
-            ]
-        },
-        {
-            label: 'Community Development and Leadership',
-            name: 'community_development_and_leadership',
-            type: 'select',
-            options: [
-                {
-                    option: 'Board member in any organization'
-                },
-                {
-                    option: 'Committee member on any organizational panel'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Adoption of Organic Farming Practices with' : 'ജൈവകൃഷി രീതികൾ സ്വീകരിക്കുന്നു',
+			name: 'adoption_of_organic_farming_practices_with_certifications',
+			type: 'select',
+			options: [
+				{
+					option: 'EU standards'
+				},
+				{
+					option: 'NOP'
+				},
 
-            ]
-        },
-        {
-            label: 'Financial Stability',
-            name: 'financial_stability',
-            type: 'select',
-            options: [
-                {
-                    option: 'Annual turnover >200 lakhs'
-                },
-                {
-                    option: '100-200 lakhs'
-                },
-                {
-                    option: '25-50 lakhs'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Use of Renewable Energy Resources' : 'റിന്യൂവബിൾ എനർജി റിസോഴ്സുകളുടെ ഉപയോഗം',
+			name: 'use_of_renewable_energy_resources',
+			type: 'select',
+			options: [
+				{
+					option: 'Usage of renewable energy'
+				},
+				{
+					option: 'Normal practice'
+				},
 
-            ]
-        },
-        {
-            parameter: 'Additional Requirements for FPOs',
-            label: 'Number of Members',
-            name: 'number_of_members',
-            type: 'number',
-        },
-        {
-            label: 'Existing Infrastructure',
-            name: 'existing_infrastructure',
-            type: 'select',
-            options: [
-                {
-                    option: 'Collection Centre'
-                },
-                {
-                    option: 'Primary Processing Unit'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Community Development and Leadership' : 'കമ്മ്യൂണിറ്റി വികസനവും നേതൃത്വവും',
+			name: 'community_development_and_leadership',
+			type: 'select',
+			options: [
+				{
+					option: 'Board member in any organization'
+				},
+				{
+					option: 'Committee member on any organizational panel'
+				},
 
-            ]
-        },
-        {
-            label: 'Compliance with Bookkeeping Requirements',
-            name: 'compliance_with_bookkeeping_requirements',
-            type: 'select',
-            options: [
-                {
-                    option: 'Yes'
-                },
-                {
-                    option: 'No'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Financial Stability' : 'സാമ്പത്തിക സ്ഥിരത',
+			name: 'financial_stability',
+			type: 'select',
+			options: [
+				{
+					option: 'Annual turnover >200 lakhs'
+				},
+				{
+					option: '100-200 lakhs'
+				},
+				{
+					option: '25-50 lakhs'
+				},
 
-            ]
-        },
-        {
-            parameter: 'Business Plan (For Youth/Agripreneurs Only)',
-            label: 'Proposed Agribusiness Plan (Attach a details)',
-            name: 'full_name',
-            type: 'file',
-        },
-        {
-            label: 'Educational Qualification (bachelor’s degree in',
-            name: 'educational_qualification_bachelors_in_agriculture_or_other',
-            type: 'select',
-            options: [
-                {
-                    option: 'Yes'
-                },
-                {
-                    option: 'No'
-                },
+			]
+		},
+		{
+			parameter: language === 'en' ? 'Additional Requirements for FPOs' : 'FPO-കൾക്കുള്ള അധിക ആവശ്യകതകൾ',
+			label: language === 'en' ? 'Number of Members' : 'അംഗങ്ങളുടെ എണ്ണം',
+			name: 'number_of_members',
+			type: 'number',
+		},
+		{
+			label: language === 'en' ? 'Existing Infrastructure' : 'നിലവിലുള്ള അടിസ്ഥാന സൗകര്യങ്ങൾ',
+			name: 'existing_infrastructure',
+			type: 'select',
+			options: [
+				{
+					option: 'Collection Centre'
+				},
+				{
+					option: 'Primary Processing Unit'
+				},
 
-            ]
-        },
-        {
-            label: 'Experience in Agricultural Entrepreneurship',
-            name: 'experience_in_agricultural_entrepreneurship',
-            type: 'text',
-        },
-        {
-            label: 'Years of experience',
-            name: 'years_of_experience',
-            type: 'select',
-            options: [
-                {
-                    option: '>20 years'
-                },
-                {
-                    option: '15-20 years'
-                },
-                {
-                    option: '10-15 years'
-                },
-                {
-                    option: '5-10 years'
-                },
-                {
-                    option: '3-5 years'
-                },
+			]
+		},
+		{
+			label: language === 'en' ? 'Compliance with Bookkeeping Requirements' : 'ബുക്ക് കീപ്പിംഗ് ആവശ്യകതകൾ പാലിക്കൽ',
+			name: 'compliance_with_bookkeeping_requirements',
+			type: 'select',
+			options: [
+				{
+					option: 'Yes'
+				},
+				{
+					option: 'No'
+				},
 
-            ]
-        },
-        {
-            parameter: 'Attachments and Supporting Documents',
-            label: 'Financial Bank Statements (Last 2 years)',
-            name: 'full_name',
-            type: 'file',
-        },
-        {
-            label: 'Business Plan Document (For Youth/Agripreneurs)',
-            name: 'full_name',
-            type: 'file',
-        },
-        {
-            label: 'Business Plan Document (For Youth/Agripreneurs)',
-            name: 'full_name',
-            type: 'file',
-        },
+			]
+		},
+		{
+			parameter: language === 'en' ? 'Business Plan (For Youth/Agripreneurs Only)' : 'ബിസിനസ് പ്ലാൻ (യുവാക്കൾ/കർഷകർക്ക് മാത്രം)',
+			label: language === 'en' ? 'Proposed Agribusiness Plan (Attach a details)' : 'നിർദ്ദിഷ്ട അഗ്രിബിസിനസ് പ്ലാൻ (വിശദാംശങ്ങൾ അറ്റാച്ചുചെയ്യുക) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
+			name: 'full_name',
+			type: 'file',
+		},
+		{
+			label: language === 'en' ? 'Educational Qualification (bachelor’s degree in' : 'വിദ്യാഭ്യാസ യോഗ്യത (ബിരുദം)',
+			name: 'educational_qualification_bachelors_in_agriculture_or_other',
+			type: 'select',
+			options: [
+				{
+					option: 'Yes'
+				},
+				{
+					option: 'No'
+				},
 
+			]
+		},
+		{
+			label: language === 'en' ? 'Experience in Agricultural Entrepreneurship' : 'കാർഷിക സംരംഭകത്വത്തിൽ പരിചയം',
+			name: 'experience_in_agricultural_entrepreneurship',
+			type: 'text',
+		},
+		{
+			label: language === 'en' ? 'Years of experience' : 'വർഷങ്ങളുടെ അനുഭവപരിചയം',
+			name: 'years_of_experience',
+			type: 'select',
+			options: [
+				{
+					option: '>20 years'
+				},
+				{
+					option: '15-20 years'
+				},
+				{
+					option: '10-15 years'
+				},
+				{
+					option: '5-10 years'
+				},
+				{
+					option: '3-5 years'
+				},
 
-    ]
-
-
-    const navigate = useNavigate()
-
-    const modelSchema = Yup.object(
-        QualificationForm.reduce((schema, field) => {
-            let fieldValidation = Yup.string();
-            // if (field.type.toLowerCase() === 'password') {
-            //     fieldValidation = Yup.string().min(8, 'Password must be at least 8 characters long');
-            // }
-            if (field?.validation?.toLowerCase() === 'mobile') {
-                fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
-            }
-            if (field?.validation?.toLowerCase() === 'email') {
-                fieldValidation = fieldValidation.email('Invalid Email Id');
-            }
-
-            schema[field?.name] = fieldValidation
-            return schema;
-        }, {})
-    );
-
-    const submitData = (data) => {
-        let values = {}
-        QualificationForm.map(ele => {
-            if (data?.[ele?.name]) {
-                values = { ...values, [ele?.name]: `${data?.[ele?.name]}` }
-            }
-        })
-        console.log('values>>>>', values)
-        confirmSubmit(data)
-    }
-
-    const DisplayFormikValues = () => {
-        const { values, errors } = useFormikContext();
-        console.log(values, errors); // Access Formik values here
-        return null; // You can return JSX or null if you just want to log the values
-    };
-
-    const initialValues = QualificationForm.reduce((values, field) => {
-        values[field.name] = '';
-        return values;
-    }, {});
+			]
+		},
+		{
+			parameter: language === 'en' ? 'Attachments and Supporting Documents' : 'അറ്റാച്ചുമെൻ്റുകളും അനുബന്ധ രേഖകളും',
+			label: language === 'en' ? 'Financial Bank Statements (Last 2 years)' : 'ഫിനാൻഷ്യൽ ബാങ്ക് സ്റ്റേറ്റ്‌മെൻ്റുകൾ (കഴിഞ്ഞ 2 വർഷം) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
+			name: 'full_name',
+			type: 'file',
+		},
+		{
+			label: language === 'en' ? 'Business Plan Document (For Youth/Agripreneurs)' : 'ബിസിനസ് പ്ലാൻ ഡോക്യുമെൻ്റ് (യുവാക്കൾ/കർഷകർക്ക്) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
+			name: 'full_name',
+			type: 'file',
+		},
+		{
+			label: language === 'en' ? 'Business Plan Document (For Youth/Agripreneurs)' : 'ബിസിനസ് പ്ലാൻ ഡോക്യുമെൻ്റ് (യുവാക്കൾ/കർഷകർക്ക്) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
+			name: 'full_name',
+			type: 'file',
+		},
 
 
+	];
+
+
+	const navigate = useNavigate()
+
+	const modelSchema = Yup.object(
+		QualificationForm.reduce((schema, field) => {
+			let fieldValidation = Yup.string();
+			// if (field.type.toLowerCase() === 'password') {
+			//     fieldValidation = Yup.string().min(8, 'Password must be at least 8 characters long');
+			// }
+			if (field?.validation?.toLowerCase() === 'mobile') {
+				fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
+			}
+			if (field?.validation?.toLowerCase() === 'email') {
+				fieldValidation = fieldValidation.email('Invalid Email Id');
+			}
+
+			schema[field?.name] = fieldValidation
+			return schema;
+		}, {})
+	);
+
+	const submitData = (data) => {
+		let values = {}
+		QualificationForm.map(ele => {
+			if (data?.[ele?.name]) {
+				values = { ...values, [ele?.name]: `${data?.[ele?.name]}` }
+			}
+		})
+		console.log('values>>>>', values)
+		confirmSubmit(data)
+	}
+
+	const DisplayFormikValues = () => {
+		const { values, errors } = useFormikContext();
+		console.log(values, errors); // Access Formik values here
+		return null; // You can return JSX or null if you just want to log the values
+	};
+
+	const initialValues = QualificationForm.reduce((values, field) => {
+		values[field.name] = '';
+		return values;
+	}, {});
 
 
 
-    const handleCreateSuccess = (data) => {
-        navigate('/dashboard/submission-form')
-        enqueueSnackbar('Success', { variant: 'success' });
-    };
-    const handleCreateError = (error) => {
-        const message = error?.response?.data?.message || error?.message;
-        enqueueSnackbar(message, { variant: 'error' });
-    };
 
-    const { mutateAsync: confirmSubmit, isLoading: regLoading } = useMutation({
-        mutationFn: TechnicalPost,
-        onSuccess: handleCreateSuccess,
-        onError: (error) => {
-            console.error('Mutation Error:', error);
-            handleCreateError(error);
-        },
-    });
-    return (
-        <>
 
-            <div className='w-[100%] mt-[20px] rounded-xl p-[20px]'>
-                {/* <div className='flex justify-center'>
+	const handleCreateSuccess = (data) => {
+		navigate('/dashboard/submission-form')
+		enqueueSnackbar('Success', { variant: 'success' });
+	};
+	const handleCreateError = (error) => {
+		const message = error?.response?.data?.message || error?.message;
+		enqueueSnackbar(message, { variant: 'error' });
+	};
+
+	const { mutateAsync: confirmSubmit, isLoading: regLoading } = useMutation({
+		mutationFn: TechnicalPost,
+		onSuccess: handleCreateSuccess,
+		onError: (error) => {
+			console.error('Mutation Error:', error);
+			handleCreateError(error);
+		},
+	});
+	return (
+		<>
+
+			<div className='w-[100%] mt-[20px] rounded-xl p-[20px]'>
+				{/* <div className='flex justify-center'>
                     <div className='w-[500px] relative '>
                         <div className='flex justify-between'>
                             <ParagraphComp className='text-md text-[#0F75BC] ' text='TECHNICAL PROPOSAL' />
@@ -420,61 +422,58 @@ const ApplyForRFP = ({ setButtons }) => {
                         </div>
                     </div>
                 </div> */}
-                <ParagraphComp className='text-md mt-[30px] font-bold text-[#0F75BC] ' text='TECHNICAL PROPOSAL SUBMISSION FORM' />
-                <ParagraphComp className='text-md text-[black] font-schibsted ' text='Name of Services: Inviting Cultivators for NAWODHAN implementation' />
+				<ParagraphComp className='text-md mt-[30px] font-bold text-[#0F75BC] ' text={language === 'en' ? 'TECHNICAL PROPOSAL SUBMISSION FORM' : 'സാങ്കേതിക പ്രൊപ്പോസൽ സമർപ്പിക്കൽ ഫോം'} />
+				<ParagraphComp className='text-md text-[black] font-schibsted ' text={language === 'en' ? 'Name of Services: Inviting Cultivators for NAWODHAN implementation':'സേവനങ്ങളുടെ പേര്: നവോധൻ നടപ്പിലാക്കുന്നതിനായി കര്‍ഷകരെ ക്ഷണിക്കുന്നു'} />
 
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={modelSchema}
-                    onSubmit={(data) => {
-                        submitData(data)
-                    }}
-                >
-                    {({ values,  handleChange }) => (
-                        <Form className='w-[100%]'>
-                            <div className='flex flex-wrap w-[100%] gap-[20px] mt-[20px]'>
-                                {QualificationForm.map(field =>
+				<Formik
+					initialValues={initialValues}
+					validationSchema={modelSchema}
+					onSubmit={(data) => {
+						submitData(data)
+					}}
+				>
+					{({ values, handleChange }) => (
+						<Form className='w-[100%]'>
+							<div className='flex flex-wrap w-[100%] gap-[20px] mt-[20px]'>
+								{QualificationForm.map(field =>
 
-                                    <>
-                                        {field.parameter &&
-                                            <div className='w-[100%]'>
-                                                <ParagraphComp className='text-md mt-[30px] font-semibold text-[#0F75BC] ' text={field?.parameter} />
-                                            </div>
-                                        }
-                                        {field.type.toLocaleLowerCase() === 'select' ?
-                                            <div className='w-[32%] mt-[20px]'>
-                                                <CusSelect value={values?.[field?.name]} onChange={handleChange} mappingKey={'option'} name={field?.name} options={field?.options?.length > 0 ? field?.options : [{ option: 'checking' }, { option: 'checking' }]} label={field?.label} />
-                                            </div>
-                                            :
-                                            field.type.toLocaleLowerCase() === 'file' ?
-                                                <div className='w-[32%] mt-[20px]'>
-                                                    <CustomFileInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} />
-                                                </div>
-                                                :
-                                                <div className='w-[32%] mt-[20px]'>
-                                                    <CusInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} type={field?.type} />
-                                                </div>
-                                        }
-                                    </>
-                                )}
+									<>
+										{field.parameter &&
+											<div className='w-[100%]'>
+												<ParagraphComp className='text-md mt-[30px] font-semibold text-[#0F75BC] ' text={field?.parameter} />
+											</div>
+										}
+										{field.type.toLocaleLowerCase() === 'select' ?
+											<div className='w-[32%] mt-[20px]'>
+												<CusSelect value={values?.[field?.name]} onChange={handleChange} mappingKey={'option'} name={field?.name} options={field?.options?.length > 0 ? field?.options : [{ option: 'checking' }, { option: 'checking' }]} label={field?.label} />
+											</div>
+											:
+											field.type.toLocaleLowerCase() === 'file' ?
+												<div className='w-[32%] mt-[20px]'>
+													<CustomFileInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} />
+												</div>
+												:
+												<div className='w-[32%] mt-[20px]'>
+													<CusInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} type={field?.type} />
+												</div>
+										}
+									</>
+								)}
 
-                            </div>
-                            <div className='flex justify-end mt-[30px] '>
-                                <ButtonComp type='submit' className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save & Next' />
-                            </div>
-                            <DisplayFormikValues />
+							</div>
+							<div className='flex justify-end mt-[30px] '>
+								<ButtonComp type='submit' className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save & Next' />
+							</div>
+							<DisplayFormikValues />
 
-                        </Form>
-                    )}
-                </Formik>
+						</Form>
+					)}
+				</Formik>
 
+			</div>
 
-
-            </div>
-
-
-        </>
-    )
+		</>
+	)
 }
 
 export default ApplyForRFP
