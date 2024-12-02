@@ -9,7 +9,7 @@ export const actionHandler = (payload) => {
   const accessToken = localStorage.getItem('accessToken');
 
   if (accessToken) {
-    axios.defaults.headers.common["Authorization"] = 'Token df9bc3921c8c000:22534a6d74a03e4';
+    axios.defaults.headers.common["Authorization"] = "Token " + accessToken;
   }
 
   return new Promise((resolve, reject) => {
