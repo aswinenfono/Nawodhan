@@ -16,7 +16,7 @@ const Initial = ({ setIntialForm }) => {
     {
       label: 'Mobile Number',
       name: 'mobile_number',
-      type: 'number',
+      type: 'string',
       validation: 'mobile'
 
     },

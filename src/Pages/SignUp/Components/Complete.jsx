@@ -90,7 +90,7 @@ const Complete = ({ IntialForm }) => {
 
   const handleCreateSuccess = (data) => {
     navigate('/signup/pending')
-    enqueueSnackbar(data.message?.[1], { variant: 'success' });
+    enqueueSnackbar('Success', { variant: 'success' });
   };
 
   const handleCreateError = (error) => {
