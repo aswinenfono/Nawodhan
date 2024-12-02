@@ -4,6 +4,7 @@ import ButtonComp from '../../../Components/ButtonComp'
 import LogoutIcon from '@mui/icons-material/Logout';
 import { ParagraphComp } from '../../../Components/ParagraphComp';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const SideBar = () => {
   const location = useLocation();
   const subMenus = ['lands', 'apply-for-rfp', 'submission-form', 'timer'];
@@ -48,7 +49,12 @@ const SideBar = () => {
             )
           })}
         </div>
-        <ButtonComp onClick={() => { navigate('/signin') }} className=' w-[100%] py-[10px] px-[10px] flex mb-[15px] text-center font-semibold bg-[white] text-[#0F75BC] rounded-md' >
+        <ButtonComp
+          onClick={() => {
+            localStorage.clear();
+            delete axios.defaults.headers.common.Authorization;
+            navigate('/signin')
+          }} className=' w-[100%] py-[10px] px-[10px] flex mb-[15px] text-center font-semibold bg-[white] text-[#0F75BC] rounded-md' >
           <LogoutIcon className='text-[red] mr-[35px] ' />
           <ParagraphComp className='' text='Logout' />
         </ButtonComp>

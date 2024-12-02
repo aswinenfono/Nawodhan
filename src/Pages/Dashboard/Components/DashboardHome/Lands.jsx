@@ -9,7 +9,8 @@ import { enqueueSnackbar } from 'notistack';
 const Lands = ({ setLandId }) => {
     const navigate = useNavigate()
     const [District, setDistrict] = useState()
-    const [FilteresDistricts, setFilteresDistricts] = useState([])
+    const [FilteresDistricts, setFilteresDistricts] = useState([]);
+    
     const { isLoading, data: Lands, error } = useQuery({
         queryKey: 'LandsList',
         queryFn: LandsList,

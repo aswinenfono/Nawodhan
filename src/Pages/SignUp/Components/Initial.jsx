@@ -51,7 +51,7 @@ const Initial = ({ setIntialForm }) => {
       }
 
       if (field?.validation?.toLowerCase() === 'pin') {
-        fieldValidation = fieldValidation.matches(/^\d{6}$/, 'Your PIN must be exactly 6 digits long')
+        fieldValidation = fieldValidation.matches(/^\d{4}$/, 'Your PIN must be exactly 4 digits long')
       }
       else if (field?.validation?.toLowerCase() === 'email') {
         fieldValidation = fieldValidation.email('Invalid email address')
@@ -98,7 +98,7 @@ const Initial = ({ setIntialForm }) => {
 
 
   const submitData = (data) => {
-    const values = { ...data, redirect_to: '' }
+    const values = { ...data }
     setIntialForm(values)
     navigate('/signup/complete')
   }
@@ -129,23 +129,23 @@ const Initial = ({ setIntialForm }) => {
                       }
                     </div>
                     {/* :
-                                        <div className='flex justify-around w-[100%] mt-[20px] ' >
-                                            {inp?.options?.map(opt =>
-                                                <label className="flex mt-[16px] items-center space-x-2">
-                                                    <InputComp
-                                                        value={opt}  // Set the value of the radio button
-                                                        checked={values[inp?.name] === opt}  // Ensure it is checked correctly
-                                                        onChange={() => setFieldValue(inp?.name, opt)}  // Handle change manually
-                                                        required={true}
-                                                        className='h-[20px] w-[20px]'
-                                                        type={inp?.type}
-                                                        label={opt}
-                                                        name={inp?.name}
-                                                    />
-                                                    <span className='text-black'>{opt}</span>
-                                                </label>
+                      <div className='flex justify-around w-[100%] mt-[20px] ' >
+                          {inp?.options?.map(opt =>
+                              <label className="flex mt-[16px] items-center space-x-2">
+                                  <InputComp
+                                      value={opt}  // Set the value of the radio button
+                                      checked={values[inp?.name] === opt}  // Ensure it is checked correctly
+                                      onChange={() => setFieldValue(inp?.name, opt)}  // Handle change manually
+                                      required={true}
+                                      className='h-[20px] w-[20px]'
+                                      type={inp?.type}
+                                      label={opt}
+                                      name={inp?.name}
+                                  />
+                                  <span className='text-black'>{opt}</span>
+                              </label>
 
-                                            )} */}
+                          )} */}
                     {/* </div> */}
                   </>
                 )}

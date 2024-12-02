@@ -32,16 +32,16 @@ const SubmissionForm = () => {
       type: 'select',
       options: []
     },
-    {
-      label: language === 'en' ? 'Specifications' : 'സ്പെസിഫിക്കേഷനുകൾ',
-      name: 'specifications',
-      type: 'text',
-    },
-    {
-      label: language === 'en' ? 'Unit (10 Acre land as 1 unit) (A)' : 'യൂണിറ്റ് (10 ഏക്കർ ഭൂമി 1 യൂണിറ്റായി) (എ)',
-      name: 'unit_10_acre_land_as_1_unit',
-      type: 'number',
-    },
+    // {
+    //   label: language === 'en' ? 'Specifications' : 'സ്പെസിഫിക്കേഷനുകൾ',
+    //   name: 'specifications',
+    //   type: 'text',
+    // },
+    // {
+    //   label: language === 'en' ? 'Unit (10 Acre land as 1 unit) (A)' : 'യൂണിറ്റ് (10 ഏക്കർ ഭൂമി 1 യൂണിറ്റായി) (എ)',
+    //   name: 'unit_10_acre_land_as_1_unit',
+    //   type: 'number',
+    // },
     {
       label: language === 'en' ? 'Rate per unit (Rs.) (B)' : 'യൂണിറ്റിന് നിരക്ക് (രൂപ) (ബി)',
       name: 'rate_per_unit_rs',
