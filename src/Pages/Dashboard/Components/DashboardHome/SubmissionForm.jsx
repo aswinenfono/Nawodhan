@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ParagraphComp } from '../../../../Components/ParagraphComp'
 import CusInput from '../../../../Components/CusInput'
 import ButtonComp from '../../../../Components/ButtonComp'
 import CusSelect from '../../../../Components/CusSelect'
 import InputComp from '../../../../Components/InputComp'
-import CustomFileInput from '../../../../Components/CusFileInput'
+import DeleteIcon from '@mui/icons-material/Delete';
 import * as Yup from 'yup';
 import { useMutation, useQuery } from 'react-query'
 import { enqueueSnackbar } from 'notistack'
 import { SubmissionFormPost, UnitsList } from '../../../../Store/DashBoard/DashBoard'
-import { Form, Formik, useFormikContext } from 'formik'
+import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik'
 import ModalComp from '../../../../Components/ModalComp'
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 const SubmissionForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [Smbple, setSmbple] = useState({});
   const language = localStorage.getItem('language');
-  
+  const [noOfYears, setNoOfYears] = useState(0);
+  const [fields, setFields] = useState([]);
 
   const { data: units } = useQuery({
     queryKey: 'units',
@@ -25,74 +26,59 @@ const SubmissionForm = () => {
   });
 
 
-  const [SubmissionForm, setSubmissionForm] = useState([
-    {
-      label: language === 'en' ? 'Select Unit' : 'യൂണിറ്റ് ',
-      name: 'unit',
-      type: 'select',
-      options: []
-    },
-    // {
-    //   label: language === 'en' ? 'Specifications' : 'സ്പെസിഫിക്കേഷനുകൾ',
-    //   name: 'specifications',
-    //   type: 'text',
-    // },
-    // {
-    //   label: language === 'en' ? 'Unit (10 Acre land as 1 unit) (A)' : 'യൂണിറ്റ് (10 ഏക്കർ ഭൂമി 1 യൂണിറ്റായി) (എ)',
-    //   name: 'unit_10_acre_land_as_1_unit',
-    //   type: 'number',
-    // },
-    {
-      label: language === 'en' ? 'Rate per unit (Rs.) (B)' : 'യൂണിറ്റിന് നിരക്ക് (രൂപ) (ബി)',
-      name: 'rate_per_unit_rs',
-      type: 'number',
-    },
-    {
-      label: language === 'en' ? 'Sub-unit (Less than 10 Acres) (Ex. 1 Acre or 2 Acre) (C)' : 'ഉപ-യൂണിറ്റ് (10 ഏക്കറിൽ താഴെ) (ഉദാ. 1 ഏക്കർ അല്ലെങ്കിൽ 2 ഏക്കർ) (സി)',
-      name: 'sub_unit_less_than_10_acres',
-      type: 'number',
-    },
-    {
-      label: language === 'en' ? 'Rate per Sub-unit (Rs.) (D)' : 'സബ്-യൂണിറ്റിന് നിരക്ക് (രൂപ) (ഡി)',
-      name: 'rate_per_sub_unit_rs',
-      type: 'number',
-    },
-    {
-      label: language === 'en' ? 'Total Quantity units  (A+C)' : 'മൊത്തം അളവ് യൂണിറ്റുകൾ (A+C)',
-      name: 'total_quantity_units',
-      type: 'number',
-    },
-    {
-      label: language === 'en' ? 'Total Quoted Unit Rate at land in (Rs.) (B+D)' : 'ഭൂമിയിലെ മൊത്തം നിരക്ക് (രൂപ) (B+D)',
-      name: 'total_quoted_unit_rate_at_land_rs',
-      type: 'number',
-    },
-    {
-      label: language === 'en' ? 'In Figures' : 'അക്കങ്ങളില്‍',
-      name: 'total_in_figures',
-      type: 'number',
-    },
-    {
-      label: language === 'en' ? 'In Words' : 'വാക്കുകളിൽ',
-      name: 'total_in_words',
-      type: 'text',
-    },
-  ]);
-
-
-  useEffect(() => {
-    if (units?.message?.length > 0) {
-      const updatedOptions = units?.message?.map((item) => {
-        return { option: item?.name };
-      });
-
-      setSubmissionForm(prev => {
-        const [firstField, ...restFields] = prev;
-        const updatedFirstField = { ...firstField, options: updatedOptions };
-        return [updatedFirstField, ...restFields];
-      });
-    }
-  }, [units]);
+  // const [SubmissionForm, setSubmissionForm] = useState([
+  //   {
+  //     label: language === 'en' ? 'Select Unit' : 'യൂണിറ്റ് ',
+  //     name: 'unit',
+  //     type: 'select',
+  //     options: []
+  //   },
+  //   // {
+  //   //   label: language === 'en' ? 'Specifications' : 'സ്പെസിഫിക്കേഷനുകൾ',
+  //   //   name: 'specifications',
+  //   //   type: 'text',
+  //   // },
+  //   // {
+  //   //   label: language === 'en' ? 'Unit (10 Acre land as 1 unit) (A)' : 'യൂണിറ്റ് (10 ഏക്കർ ഭൂമി 1 യൂണിറ്റായി) (എ)',
+  //   //   name: 'unit_10_acre_land_as_1_unit',
+  //   //   type: 'number',
+  //   // },
+  //   {
+  //     label: language === 'en' ? 'Rate per unit (Rs.) (B)' : 'യൂണിറ്റിന് നിരക്ക് (രൂപ) (ബി)',
+  //     name: 'units',
+  //     type: 'section',
+  //   },
+  //   {
+  //     label: language === 'en' ? 'Sub-unit (Less than 10 Acres) (Ex. 1 Acre or 2 Acre) (C)' : 'ഉപ-യൂണിറ്റ് (10 ഏക്കറിൽ താഴെ) (ഉദാ. 1 ഏക്കർ അല്ലെങ്കിൽ 2 ഏക്കർ) (സി)',
+  //     name: 'sub_unit_less_than_10_acres',
+  //     type: 'number',
+  //   },
+  //   {
+  //     label: language === 'en' ? 'Rate per Sub-unit (Rs.) (D)' : 'സബ്-യൂണിറ്റിന് നിരക്ക് (രൂപ) (ഡി)',
+  //     name: 'rate_per_sub_unit_rs',
+  //     type: 'number',
+  //   },
+  //   {
+  //     label: language === 'en' ? 'Total Quantity units  (A+C)' : 'മൊത്തം അളവ് യൂണിറ്റുകൾ (A+C)',
+  //     name: 'total_quantity_units',
+  //     type: 'number',
+  //   },
+  //   {
+  //     label: language === 'en' ? 'Total Quoted Unit Rate at land in (Rs.) (B+D)' : 'ഭൂമിയിലെ മൊത്തം നിരക്ക് (രൂപ) (B+D)',
+  //     name: 'total_quoted_unit_rate_at_land_rs',
+  //     type: 'number',
+  //   },
+  //   {
+  //     label: language === 'en' ? 'In Figures' : 'അക്കങ്ങളില്‍',
+  //     name: 'total_in_figures',
+  //     type: 'number',
+  //   },
+  //   {
+  //     label: language === 'en' ? 'In Words' : 'വാക്കുകളിൽ',
+  //     name: 'total_in_words',
+  //     type: 'text',
+  //   },
+  // ]);
     
 
   const closeModal = () => {
@@ -103,34 +89,8 @@ const SubmissionForm = () => {
   }
 
 
-  const modelSchema = Yup.object(
-    SubmissionForm.reduce((schema, field) => {
-      let fieldValidation = Yup.string();
-      // if (field.type.toLowerCase() === 'password') {
-      //     fieldValidation = Yup.string().min(8, 'Password must be at least 8 characters long');
-      // }
-      if (field?.validation?.toLowerCase() === 'mobile') {
-        fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
-      }
-      if (field?.validation?.toLowerCase() === 'email') {
-        fieldValidation = fieldValidation.email('Invalid Email Id');
-      }
+  const modelSchema = Yup.object();
 
-      schema[field?.name] = fieldValidation
-      return schema;
-    }, {})
-  );
-
-  const submitData = (data) => {
-    let values = {}
-    SubmissionForm.map(ele => {
-      if (data?.[ele?.name]) {
-        values = { ...values, [ele?.name]: `${data?.[ele?.name]}` }
-      }
-    })
-    console.log('values>>>>', values)
-    confirmSubmit(data)
-  }
 
   const DisplayFormikValues = () => {
     const { values, errors } = useFormikContext();
@@ -138,12 +98,20 @@ const SubmissionForm = () => {
     return null; // You can return JSX or null if you just want to log the values
   };
 
-  const initialValues = SubmissionForm.reduce((values, field) => {
-    values[field.name] = '';
-    return values;
-  }, {});
+  const initialValues = {
+    table_uefd: [
+      {
+        unit: '',
+        total_per_unit: 0,
+        sub_unit: '',
+        total_per_sub_unit: 0
+      }
+    ],
+    total_in_words: '',
+    total_in_figures: ''
+  }
 
-  const handleCreateSuccess = (data) => {
+  const handleCreateSuccess = () => {
     setTimeout(() => {
       openModal()
     }, 100);
@@ -155,7 +123,7 @@ const SubmissionForm = () => {
     enqueueSnackbar(message, { variant: 'error' });
   };
 
-  const { mutateAsync: confirmSubmit, isLoading: regLoading } = useMutation({
+  const { mutateAsync: confirmSubmit } = useMutation({
     mutationFn: SubmissionFormPost,
     onSuccess: handleCreateSuccess,
     onError: (error) => {
@@ -164,11 +132,51 @@ const SubmissionForm = () => {
     },
   });
 
-
-  const handleCheck = (e) => {
-    const { value, name } = e.target
-    setSmbple({ [name]: value })
+  const handleSubmit = async (values) => {
+    let payload = {
+      ...values
+    }
+    try {
+      await confirmSubmit(payload);
+    } catch (error) {
+      handleCreateError(error);
+    }
+    console.log(payload)
   }
+
+
+  const years = [
+    {
+      option: 1
+    },
+    {
+      option: 2
+    },
+    {
+      option: 3
+    },
+    {
+      option: 4
+    },
+    {
+      option: 5
+    },
+    {
+      option: 6
+    },
+    {
+      option: 7
+    },
+    {
+      option: 8
+    },
+    {
+      option: 9
+    },
+    {
+      option: 10
+    },
+  ];
 
 
 
@@ -176,69 +184,139 @@ const SubmissionForm = () => {
     <>
       <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
         <ParagraphComp text={language === 'en' ? 'FINANCIAL PROPOSAL SUBMISSION FORM' : 'സാമ്പത്തിക പ്രൊപ്പോസല്‍ സമർപ്പണ ഫോം'} className='text-md font-schibsted text-[#0F75BC] font-bold' />
-
+        <div className='sm:w-[49%] xs:w-[100%]  mt-3'>
+          
+          <ParagraphComp text='Years of Proposal' className='text-md font-schibsted text-[black] font-bold mb-2' />
+          <FormControl fullWidth sx={{ mt: 1 }}>
+            <InputLabel id="demo-simple-select-label">Year</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={noOfYears}
+              label="Year"
+              sx={{ borderColor: '#0F75BC' }}
+              onChange={(e) => {
+                setFields(Array.from({ length: e.target.value }, (_, index) => `Year ${index + 1}`));
+                setNoOfYears(e.target.value)
+              }}
+            >
+              {years?.map((item, index) => (
+                <MenuItem key={index} value={item?.option}>{item?.option}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <ParagraphComp text='Select Land Unit' className='text-md font-schibsted text-[#0F75BC] font-bold mt-2' />
+        </div>
         <Formik
           initialValues={initialValues}
           validationSchema={modelSchema}
-          onSubmit={(data) => {
-            submitData(data)
+          onSubmit={async (values) => {
+            handleSubmit(values)
           }}
         >
-          {({ values, handleChange }) => (
-            <Form className='w-[100%]'>
-
-              <div className='flex flex-wrap w-[100%] justify-between mt-[20px]'>
-                {SubmissionForm.map(field =>
-
-                  <>
-                    {field?.parameter &&
-                      <div className='w-[100%]'>
-                        <ParagraphComp className='text-md mt-[30px] font-semibold text-[#0F75BC] ' text={field?.parameter} />
-                      </div>
-                    }
-                    {field?.type?.toLocaleLowerCase() === 'select' ?
-                      <div className='w-[49%] mt-[20px]'>
-                        <CusSelect value={values?.[field?.name]} onChange={handleChange} mappingKey={'option'} name={field?.name} options={field?.options?.length > 0 ? field?.options : [{ option: 'checking' }, { option: 'checking' }]} label={field?.label} />
-                      </div>
-                      :
-                      field?.type?.toLocaleLowerCase() === 'file' ?
-                        <div className='w-[49%] mt-[20px]'>
-                          <CustomFileInput label={field?.label} />
-                        </div>
-                        :
-                        <div className={`${field?.label?.toLocaleLowerCase() === 'in figures' || field?.label?.toLocaleLowerCase() === 'in words' ? 'w-[100%]' : 'w-[49%]'}  mt-[20px] `}>
-                          <CusInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} type={field?.type} />
-                        </div>
-                    }
-                  </>
-
-                )}
-
+          {({ values, setFieldValue,handleSubmit }) => (
+            <Form className='w-[100%]' noValidate onSubmit={handleSubmit}>
+              <div className='flex flex-wrap w-[100%] overflow-x-scroll justify-between mt-[20px]'>
+                <>
+                  <div style={{ marginBottom: '20px', width: '100%', overflowX: 'scroll' }}>
+                    <FieldArray name={'table_uefd'}>
+                      {({ push, remove }) => (
+                        <>
+                          {values?.table_uefd?.map((row, rowIndex) => (
+                            <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 items-center'>
+                              <div className='mt-2'>
+                                <CusSelect value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
+                                  return { option: item?.name };
+                                })} label={'Select Unit'} />
+                              </div>
+                              {fields.map((_, index) => (<div key={index} className=' mt-2'>
+                                <Field
+                                  onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.rate_per_unit_year_${index + 1}`, e.target.value)}
+                                  name={`table_uefd.${rowIndex}.rate_per_unit_year_${index + 1}`}
+                                  value={values.table_uefd[rowIndex]?.[`rate_per_unit_year_${index + 1}`] || ''}
+                                  component={CusInput}
+                                  label={`Rate ${(index + 1)} Year`}
+                                  type='number' />
+                              </div>))}
+                              <div className='mt-2'>
+                                <CusInput value={row?.total_per_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_unit`} label={'Total'} type={'number'} />
+                              </div>
+                              <div className='w-[5%] mt-2'>
+                                <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
+                                  e.preventDefault()
+                                  remove(rowIndex)
+                                }} />
+                              </div>
+                            </div>
+                          ))}
+                          <div className='flex justify-end mt-10'>
+                            <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Add Next' onClick={(e) => {
+                              e.preventDefault()
+                              push({})
+                            }} />
+                          </div>
+                        </>
+                      )}
+                    </FieldArray>
+                  </div>
+                </>
               </div>
+              <ParagraphComp text='Select Sub Unit' className='text-md font-schibsted text-[#0F75BC] font-bold mt-5' />
+              <div className='flex flex-wrap w-[100%] overflow-x-scroll justify-between mt-[20px]'>
+                <>
+                  <div style={{ marginBottom: '20px', width: '100%', overflowX: 'scroll' }}>
+                    <FieldArray name={'table_uefd'}>
+                      {({ push, remove }) => (
+                        <>
+                          {values?.table_uefd?.map((row, rowIndex) => (
+                            <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 items-center'>
+                              <div className='mt-2'>
+                                <CusSelect value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={units?.message?.map((item) => {
+                                  return { option: item?.name };
+                                })} label={'Select Unit'} />
+                              </div>
+                              {fields.map((_, index) => (<div key={index} className='mt-2'>
+                                <Field
+                                  onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.rate_per_sub_unit_year_${index + 1}`, e.target.value)}
+                                  name={`table_uefd.${rowIndex}.rate_per_sub_unit_year_${index + 1}`}
+                                  value={values.table_uefd[rowIndex]?.[`rate_per_sub_unit_year_${index + 1}`] || ''}
 
-
-              <div className='rounded-lg mt-[40px] bg-[#D9EFFF] p-[10px]'>
-                <table className='w-[100%]'>
-                  <tr className='bg-[white]'>
-                    <th className='p-[10px]'>{language === 'en' ? 'Description of Goods' : 'സാധനങ്ങളുടെ വിവരണം'}</th>
-                    <th className='p-[10px]'>{language === 'en' ? 'Specifications' : 'സ്പെസിഫിക്കേഷനുകൾ'}</th>
-                    <th className='p-[10px]'>{language === 'en' ? 'Unit' : 'യൂണിറ്റ്'}</th>
-                    <th className='p-[10px]'>{language === 'en' ? 'Rate per unit' : 'യൂണിറ്റ് നിരക്ക്'}</th>
-                    <th className='p-[10px]'>{language === 'en' ? 'Sub-unit' : 'ഉപ-യൂണിറ്റ്'}</th>
-                    <th className='p-[10px]'>{language === 'en' ? 'Rate per Sub-unit' : 'ഉപ-യൂണിറ്റ് നിരക്ക്'}</th>
-                  </tr>
-                  <tr >
-                    <td className='p-[10px] text-center' >Goods #54344</td>
-                    <td className='p-[10px] text-center'>Sample text</td>
-                    <td className='p-[10px] text-center'>2000</td>
-                    <td className='p-[10px] text-center'>2000</td>
-                    <td className='p-[10px] text-center'>2000</td>
-                    <td className='p-[10px] text-center'>32,467</td>
-                  </tr>
-                </table>
+                                  component={CusInput}
+                                  label={`Rate ${(index + 1)} Year`}
+                                  type='number' />
+                              </div>))}
+                              <div className='mt-2'>
+                                <CusInput value={row?.total_per_sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_sub_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_sub_unit`} label={'Total'} type={'number'} />
+                              </div>
+                              <div className='w-[5%] mt-2'>
+                                <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
+                                  e.preventDefault()
+                                  remove(rowIndex)
+                                }} />
+                              </div>
+                            </div>
+                          ))}
+                          <div className='flex justify-end mt-10'>
+                            <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Add Next' onClick={(e) => {
+                              e.preventDefault()
+                              push({})
+                            }} />
+                          </div>
+                        </>
+                      )}
+                    </FieldArray>
+                  </div>
+                </>
               </div>
-
-              <div className='flex mt-[20px] justify-between'>
+              <div className='mt-10 sm:flex xs:flex-col justify-end items-center gap-3'>
+                <div className='w-[25%] mt-[20px]'>
+                  <CusInput onChange={(e) => setFieldValue('total_in_words', e.target.value)} value={values?.total_in_words} name={'total_in_words'} type='text' label={language === 'en' ? 'Total amount in words' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+                </div>
+                <div className='w-[25%] mt-[20px]'>
+                  <CusInput onChange={(e) => setFieldValue('total_in_figures', e.target.value)} value={values?.total_in_figures} name={'total_in_figures'} type='number' label={language === 'en' ? 'Total amount in figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+                </div>
+              </div>
+              <div className='flex mt-[40px] justify-between'>
                 <ParagraphComp className='text-md mt-[20px] font-schibsted leading-6 text-[black] ' >
                   {language === 'en' ? 'To' : 'സ്വീകർത്താവ്'}: <br />
                   <span className='font-bold' >{language === 'en' ? 'The Director - Business,' : 'ഡയറക്ടർ - ബിസിനസ്,'}</span>
@@ -257,14 +335,14 @@ const SubmissionForm = () => {
                   <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Location, Date' : 'സ്ഥലം, തീയതി'} />
                 </div>
               </div>
-              <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' : 'ഞങ്ങൾ, താഴെ ഒപ്പിട്ടവർ, നിങ്ങളുടെ പ്രോപ്പോസലിനായുള്ള അഭ്യർത്ഥനയ്ക്ക് അനുസൃതമായി നവോധൻ പദ്ധതിക്കായി കൃഷി സേവനങ്ങൾ നല്‍കുമെന്ന് വാഗ്ദാനം ചെയ്യുന്നു'} />
+              {/* <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' : 'ഞങ്ങൾ, താഴെ ഒപ്പിട്ടവർ, നിങ്ങളുടെ പ്രോപ്പോസലിനായുള്ള അഭ്യർത്ഥനയ്ക്ക് അനുസൃതമായി നവോധൻ പദ്ധതിക്കായി കൃഷി സേവനങ്ങൾ നല്‍കുമെന്ന് വാഗ്ദാനം ചെയ്യുന്നു'} />
               <div className='w-[100%] mt-[20px]'>
                 <CusInput onChange={handleCheck} value={Smbple?.amount} name={'amount'} type='text' label={language === 'en' ? 'amount in words and figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
               </div>
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Our attached Financial Proposal is for the amount of Rs. {Insert amount in words and figures' : 'ഞങ്ങളുടെ ഉള്ളടക്കം ചെയ്ത സാമ്പത്തിക പ്രൊപോസല്‍രൂപ. {വാക്കുകളിലും അക്കങ്ങളിലും തുക ചേർക്കുക'} />
               <div className='w-[100%] mt-[20px]'>
                 <CusInput onChange={handleCheck} value={Smbple?.date} type='date' name='date' label={language === 'en' ? 'DATE' : 'തീയതി'} />
-              </div>
+              </div> */}
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'The estimated amount of local indirect taxes is Rs. {Insert amount in words and figures' : 'പ്രാദേശിക പരോക്ഷ നികുതികളുടെ ഏകദേശ തുക. {വാക്കുകളിലും അക്കങ്ങളിലും തുക ചേർക്കുക'} />
               <div className='flex  justify-end mt-[30px] '>
                 {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] flex justify-center gap-[10px] items-center text-white rounded-md border-none'  >
@@ -273,7 +351,6 @@ const SubmissionForm = () => {
                     </ButtonComp> */}
                 <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save' />
                 <DisplayFormikValues />
-
               </div>
               <ParagraphComp className='md  mt-[60px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'which shall be confirmed or adjusted, if needed, during negotiations. {Please note that all amounts shall be the same as in financial application form}.' : 'ചർച്ചകൾക്കിടയിൽ, ആവശ്യമെങ്കിൽ അത് സ്ഥിരീകരിക്കുകയോ ക്രമീകരിക്കുകയോ ചെയ്യും. {എല്ലാ തുകയും സാമ്പത്തിക അപേക്ഷാ ഫോമിലെ പോലെ തന്നെ ആയിരിക്കുമെന്ന് ദയവായി ശ്രദ്ധിക്കുക}'} />
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Our Financial Proposal shall be valid and remain binding upon us, subject to the modifications resulting from bid negotiations, for the period of time specified in the Table 1.' : 'ഞങ്ങളുടെ സാമ്പത്തിക നിർദ്ദേശം സാധുതയുള്ളതും ടേബിൾ 1 ൽ വ്യക്തമാക്കിയ കാലയളവിലേക്ക് ബിഡ് ചർച്ചകളുടെ ഫലമായുണ്ടാകുന്ന പരിഷ്‌ക്കരണങ്ങൾക്ക് വിധേയമായി ഞങ്ങളിൽ നിലനിൽക്കുന്നതും ആയിരിക്കും.'} />
@@ -289,8 +366,6 @@ const SubmissionForm = () => {
                 {language === 'en' ? 'RFP No.: 01/KABCO-NAWODHAN/CULTIVATORS/2024/RFP' : 'RFP നമ്പർ: 01/കാബ്‌കോ-നവോദൻ/കർഷകർ/2024/RFP'}
                 <br />
               </ParagraphComp>
-
-
             </Form>
           )}
         </Formik>

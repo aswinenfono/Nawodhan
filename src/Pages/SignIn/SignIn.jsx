@@ -3,18 +3,20 @@ import HeaderComp from '../../Components/HeaderComp'
 import CusInput from '../../Components/CusInput'
 import ButtonComp from '../../Components/ButtonComp'
 import * as Yup from 'yup';
-import { Form, Formik, useFormikContext } from 'formik'
+import { Form, Formik, } from 'formik'
 import { ParagraphComp } from '../../Components/ParagraphComp'
 import { useMutation } from 'react-query'
-import { enqueueSnackbar } from 'notistack'
+import { useSnackbar } from 'notistack';
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../Store/auth/Login'
 
 const SignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+
   const FormInputs = [
     {
-      label: 'Username',
+      label: 'Mobile',
       name: 'username',
       type: 'text',
       validation: ''
@@ -35,9 +37,6 @@ const SignIn = () => {
       if (field?.validation?.toLowerCase() === 'mobile') {
         fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
       }
-      if (field?.validation?.toLowerCase() === 'email') {
-        fieldValidation = fieldValidation.email('Invalid Email Id');
-      }
       schema[field?.name] = fieldValidation.required('This field is required');
       return schema;
     }, {})
@@ -49,8 +48,9 @@ const SignIn = () => {
   }, {});
 
   const handleCreateSuccess = (data) => {
-    navigate('/dashboard')
+    localStorage.setItem('language', 'en')
     enqueueSnackbar(data?.message, { variant: 'success' });
+    navigate('/dashboard')
   };
 
   const handleCreateError = (error) => {
@@ -61,11 +61,14 @@ const SignIn = () => {
   const { mutateAsync: confirmLogin, isLoading: regLoading } = useMutation({
     mutationFn: login,  // Your login function
     onSuccess: handleCreateSuccess,  // Success callback
-    onError: handleCreateError,      // Error callback
   });
 
-  const submitData = (data) => {
-    confirmLogin(data);
+  const handleSubmit = async (data) => {
+    try {
+      await confirmLogin(data);
+    } catch (error) {
+      handleCreateError(error);
+    }
   };
 
   if (regLoading) return <h4>Loading...</h4>;
@@ -82,12 +85,12 @@ const SignIn = () => {
             <Formik
               initialValues={initialValues}
               validationSchema={modelSchema}
-              onSubmit={(data) => {
-                submitData(data)
+              onSubmit={async (data) => {
+                handleSubmit(data)
               }}
             >
-              {({ values, errors, handleChange, touched, handleBlur, setFieldValue }) => (
-                <Form className='w-[100%]'>
+              {({ values, errors, handleChange,handleSubmit }) => (
+                <Form className='w-[100%]' noValidate onSubmit={handleSubmit}>
                   {FormInputs.map((inp, index) =>
                     <>
                       {/* inp.type.toLowerCase() === 'number' || inp.type.toLowerCase() === 'text' || inp.type.toLowerCase() === 'email' || inp.type.toLowerCase() === 'password' ? */}
@@ -124,7 +127,7 @@ const SignIn = () => {
                         Sign In
                       </ButtonComp>
                       <ParagraphComp className='text-sm mt-[10px] text-[black] text-center' >
-                        Don't have an account ?
+                        Don&apos;t have an account ?
                         &nbsp;
                         <Link className='text-[#0F75BC]' to='/signup'>
                           Sign Up

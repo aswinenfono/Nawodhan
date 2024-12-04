@@ -109,7 +109,6 @@ const Complete = ({ IntialForm }) => {
 
   const submitData = (data) => {
     const values = { ...data, ...IntialForm }
-    console.log("values>>>>", values)
     submitSubReg(values)
   }
 
@@ -121,7 +120,6 @@ const Complete = ({ IntialForm }) => {
     ...dataHandling,
   });
 
-  console.log("regLoading>>>>", regLoading)
 
   if (regLoading) return (<> <h4>Loading...</h4></>)
   return (

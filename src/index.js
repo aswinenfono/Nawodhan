@@ -3,30 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import styled from 'styled-components';
-import { MaterialDesignContent, SnackbarProvider } from 'notistack'
+import { SnackbarProvider,closeSnackbar } from 'notistack'
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { IconButton } from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
-  '&.notistack-MuiContent-success': {
-    backgroundColor: '#2D7738',
-  },
-  '&.notistack-MuiContent-error': {
-    backgroundColor: '#970C0C',
-  },
-
-}));
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <QueryClientProvider client={queryClient}>
     <SnackbarProvider
-      Components={{
-        success: StyledMaterialDesignContent,
-        error: StyledMaterialDesignContent,
-        warning: StyledMaterialDesignContent
-      }}
+        autoHideDuration={3000}
+        maxSnack={2}
+        preventDuplicate
+        action={(snackbarId) => (
+          <IconButton size='small' color="inherit" onClick={() => closeSnackbar(snackbarId)}>
+            <HighlightOffIcon sx={{ fontSize: 20 }} />
+          </IconButton>
+        )}
     >
       <React.StrictMode>
         <App />
