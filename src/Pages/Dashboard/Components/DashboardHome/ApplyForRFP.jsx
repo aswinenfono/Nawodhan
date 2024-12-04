@@ -60,6 +60,9 @@ const ApplyForRFP = ({ setButtons }) => {
 				{
 					option: '56-60 years'
 				},
+				{
+					option: 'Above 60'
+				},
 			]
 		},
 		{
@@ -85,12 +88,17 @@ const ApplyForRFP = ({ setButtons }) => {
 			type: 'select',
 			options: [
 				{
-					option: '>20 years'
+					option: '0 years'
+				},
+				{
+					option: '1-3 years'
 				},
 				{
 					option: '15-20 years'
 				},
-
+				{
+					option: '>20 years'
+				},
 			]
 		},
 		{
@@ -99,10 +107,16 @@ const ApplyForRFP = ({ setButtons }) => {
 			type: 'select',
 			options: [
 				{
-					option: '>3 firms signed'
+					option: '0 firms signed'
+				},
+				{
+					option: '1 to 2 firms signed'
 				},
 				{
 					option: '2-3 firms signed'
+				},
+				{
+					option: '>3 firms signed'
 				},
 
 			]
@@ -112,6 +126,9 @@ const ApplyForRFP = ({ setButtons }) => {
 			name: 'attendance_in_international_seminarsworkshops',
 			type: 'select',
 			options: [
+				{
+					option: '0 seminars/workshops'
+				},
 				{
 					option: '>2 seminars/workshops'
 				},
@@ -126,6 +143,9 @@ const ApplyForRFP = ({ setButtons }) => {
 			name: 'attendance_in_national_or_state_seminarsworkshops',
 			type: 'select',
 			options: [
+				{
+					option: '0 seminars/workshops'
+				},
 				{
 					option: '>3 seminars/workshops'
 				},
@@ -155,12 +175,23 @@ const ApplyForRFP = ({ setButtons }) => {
 			type: 'select',
 			options: [
 				{
-					option: '>5 years'
+					option: '0 years'
+				},
+				{
+					option: 'Below 1 years'
+				},
+				{
+					option: '1-2 years'
+				},
+				{
+					option: '2-3 years'
 				},
 				{
 					option: '3-4 years'
 				},
-
+				{
+					option: '>5 years'
+				},
 			]
 		},
 		{
@@ -188,7 +219,12 @@ const ApplyForRFP = ({ setButtons }) => {
 				{
 					option: 'NOP'
 				},
-
+				{
+					option: 'NPOP'
+				},
+				{
+					option: 'PGS, Organic'
+				},
 			]
 		},
 		{
@@ -216,6 +252,12 @@ const ApplyForRFP = ({ setButtons }) => {
 				{
 					option: 'Committee member on any organizational panel'
 				},
+				{
+					option:'Committee Member on a Panel'
+				},
+				{
+					option:'Not a Member'
+				}
 
 			]
 		},
@@ -224,6 +266,9 @@ const ApplyForRFP = ({ setButtons }) => {
 			name: 'financial_stability',
 			type: 'select',
 			options: [
+				{
+					option: 'Below 50 lakhs'
+				},
 				{
 					option: 'Annual turnover >200 lakhs'
 				},
@@ -247,6 +292,9 @@ const ApplyForRFP = ({ setButtons }) => {
 			name: 'existing_infrastructure',
 			type: 'select',
 			options: [
+				{
+					option: 'No Infrastructure'
+				},
 				{
 					option: 'Collection Centre'
 				},
@@ -314,6 +362,18 @@ const ApplyForRFP = ({ setButtons }) => {
 				},
 				{
 					option: '3-5 years'
+				},
+				{
+					option: '2-3 years'
+				},
+				{
+					option: '1-2 years'
+				},
+				{
+					option: 'Below 1 years'
+				},
+				{
+					option: '0 years'
 				},
 
 			]
@@ -394,7 +454,7 @@ const ApplyForRFP = ({ setButtons }) => {
 		enqueueSnackbar(message, { variant: 'error' });
 	};
 
-	const { mutateAsync: confirmSubmit, isLoading: regLoading } = useMutation({
+	const { mutateAsync: confirmSubmit } = useMutation({
 		mutationFn: TechnicalPost,
 		onSuccess: handleCreateSuccess,
 		onError: (error) => {
