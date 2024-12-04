@@ -1,10 +1,10 @@
-import axios from "axios";
 import { actionHandler } from "../api";
 const initialRegQ = '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]';
 const LandDetailedApi = '/api/resource/EOI%20For%20Land'
 const TechnicalUrl = '/api/resource/Technical%20Proposal%20Submission%20Form'
 const SubmissionFormUrl = '/api/resource/FINANCIAL%20PROPOSAL%20SUBMISSION%20FORM'
-const UnitsURL = 'https://nawo-dhan.frappe.cloud/api/method/develop.rest.get_eoi_with_units'
+const UnitsURL = '/api/method/develop.rest.get_units'
+const SubUnitsURL = '/api/method/develop.rest.get_sub_units'
 
 export const LandsList = async () => {
   try {
@@ -62,13 +62,30 @@ export const SubmissionFormPost = async (payload) => {
 }
 
 export const UnitsList = async () => {
-  try {
-        
-    const response = await axios.get(UnitsURL);
+  try {        
+    const response = await actionHandler({
+      url: UnitsURL,
+      method: 'GET',
+    });
     return response.data;
   } catch (error) {
-    console.error('UnitsList Error:', error);
+    console.error('Units List Error:', error);
     throw error;
   }
 }
+
+export const SubUnitsList = async () => {
+  try {
+    const response = await actionHandler({
+      url: SubUnitsURL,
+      method: 'GET',
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Sub Units List Error:', error);
+    throw error;
+  }
+}
+
+
 

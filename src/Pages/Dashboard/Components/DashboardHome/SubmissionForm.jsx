@@ -8,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import * as Yup from 'yup';
 import { useMutation, useQuery } from 'react-query'
 import { enqueueSnackbar } from 'notistack'
-import { SubmissionFormPost, UnitsList } from '../../../../Store/DashBoard/DashBoard'
+import { SubmissionFormPost, SubUnitsList, UnitsList } from '../../../../Store/DashBoard/DashBoard'
 import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik'
 import ModalComp from '../../../../Components/ModalComp'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
@@ -25,61 +25,11 @@ const SubmissionForm = () => {
     refetchOnWindowFocus: false
   });
 
-
-  // const [SubmissionForm, setSubmissionForm] = useState([
-  //   {
-  //     label: language === 'en' ? 'Select Unit' : 'യൂണിറ്റ് ',
-  //     name: 'unit',
-  //     type: 'select',
-  //     options: []
-  //   },
-  //   // {
-  //   //   label: language === 'en' ? 'Specifications' : 'സ്പെസിഫിക്കേഷനുകൾ',
-  //   //   name: 'specifications',
-  //   //   type: 'text',
-  //   // },
-  //   // {
-  //   //   label: language === 'en' ? 'Unit (10 Acre land as 1 unit) (A)' : 'യൂണിറ്റ് (10 ഏക്കർ ഭൂമി 1 യൂണിറ്റായി) (എ)',
-  //   //   name: 'unit_10_acre_land_as_1_unit',
-  //   //   type: 'number',
-  //   // },
-  //   {
-  //     label: language === 'en' ? 'Rate per unit (Rs.) (B)' : 'യൂണിറ്റിന് നിരക്ക് (രൂപ) (ബി)',
-  //     name: 'units',
-  //     type: 'section',
-  //   },
-  //   {
-  //     label: language === 'en' ? 'Sub-unit (Less than 10 Acres) (Ex. 1 Acre or 2 Acre) (C)' : 'ഉപ-യൂണിറ്റ് (10 ഏക്കറിൽ താഴെ) (ഉദാ. 1 ഏക്കർ അല്ലെങ്കിൽ 2 ഏക്കർ) (സി)',
-  //     name: 'sub_unit_less_than_10_acres',
-  //     type: 'number',
-  //   },
-  //   {
-  //     label: language === 'en' ? 'Rate per Sub-unit (Rs.) (D)' : 'സബ്-യൂണിറ്റിന് നിരക്ക് (രൂപ) (ഡി)',
-  //     name: 'rate_per_sub_unit_rs',
-  //     type: 'number',
-  //   },
-  //   {
-  //     label: language === 'en' ? 'Total Quantity units  (A+C)' : 'മൊത്തം അളവ് യൂണിറ്റുകൾ (A+C)',
-  //     name: 'total_quantity_units',
-  //     type: 'number',
-  //   },
-  //   {
-  //     label: language === 'en' ? 'Total Quoted Unit Rate at land in (Rs.) (B+D)' : 'ഭൂമിയിലെ മൊത്തം നിരക്ക് (രൂപ) (B+D)',
-  //     name: 'total_quoted_unit_rate_at_land_rs',
-  //     type: 'number',
-  //   },
-  //   {
-  //     label: language === 'en' ? 'In Figures' : 'അക്കങ്ങളില്‍',
-  //     name: 'total_in_figures',
-  //     type: 'number',
-  //   },
-  //   {
-  //     label: language === 'en' ? 'In Words' : 'വാക്കുകളിൽ',
-  //     name: 'total_in_words',
-  //     type: 'text',
-  //   },
-  // ]);
-    
+  const { data: sub_units } = useQuery({
+    queryKey: 'sub_units',
+    queryFn: SubUnitsList,
+    refetchOnWindowFocus: false
+  });
 
   const closeModal = () => {
     setIsModalOpen(false)
@@ -88,9 +38,7 @@ const SubmissionForm = () => {
     setIsModalOpen(true)
   }
 
-
   const modelSchema = Yup.object();
-
 
   const DisplayFormikValues = () => {
     const { values, errors } = useFormikContext();
@@ -214,7 +162,7 @@ const SubmissionForm = () => {
             handleSubmit(values)
           }}
         >
-          {({ values, setFieldValue,handleSubmit }) => (
+          {({ values, setFieldValue, handleSubmit }) => (
             <Form className='w-[100%]' noValidate onSubmit={handleSubmit}>
               <div className='flex flex-wrap w-[100%] overflow-x-scroll justify-between mt-[20px]'>
                 <>
@@ -226,7 +174,7 @@ const SubmissionForm = () => {
                             <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 items-center'>
                               <div className='mt-2'>
                                 <CusSelect value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
-                                  return { option: item?.name };
+                                  return { option: item?.unit };
                                 })} label={'Select Unit'} />
                               </div>
                               {fields.map((_, index) => (<div key={index} className=' mt-2'>
@@ -271,8 +219,8 @@ const SubmissionForm = () => {
                           {values?.table_uefd?.map((row, rowIndex) => (
                             <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 items-center'>
                               <div className='mt-2'>
-                                <CusSelect value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={units?.message?.map((item) => {
-                                  return { option: item?.name };
+                                <CusSelect value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={sub_units?.message?.map((item) => {
+                                  return { option: item?.sub_unit };
                                 })} label={'Select Unit'} />
                               </div>
                               {fields.map((_, index) => (<div key={index} className='mt-2'>
