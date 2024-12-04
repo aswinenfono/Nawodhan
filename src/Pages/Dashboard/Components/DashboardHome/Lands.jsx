@@ -83,7 +83,7 @@ const Lands = ({ setLandId }) => {
 							<th className=' p-[10px]'>Land Name</th>
 							<th className=' p-[10px]'>Land in Acre</th>
 							<th className=' p-[10px]'>District</th>
-							<th className=' p-[10px]'>Land IN UNIT</th>
+							<th className=' p-[10px]'>Land in Unit</th>
 						</tr>
 					</thead>
 					<tbody >

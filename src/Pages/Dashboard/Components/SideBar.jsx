@@ -39,7 +39,7 @@ const SideBar = () => {
   return (
     <div className='p-[10px] border-r-2 border-[#0F75BC]'>
       <div className='h-[100px] justify-center flex items-center'>
-        <HeaderCompo tagType='h3' className='text-xl text-[#0F75BC] font-semibold' text='NAWODHAN' />
+        <HeaderCompo tagType='h3' className='text-xl text-[#0F75BC] font-semibold' text='NAWO-DHAN' />
       </div>
       <div className='w-[100%] rounded-md bg-[#D9EFFF] justify-between flex flex-col h-[85vh] p-[10px]'>
         <div>
