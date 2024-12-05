@@ -131,7 +131,15 @@ const SubmissionForm = () => {
   return (
     <>
       <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
-        <ParagraphComp text={language === 'en' ? 'FINANCIAL PROPOSAL SUBMISSION FORM' : 'സാമ്പത്തിക പ്രൊപ്പോസല്‍ സമർപ്പണ ഫോം'} className='text-md font-schibsted text-[#0F75BC] font-bold' />
+        <ParagraphComp text={language === 'en' ? 'FINANCIAL PROPOSAL SUBMISSION FORM 3.1' : 'സാമ്പത്തിക പ്രൊപ്പോസല്‍ സമർപ്പണ ഫോം 3.1'} className='text-md text-[#0F75BC] font-bold' />
+        <ParagraphComp className='text-sm mt-[15px] font-schibsted leading-9 text-[black] ' >
+          {language === 'en' ? 'Tender Inviting Authority: Kerla Agro Business Company (KABCO)' : 'ടെൻഡർ ക്ഷണിക്കുന്ന അതോറിറ്റി: കേരള അഗ്രോ ബിസിനസ് കമ്പനി (KABCO)'}
+          <br />
+          {language === 'en' ? 'Name of Services: Inviting Cultivators for NAWODHAN implementation' : 'സേവനങ്ങളുടെ പേര്: നവോദാൻ നടപ്പിലാക്കുന്നതിനായി കൃഷിക്കാരെ ക്ഷണിക്കുന്നു'}
+          <br />
+          {language === 'en' ? 'RFP No.: 01/KABCO-NAWODHAN/CULTIVATORS/2024/RFP' : 'RFP നമ്പർ: 01/കാബ്‌കോ-നവോദൻ/കർഷകർ/2024/RFP'}
+          <br />
+        </ParagraphComp>
         <div className='sm:w-[49%] xs:w-[100%]  mt-3'>
           
           <ParagraphComp text='Years of Proposal' className='text-md font-schibsted text-[black] font-bold mb-2' />
@@ -171,7 +179,7 @@ const SubmissionForm = () => {
                       {({ push, remove }) => (
                         <>
                           {values?.table_uefd?.map((row, rowIndex) => (
-                            <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 items-center'>
+                            <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 mt-6 items-center'>
                               <div className='mt-2'>
                                 <CusSelect value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
                                   return { option: item?.unit };
@@ -186,15 +194,18 @@ const SubmissionForm = () => {
                                   label={`Rate ${(index + 1)} Year`}
                                   type='number' />
                               </div>))}
-                              <div className='mt-2'>
+
+                              <div className='mt-2 flex items-center gap-2'>
                                 <CusInput value={row?.total_per_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_unit`} label={'Total'} type={'number'} />
+
+                                <div>
+                                  <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
+                                    e.preventDefault()
+                                    remove(rowIndex)
+                                  }} />
+                                </div>
                               </div>
-                              <div className='w-[5%] mt-2'>
-                                <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
-                                  e.preventDefault()
-                                  remove(rowIndex)
-                                }} />
-                              </div>
+                              
                             </div>
                           ))}
                           <div className='flex justify-end mt-10'>
@@ -217,7 +228,7 @@ const SubmissionForm = () => {
                       {({ push, remove }) => (
                         <>
                           {values?.table_uefd?.map((row, rowIndex) => (
-                            <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 items-center'>
+                            <div key={rowIndex} className='grid sm:grid-cols-5 xs:grid-cols-1 gap-3 mt-6 items-center'>
                               <div className='mt-2'>
                                 <CusSelect value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={sub_units?.message?.map((item) => {
                                   return { option: item?.sub_unit };
@@ -233,15 +244,16 @@ const SubmissionForm = () => {
                                   label={`Rate ${(index + 1)} Year`}
                                   type='number' />
                               </div>))}
-                              <div className='mt-2'>
+                              <div className='mt-2 flex items-center gap-2'>
                                 <CusInput value={row?.total_per_sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_sub_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_sub_unit`} label={'Total'} type={'number'} />
+                                <div>
+                                  <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
+                                    e.preventDefault()
+                                    remove(rowIndex)
+                                  }} />
+                                </div>
                               </div>
-                              <div className='w-[5%] mt-2'>
-                                <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
-                                  e.preventDefault()
-                                  remove(rowIndex)
-                                }} />
-                              </div>
+   
                             </div>
                           ))}
                           <div className='flex justify-end mt-10'>
@@ -256,14 +268,7 @@ const SubmissionForm = () => {
                   </div>
                 </>
               </div>
-              <div className='mt-10 sm:flex xs:flex-col justify-end items-center gap-3'>
-                <div className='w-[25%] mt-[20px]'>
-                  <CusInput onChange={(e) => setFieldValue('total_in_words', e.target.value)} value={values?.total_in_words} name={'total_in_words'} type='text' label={language === 'en' ? 'Total amount in words' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
-                </div>
-                <div className='w-[25%] mt-[20px]'>
-                  <CusInput onChange={(e) => setFieldValue('total_in_figures', e.target.value)} value={values?.total_in_figures} name={'total_in_figures'} type='number' label={language === 'en' ? 'Total amount in figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
-                </div>
-              </div>
+              <ParagraphComp text={language === 'en' ? 'FINANCIAL PROPOSAL SUBMISSION FORM' : 'സാമ്പത്തിക പ്രൊപ്പോസല്‍ സമർപ്പണ ഫോം'} className='text-md font-schibsted text-[#0F75BC] font-bold mt-5' />
               <div className='flex mt-[40px] justify-between'>
                 <ParagraphComp className='text-md mt-[20px] font-schibsted leading-6 text-[black] ' >
                   {language === 'en' ? 'To' : 'സ്വീകർത്താവ്'}: <br />
@@ -283,37 +288,30 @@ const SubmissionForm = () => {
                   <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Location, Date' : 'സ്ഥലം, തീയതി'} />
                 </div>
               </div>
-              {/* <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' : 'ഞങ്ങൾ, താഴെ ഒപ്പിട്ടവർ, നിങ്ങളുടെ പ്രോപ്പോസലിനായുള്ള അഭ്യർത്ഥനയ്ക്ക് അനുസൃതമായി നവോധൻ പദ്ധതിക്കായി കൃഷി സേവനങ്ങൾ നല്‍കുമെന്ന് വാഗ്ദാനം ചെയ്യുന്നു'} />
+              <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' : 'ഞങ്ങൾ, താഴെ ഒപ്പിട്ടവർ, നിങ്ങളുടെ പ്രോപ്പോസലിനായുള്ള അഭ്യർത്ഥനയ്ക്ക് അനുസൃതമായി നവോധൻ പദ്ധതിക്കായി കൃഷി സേവനങ്ങൾ നല്‍കുമെന്ന് വാഗ്ദാനം ചെയ്യുന്നു'} />
               <div className='w-[100%] mt-[20px]'>
-                <CusInput onChange={handleCheck} value={Smbple?.amount} name={'amount'} type='text' label={language === 'en' ? 'amount in words and figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+                <CusInput onChange={(e) => setFieldValue('total_in_words', e.target.value)} value={values?.total_in_words} name={'total_in_words'} type='text' label={language === 'en' ? 'Total amount in words' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+
               </div>
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Our attached Financial Proposal is for the amount of Rs. {Insert amount in words and figures' : 'ഞങ്ങളുടെ ഉള്ളടക്കം ചെയ്ത സാമ്പത്തിക പ്രൊപോസല്‍രൂപ. {വാക്കുകളിലും അക്കങ്ങളിലും തുക ചേർക്കുക'} />
               <div className='w-[100%] mt-[20px]'>
-                <CusInput onChange={handleCheck} value={Smbple?.date} type='date' name='date' label={language === 'en' ? 'DATE' : 'തീയതി'} />
-              </div> */}
+                <CusInput onChange={(e) => setFieldValue('total_in_figures', e.target.value)} value={values?.total_in_figures} name={'total_in_figures'} type='number' label={language === 'en' ? 'Total amount in figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+
+              </div>
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'The estimated amount of local indirect taxes is Rs. {Insert amount in words and figures' : 'പ്രാദേശിക പരോക്ഷ നികുതികളുടെ ഏകദേശ തുക. {വാക്കുകളിലും അക്കങ്ങളിലും തുക ചേർക്കുക'} />
               <div className='flex  justify-end mt-[30px] '>
                 {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] flex justify-center gap-[10px] items-center text-white rounded-md border-none'  >
                         <AddCircleOutlineIcon className='text-[white]' />
                         Save
                     </ButtonComp> */}
-                <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save' />
+                {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' /> */}
                 <DisplayFormikValues />
               </div>
-              <ParagraphComp className='md  mt-[60px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'which shall be confirmed or adjusted, if needed, during negotiations. {Please note that all amounts shall be the same as in financial application form}.' : 'ചർച്ചകൾക്കിടയിൽ, ആവശ്യമെങ്കിൽ അത് സ്ഥിരീകരിക്കുകയോ ക്രമീകരിക്കുകയോ ചെയ്യും. {എല്ലാ തുകയും സാമ്പത്തിക അപേക്ഷാ ഫോമിലെ പോലെ തന്നെ ആയിരിക്കുമെന്ന് ദയവായി ശ്രദ്ധിക്കുക}'} />
+              <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'which shall be confirmed or adjusted, if needed, during negotiations. {Please note that all amounts shall be the same as in financial application form}.' : 'ചർച്ചകൾക്കിടയിൽ, ആവശ്യമെങ്കിൽ അത് സ്ഥിരീകരിക്കുകയോ ക്രമീകരിക്കുകയോ ചെയ്യും. {എല്ലാ തുകയും സാമ്പത്തിക അപേക്ഷാ ഫോമിലെ പോലെ തന്നെ ആയിരിക്കുമെന്ന് ദയവായി ശ്രദ്ധിക്കുക}'} />
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Our Financial Proposal shall be valid and remain binding upon us, subject to the modifications resulting from bid negotiations, for the period of time specified in the Table 1.' : 'ഞങ്ങളുടെ സാമ്പത്തിക നിർദ്ദേശം സാധുതയുള്ളതും ടേബിൾ 1 ൽ വ്യക്തമാക്കിയ കാലയളവിലേക്ക് ബിഡ് ചർച്ചകളുടെ ഫലമായുണ്ടാകുന്ന പരിഷ്‌ക്കരണങ്ങൾക്ക് വിധേയമായി ഞങ്ങളിൽ നിലനിൽക്കുന്നതും ആയിരിക്കും.'} />
               <div className='flex justify-end mt-[30px] '>
-                {/* <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' /> */}
+                <ButtonComp className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' />
               </div>
-              <ParagraphComp text={language === 'en' ? 'FINANCIAL PROPOSAL SUBMISSION FORM 3.1' : 'സാമ്പത്തിക പ്രൊപ്പോസല്‍ സമർപ്പണ ഫോം 3.1'} className='text-md text-[#0F75BC] font-bold' />
-              <ParagraphComp className='text-sm mt-[15px] font-schibsted leading-9 text-[black] ' >
-                {language === 'en' ? 'Tender Inviting Authority: Kerla Agro Business Company (KABCO)' : 'ടെൻഡർ ക്ഷണിക്കുന്ന അതോറിറ്റി: കേരള അഗ്രോ ബിസിനസ് കമ്പനി (KABCO)'}
-                <br />
-                {language === 'en' ? 'Name of Services: Inviting Cultivators for NAWODHAN implementation' : 'സേവനങ്ങളുടെ പേര്: നവോദാൻ നടപ്പിലാക്കുന്നതിനായി കൃഷിക്കാരെ ക്ഷണിക്കുന്നു'}
-                <br />
-                {language === 'en' ? 'RFP No.: 01/KABCO-NAWODHAN/CULTIVATORS/2024/RFP' : 'RFP നമ്പർ: 01/കാബ്‌കോ-നവോദൻ/കർഷകർ/2024/RFP'}
-                <br />
-              </ParagraphComp>
             </Form>
           )}
         </Formik>
