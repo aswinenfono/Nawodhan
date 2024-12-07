@@ -22,7 +22,7 @@ const SignIn = () => {
       validation: ''
     },
     {
-      label: 'Password',
+      label: 'Pin',
       name: 'password',
       type: 'password',
     }
