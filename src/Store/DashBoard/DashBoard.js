@@ -5,6 +5,7 @@ const TechnicalUrl = '/api/resource/Technical%20Proposal%20Submission%20Form'
 const SubmissionFormUrl = '/api/resource/FINANCIAL%20PROPOSAL%20SUBMISSION%20FORM'
 const UnitsURL = '/api/method/develop.rest.get_units'
 const SubUnitsURL = '/api/method/develop.rest.get_sub_units'
+const ProfileURL = '/api/method/develop.rest.user_cred'
 
 export const LandsList = async () => {
   try {
@@ -83,6 +84,19 @@ export const SubUnitsList = async () => {
     return response.data;
   } catch (error) {
     console.error('Sub Units List Error:', error);
+    throw error;
+  }
+}
+
+export const ProfileDetails = async () => {
+  try {
+    const response = await actionHandler({
+      url: ProfileURL,
+      method: 'GET',
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Profile Details Error:', error);
     throw error;
   }
 }

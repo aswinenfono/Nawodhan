@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import ImageComp from '../../../../../Components/ImageComp'
 import { ParagraphComp } from '../../../../../Components/ParagraphComp'
-import { Link } from 'react-router-dom'
+import { ProfileDetails } from '../../../../../Store/DashBoard/DashBoard'
+import { useQuery } from 'react-query'
 
 const Profile = () => {
   const [language, setLanguage] = useState('en')
   const localLanguage = localStorage.getItem('language');
+
+  const { data: profileDetails } = useQuery({
+    queryKey: 'profileDetails',
+    queryFn: ProfileDetails,
+    refetchOnWindowFocus: false
+  });
 
   useEffect(() => {
     if (localLanguage) {
@@ -22,15 +29,15 @@ const Profile = () => {
           </div>
           <div className='w-[65%] bg-white rounded-xl p-[15px]'>
             <ParagraphComp className='text-md  font-bold text-[black] ' text='Profile' />
-            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text='Muhammed Shammas' />
-            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text='user@gmail.com' />
-            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text='+91 9646464467' />
-            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text='Kerala Kozhikode' />
-            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text='673614' />
-            <Link className="underline leading-5 text-[#0F75BC]" >Reset password</Link>
+            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text={profileDetails?.message?.full_name || '--'} />
+            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text={profileDetails?.message?.email || '--'} />
+            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text={profileDetails?.message?.mobile_no || '--'} />
+            <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text={profileDetails?.message?.location || '--'} />
+            {/* <ParagraphComp className='text-md mt-[6px] font-semibold text-[black] ' text='673614' /> */}
+            {/* <Link className="underline leading-5 text-[#0F75BC]" >Reset password</Link> */}
             <div className='mt-2'>
               <form className="max-w-[50%]">
-                <label for="countries" className="block mb-2 text-sm font-medium">Select an option</label>
+                <label htmlFor="countries" className="block mb-2 text-sm font-medium">Select an option</label>
                 <select value={language} onChange={e => {
                   setLanguage(e.target.value)
                   localStorage.setItem('language', e.target.value)
