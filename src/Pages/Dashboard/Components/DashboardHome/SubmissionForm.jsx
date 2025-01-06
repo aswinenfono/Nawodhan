@@ -12,12 +12,42 @@ import { SubmissionFormPost, SubUnitsList, UnitsList } from '../../../../Store/D
 import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik'
 import ModalComp from '../../../../Components/ModalComp'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { ToWords } from 'to-words';
 
 const SubmissionForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const language = localStorage.getItem('language');
   const [noOfYears, setNoOfYears] = useState(0);
   const [fields, setFields] = useState([]);
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  const yyyy = today.getFullYear();
+  const currentDate = yyyy + '-' + mm + '-' + dd; 
+
+  const [totalUnitPrice, setTotalUnitPrice] = useState(0);
+  const [totalSubUnitPrice, setTotalSubUnitPrice] = useState(0);
+
+  const toWords = new ToWords({
+    localeCode: 'en-IN',
+    converterOptions: {
+      currency: true,
+      ignoreDecimal: false,
+      ignoreZeroCurrency: false,
+      doNotAddOnly: false,
+      currencyOptions: {
+        // can be used to override defaults for the selected locale
+        name: 'Rupee',
+        plural: 'Rupees',
+        symbol: '₹',
+        fractionalUnit: {
+          name: 'Paisa',
+          plural: 'Paise',
+          symbol: '',
+        },
+      },
+    },
+  });
 
   const { data: units } = useQuery({
     queryKey: 'units',
@@ -82,14 +112,15 @@ const SubmissionForm = () => {
 
   const handleSubmit = async (values) => {
     let payload = {
-      ...values
+      ...values,
+      total_in_words: totalUnitPrice + totalSubUnitPrice,
+      total_in_figures: totalUnitPrice + totalSubUnitPrice > 0 ? toWords.convert(totalUnitPrice + totalSubUnitPrice) : ''
     }
     try {
       await confirmSubmit(payload);
     } catch (error) {
       handleCreateError(error);
     }
-    console.log(payload)
   }
 
 
@@ -187,7 +218,22 @@ const SubmissionForm = () => {
                               </div>
                               {fields.map((_, index) => (<div key={index} className=' mt-2'>
                                 <Field
-                                  onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.rate_per_unit_year_${index + 1}`, e.target.value)}
+                                  onChange={(e) => {
+                                    setFieldValue(`table_uefd.${rowIndex}.rate_per_unit_year_${index + 1}`, e.target.value);
+                                    // Dynamically calculate the total for this row
+                                    const updatedRow = values.table_uefd[rowIndex] || {};
+                                    const newTotal = fields.reduce((sum, _, i) => {
+                                      const rate =
+                                        parseFloat(
+                                          i === index ? e.target.value : updatedRow[`rate_per_unit_year_${i + 1}`]
+                                        ) || 0;
+                                      return sum + rate;
+                                    }, 0);
+
+                                    // Update the total field
+                                    setTotalUnitPrice(newTotal)
+                                    setFieldValue(`table_uefd.${rowIndex}.total_per_unit`, newTotal)
+                                  }}
                                   name={`table_uefd.${rowIndex}.rate_per_unit_year_${index + 1}`}
                                   value={values.table_uefd[rowIndex]?.[`rate_per_unit_year_${index + 1}`] || ''}
                                   component={CusInput}
@@ -236,11 +282,26 @@ const SubmissionForm = () => {
                               </div>
                               {fields.map((_, index) => (<div key={index} className='mt-2'>
                                 <Field
-                                  onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.rate_per_sub_unit_year_${index + 1}`, e.target.value)}
+                                  onChange={(e) => {
+                                    setFieldValue(`table_uefd.${rowIndex}.rate_per_sub_unit_year_${index + 1}`, e.target.value);
+                                    // Dynamically calculate the total for this row
+                                    const updatedRow = values.table_uefd[rowIndex] || {};
+                                    const newTotal = fields.reduce((sum, _, i) => {
+                                      const rate =
+                                        parseFloat(
+                                          i === index ? e.target.value : updatedRow[`rate_per_sub_unit_year_${i + 1}`]
+                                        ) || 0;
+                                      return sum + rate;
+                                    }, 0);
+
+                                    // Update the total field
+                                    setTotalSubUnitPrice(newTotal);
+                                    setFieldValue(`table_uefd.${rowIndex}.total_per_sub_unit`, newTotal)
+                                  }}
                                   name={`table_uefd.${rowIndex}.rate_per_sub_unit_year_${index + 1}`}
                                   value={values.table_uefd[rowIndex]?.[`rate_per_sub_unit_year_${index + 1}`] || ''}
 
-                                  component={CusInput}
+                                  component={CusInput} y
                                   label={`Rate ${(index + 1)} Year`}
                                   type='number' />
                               </div>))}
@@ -286,16 +347,20 @@ const SubmissionForm = () => {
                 </ParagraphComp>
                 <div className='w-[400px]'>
                   <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Location, Date' : 'സ്ഥലം, തീയതി'} />
+
                 </div>
               </div>
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'We, the undersigned, offer to provide the cultivation services for NAWODHAN project in accordance with your Request for Proposal ' : 'ഞങ്ങൾ, താഴെ ഒപ്പിട്ടവർ, നിങ്ങളുടെ പ്രോപ്പോസലിനായുള്ള അഭ്യർത്ഥനയ്ക്ക് അനുസൃതമായി നവോധൻ പദ്ധതിക്കായി കൃഷി സേവനങ്ങൾ നല്‍കുമെന്ന് വാഗ്ദാനം ചെയ്യുന്നു'} />
               <div className='w-[100%] mt-[20px]'>
-                <CusInput onChange={(e) => setFieldValue('total_in_words', e.target.value)} value={values?.total_in_words} name={'total_in_words'} type='text' label={language === 'en' ? 'Total amount in words' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+                <CusInput onChange={(e) => setFieldValue('date', e.target.value)} value={currentDate} name={'date'} type='date' label={language === 'en' ? 'Date' : 'തീയതി'} />
+              </div>
+              <div className='w-[100%] mt-[20px]'>
+                <CusInput onChange={(e) => setFieldValue('total_in_words', e.target.value)} disabled value={totalUnitPrice + totalSubUnitPrice > 0 ? toWords.convert(totalUnitPrice + totalSubUnitPrice) : ''} name={'total_in_words'} type='text' label={language === 'en' ? 'Total amount in words' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
 
               </div>
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'Our attached Financial Proposal is for the amount of Rs. {Insert amount in words and figures' : 'ഞങ്ങളുടെ ഉള്ളടക്കം ചെയ്ത സാമ്പത്തിക പ്രൊപോസല്‍രൂപ. {വാക്കുകളിലും അക്കങ്ങളിലും തുക ചേർക്കുക'} />
               <div className='w-[100%] mt-[20px]'>
-                <CusInput onChange={(e) => setFieldValue('total_in_figures', e.target.value)} value={values?.total_in_figures} name={'total_in_figures'} type='number' label={language === 'en' ? 'Total amount in figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
+                <CusInput onChange={(e) => setFieldValue('total_in_figures', e.target.value)} value={totalUnitPrice + totalSubUnitPrice} name={'total_in_figures'} disabled type='number' label={language === 'en' ? 'Total amount in figures' : 'വാക്കുകളിലും അക്കങ്ങളിലും തുക'} />
 
               </div>
               <ParagraphComp className='md  mt-[20px] leading-6 text-[black] font-schibsted' text={language === 'en' ? 'The estimated amount of local indirect taxes is Rs. {Insert amount in words and figures' : 'പ്രാദേശിക പരോക്ഷ നികുതികളുടെ ഏകദേശ തുക. {വാക്കുകളിലും അക്കങ്ങളിലും തുക ചേർക്കുക'} />
