@@ -525,7 +525,6 @@ const ApplyForRFP = ({ setButtons }) => {
 								<ButtonComp type='submit' className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Save & Next' />
 							</div>
 							<DisplayFormikValues />
-
 						</Form>
 					)}
 				</Formik>

@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const SideBar = () => {
   const location = useLocation();
-  const subMenus = ['lands', 'apply-for-rfp', 'submission-form', 'timer'];
+  const subMenus = ['dashboard/lands', 'apply-for-rfp', 'submission-form', 'timer'];
   const currentSub_tab = location?.pathname
 
 
@@ -35,7 +35,7 @@ const SideBar = () => {
       path: '/dashboard/profile'
     }
   ]
-  
+
   return (
     <div className='p-[10px] border-r-2 border-[#0F75BC]'>
       <div className='h-[100px] justify-center flex items-center'>

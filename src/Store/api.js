@@ -6,10 +6,22 @@ export const actionHandler = (payload) => {
   axios.defaults.headers['Content-Type'] = 'application/json';
 
   // Token for authentication 
-  const accessToken = localStorage.getItem('accessToken');
 
-  if (accessToken) {
-    axios.defaults.headers.common["Authorization"] = "Token " + accessToken;
+  const accessToken = localStorage.getItem('accessToken');
+  const landViewToken = '2dae90c706fcdf6:7f916282f919b36';
+
+  if (accessToken && payload?.url !== 'api/method/frappe.core.doctype.user.user.login') {
+    if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]') {
+      console.log('checkinggg>>>>>')
+      axios.defaults.headers.common["Authorization"] = "Token " + landViewToken;
+    } else {
+      axios.defaults.headers.common["Authorization"] = "Token " + accessToken;
+    }
+  } else {
+    if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]') {
+      console.log('checkinggg>>>>>')
+      axios.defaults.headers.common["Authorization"] = "Token " + landViewToken;
+    }
   }
 
   return new Promise((resolve, reject) => {

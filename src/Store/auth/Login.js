@@ -11,7 +11,8 @@ export const login = async (payload) => {
             data: payload,
         });
         if (response) {
-            localStorage.setItem('accessToken', 'df9bc3921c8c000:22534a6d74a03e4');
+            console.log(response)
+            // localStorage.setItem('accessToken', '2dae90c706fcdf6:7f916282f919b36');
         }
         return response?.data
     } catch (error) {

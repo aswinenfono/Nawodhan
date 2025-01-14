@@ -9,7 +9,7 @@ const Lands = ({ setLandId }) => {
 	const navigate = useNavigate()
 	const [district, setDistrict] = useState()
 	const [filteredDistricts, setFilteredDistricts] = useState([]);
-    
+
 	const { isLoading, data: Lands, error } = useQuery({
 		queryKey: 'LandsList',
 		queryFn: LandsList,

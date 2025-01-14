@@ -1,2 +1,2 @@
-const baseApi = "https://nawo-dhan.frappe.cloud"
+const baseApi = "https://nawodhan.kabco.co.in"
 export { baseApi }
