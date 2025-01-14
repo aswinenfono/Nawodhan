@@ -253,10 +253,10 @@ const ApplyForRFP = ({ setButtons }) => {
 					option: 'Committee member on any organizational panel'
 				},
 				{
-					option:'Committee Member on a Panel'
+					option: 'Committee Member on a Panel'
 				},
 				{
-					option:'Not a Member'
+					option: 'Not a Member'
 				}
 
 			]
@@ -267,16 +267,19 @@ const ApplyForRFP = ({ setButtons }) => {
 			type: 'select',
 			options: [
 				{
-					option: 'Below 50 lakhs'
-				},
-				{
-					option: 'Annual turnover >200 lakhs'
+					option: '>200 lakhs'
 				},
 				{
 					option: '100-200 lakhs'
 				},
 				{
-					option: '25-50 lakhs'
+					option: '75-100 lakhs'
+				},
+				{
+					option: '50-75 lakhs'
+				},
+				{
+					option: 'Below 50 lakhs'
 				},
 
 			]
@@ -483,7 +486,7 @@ const ApplyForRFP = ({ setButtons }) => {
                     </div>
                 </div> */}
 				<ParagraphComp className='text-md mt-[30px] font-bold text-[#0F75BC] ' text={language === 'en' ? 'TECHNICAL PROPOSAL SUBMISSION FORM' : 'സാങ്കേതിക പ്രൊപ്പോസൽ സമർപ്പിക്കൽ ഫോം'} />
-				<ParagraphComp className='text-md text-[black] font-schibsted ' text={language === 'en' ? 'Name of Services: Inviting Cultivators for NAWODHAN implementation':'സേവനങ്ങളുടെ പേര്: നവോധൻ നടപ്പിലാക്കുന്നതിനായി കര്‍ഷകരെ ക്ഷണിക്കുന്നു'} />
+				<ParagraphComp className='text-md text-[black] font-schibsted ' text={language === 'en' ? 'Name of Services: Inviting Cultivators for NAWODHAN implementation' : 'സേവനങ്ങളുടെ പേര്: നവോധൻ നടപ്പിലാക്കുന്നതിനായി കര്‍ഷകരെ ക്ഷണിക്കുന്നു'} />
 
 				<Formik
 					initialValues={initialValues}

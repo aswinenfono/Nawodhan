@@ -1,6 +1,6 @@
 import { actionHandler } from "../api";
 
-const loginUrl = 'api/method/frappe.core.doctype.user.user.login';
+const loginUrl = 'api/method/develop.rest.custom_login';
 
 export const login = async (payload) => {
     // eslint-disable-next-line no-useless-catch
@@ -11,8 +11,7 @@ export const login = async (payload) => {
             data: payload,
         });
         if (response) {
-            console.log(response)
-            // localStorage.setItem('accessToken', '2dae90c706fcdf6:7f916282f919b36');
+            localStorage.setItem('accessToken', `${response?.data?.message?.api_key}:${response?.data?.message?.api_secret}`);
         }
         return response?.data
     } catch (error) {

@@ -17,9 +17,9 @@ const SignIn = () => {
   const FormInputs = [
     {
       label: 'Mobile',
-      name: 'username',
-      type: 'text',
-      validation: ''
+      name: 'mobile_number',
+      type: 'number',
+      validation: 'mobile'
     },
     {
       label: 'Pin',
@@ -89,7 +89,7 @@ const SignIn = () => {
                 handleSubmit(data)
               }}
             >
-              {({ values, errors, handleChange,handleSubmit }) => (
+              {({ values, errors, handleChange, handleSubmit }) => (
                 <Form className='w-[100%]' noValidate onSubmit={handleSubmit}>
                   {FormInputs.map((inp, index) =>
                     <>
