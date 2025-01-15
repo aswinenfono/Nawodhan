@@ -12,13 +12,13 @@ export const actionHandler = (payload) => {
 
   if (accessToken && payload?.url !== 'api/method/frappe.core.doctype.user.user.login') {
     console.log('checkinggg>>>>>')
-    if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]') {
+    if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]' || payload?.url === "/api/resource/EOI%20For%20Land") {
       axios.defaults.headers.common["Authorization"] = "Token " + landViewToken;
     } else {
       axios.defaults.headers.common["Authorization"] = "Token " + accessToken;
     }
   } else {
-    if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]') {
+    if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]' || payload?.url === "/api/resource/EOI%20For%20Land") {
       console.log('checkinggg>>>>>')
       axios.defaults.headers.common["Authorization"] = "Token " + landViewToken;
     }
