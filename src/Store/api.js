@@ -8,9 +8,10 @@ export const actionHandler = (payload) => {
   // Token for authentication 
 
   const accessToken = localStorage.getItem('accessToken');
-  const landViewToken = '2dae90c706fcdf6:7f916282f919b36';
+  const landViewToken = '2dae90c706fcdf6:b244afc045982d8';
 
   if (accessToken && payload?.url !== 'api/method/frappe.core.doctype.user.user.login') {
+    console.log('checkinggg>>>>>')
     if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]') {
       axios.defaults.headers.common["Authorization"] = "Token " + landViewToken;
     } else {
