@@ -27,15 +27,15 @@ const LandDetailsPlus = () => {
   }
   return (
     <>
-      <div className='p-[20px] h-[68vh] overflow-y-scroll overflow-x-hidden'>
+      <div className='p-[20px] max-md:p-[5px] h-[68vh] overflow-y-scroll overflow-x-hidden'>
         <ParagraphComp text={language === 'en' ? 'LAND DETAILS' : 'ഭൂമിയുടെ വിശദാംശങ്ങൾ'} className='text-xl mt-[20px] text-[#0F75BC] font-bold' />
         <div className='w-[100%] mt-[20px] '>
-          <CusSelect readOnly={true} options={[{ option: LandsDt?.data?.select_land_owner_type }]} label={language === 'en' ?'Select Land owner type':'ഭൂവുടമയുടെ തരം തിരഞ്ഞെടുക്കുക'} value={LandsDt?.data?.select_land_owner_type} />
+          <CusSelect readOnly={true} options={[{ option: LandsDt?.data?.select_land_owner_type }]} label={language === 'en' ? 'Select Land owner type' : 'ഭൂവുടമയുടെ തരം തിരഞ്ഞെടുക്കുക'} value={LandsDt?.data?.select_land_owner_type} />
         </div>
         <div className='p-[20px] mt-[20px] rounded-lg bg-[#D9EFFF]'>
           <ParagraphComp className='font-bold text-xl' text={language === 'en' ? 'About the Institution' : 'സ്ഥാപനത്തെക്കുറിച്ച്'} />
           <div className='flex mt-[20px]'>
-            <div className='flex w-[300px] justify-between'>
+            <div className='flex w-[200px] justify-between'>
               <ParagraphComp className='font-semibold' text={language === 'en' ? 'Name Of Institution' : 'സ്ഥാപനത്തിൻ്റെ പേര്'} />
               : &nbsp;
             </div>
@@ -45,7 +45,7 @@ const LandDetailsPlus = () => {
 
           </div>
           <div className='flex mt-[20px]'>
-            <div className='flex w-[300px] justify-between'>
+            <div className='flex w-[200px] justify-between'>
               <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Name' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പേര്'} />
               : &nbsp;
             </div>
@@ -55,7 +55,7 @@ const LandDetailsPlus = () => {
 
           </div>
           <div className='flex mt-[20px]'>
-            <div className='flex w-[300px] justify-between'>
+            <div className='flex w-[200px] justify-between'>
               <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Designations ' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പദവികൾ'} />
               : &nbsp;
             </div>
@@ -65,7 +65,7 @@ const LandDetailsPlus = () => {
 
           </div>
           <div className='flex mt-[20px]'>
-            <div className='flex w-[300px] justify-between'>
+            <div className='flex w-[200px] justify-between'>
               <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Mobile' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ മൊബൈല്‍'} />
               : &nbsp;
             </div>
@@ -75,7 +75,7 @@ const LandDetailsPlus = () => {
 
           </div>
           <div className='flex mt-[20px]'>
-            <div className='flex w-[300px] justify-between'>
+            <div className='flex w-[200px] justify-between'>
               <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Mail Id' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ മെയിൽ ഐഡി'} />
               : &nbsp;
             </div>
@@ -85,7 +85,7 @@ const LandDetailsPlus = () => {
 
           </div>
           <div className='flex mt-[20px]'>
-            <div className='flex w-[300px] justify-between'>
+            <div className='flex w-[200px] justify-between'>
               <ParagraphComp className='font-semibold' text={language === 'en' ? 'Office Address' : 'ഓഫീസ് വിലാസം'} />
               : &nbsp;
             </div>
@@ -96,8 +96,8 @@ const LandDetailsPlus = () => {
           </div>
         </div>
 
-        <div className='w-[100%] mt-[20px] justify-between flex'>
-          <div className='p-[20px] w-[49%] rounded-lg bg-[#D9EFFF]'>
+        <div className='w-[100%] mt-[20px] max-md:flex-col justify-between flex'>
+          <div className='p-[20px] w-[49%] max-md:w-[100%] rounded-lg bg-[#D9EFFF]'>
             <ParagraphComp text={language === 'en' ? 'Basic Land Details' : 'അടിസ്ഥാന ഭൂമി വിശദാംശങ്ങൾ'} className='text-md mt-[20px] font-bold text-[black]' />
             <div className='flex mt-[20px]'>
               <div className='flex w-[200px] justify-between'>
@@ -145,7 +145,7 @@ const LandDetailsPlus = () => {
               </div>
             </div>
           </div>
-          <div className='p-[20px] w-[49%] rounded-lg bg-[#D9EFFF]'>
+          <div className='p-[20px] w-[49%] max-md:w-[100%] mt-[20px] rounded-lg bg-[#D9EFFF]'>
             <ParagraphComp text={language === 'en' ? 'Total Availability Of land' : 'ഭൂമിയുടെ ആകെ ലഭ്യത'} className='text-md mt-[20px] font-bold text-[black]' />
             <div className='flex mt-[20px]'>
               <div className='flex w-[200px] justify-between'>
@@ -189,19 +189,19 @@ const LandDetailsPlus = () => {
 
         <div className='p-[20px] w-[100%] mt-[20px]  bg-[#D9EFFF]'>
           <ParagraphComp text={language === 'en' ? 'Physical Status Of land' : 'ഭൂമിയുടെ ഭൗതിക നില'} className='text-md mt-[20px] font-bold text-[black]' />
-          <div className='flex justify-between w-[100%]'>
-            <div className='w-[48%] mt-[20px]'>
+          <div className=' max-md:flex-col flex justify-between w-[100%]'>
+            <div className='w-[48%] max-md:w-[100%] mt-[20px]'>
               <CusSelect options={[]} label={language === 'en' ? 'Select land type' : 'ഭൂമിയുടെ തരം തിരഞ്ഞെടുക്കുക'} />
             </div>
-            <div className='w-[48%] mt-[20px]' >
+            <div className='w-[48%] max-md:w-[100%] mt-[20px]' >
               <CusSelect options={[]} label={language === 'en' ? 'Select land type' : 'ഭൂമിയുടെ തരം തിരഞ്ഞെടുക്കുക'} />
             </div>
           </div>
         </div>
         <div className='p-[20px] w-[100%]  rounded-lg mt-[20px] bg-[#D9EFFF]'>
           <ParagraphComp text={language === 'en' ? 'Details of boundaries' : 'അതിരുകളുടെ വിശദാംശങ്ങൾ'} className='text-md mt-[20px] font-bold text-[black]' />
-          <div className='flex justify-between w-[100%]'>
-            <div className='w-[50%]'>
+          <div className='flex max-md:flex-col justify-between w-[100%]'>
+            <div className='w-[50%] max-md:w-[100%]'>
               <div className='flex mt-[20px]'>
                 <div className='flex w-[200px] justify-between'>
                   <ParagraphComp className='font-semibold' text={language === 'en' ? 'East' : 'കിഴക്ക്'} />
@@ -221,7 +221,7 @@ const LandDetailsPlus = () => {
                 </div>
               </div>
             </div>
-            <div className='w-[50%]'>
+            <div className='w-[50%] max-md:w-[100%]'>
               <div className='flex mt-[20px]'>
                 <div className='flex w-[200px] justify-between'>
                   <ParagraphComp className='font-semibold' text={language === 'en' ? 'North' : 'പടിഞ്ഞാറ്'} />
@@ -245,19 +245,19 @@ const LandDetailsPlus = () => {
         </div>
         <div className='p-[20px] w-[100%] rounded-lg mt-[20px]  bg-[#D9EFFF]'>
           <ParagraphComp text={language === 'en' ? 'Basic amenities availability status' : 'അടിസ്ഥാന സൗകര്യങ്ങളുടെ ലഭ്യത നില'} className='text-md mt-[20px] font-bold text-[black]' />
-          <div className='flex justify-between w-[100%]'>
-            <div className='w-[48%] mt-[20px]'>
+          <div className='flex max-md:flex-col  justify-between w-[100%]'>
+            <div className='w-[48%] max-md:w-[100%] mt-[20px]'>
               <CusSelect options={[]} label={language === 'en' ? 'Irrigation facility available' : 'ജലസേചന സൗകര്യം ലഭ്യമാണോ'} />
             </div>
-            <div className='w-[48%] mt-[20px]' >
+            <div className='w-[48%] max-md:w-[100%] mt-[20px]' >
               <CusSelect options={[]} label={language === 'en' ? 'Roads available' : 'റോഡുകൾ ലഭ്യമാണോ'} />
             </div>
           </div>
-          <div className='flex justify-between w-[100%]'>
-            <div className='w-[48%] mt-[20px]'>
+          <div className=' max-md:flex-col flex justify-between w-[100%]'>
+            <div className='w-[48%] max-md:w-[100%] mt-[20px]'>
               <CusSelect options={[]} label={language === 'en' ? 'Electricity Available' : 'വൈദ്യുതി ലഭ്യമാണോ'} />
             </div>
-            <div className='w-[48%] mt-[20px]' >
+            <div className='w-[48%] max-md:w-[100%] mt-[20px]' >
               <CusSelect options={[]} label={language === 'en' ? 'Fencing  available' : 'ഫെൻസിങ് ലഭ്യമാണോ'} />
             </div>
           </div>

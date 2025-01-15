@@ -19,13 +19,13 @@ const Dashboard = () => {
     const shouldShowHeader = location.pathname !== '/dashboard/profile' && location.pathname !== '/dashboard/faq';
 
     return (
-        <div className="flex w-[100%]">
-            <div className="w-[15%] transition-[2s]">
+        <div className="flex max-md:flex-col w-[100%]">
+            <div className="w-[15%] max-md:w-[100%] transition-[2s]">
                 <SideBar />
             </div>
-            <div className="w-[85%] h-[100vh] overflow-scroll">
+            <div className="w-[85%] max-md:w-[100%] h-[100vh] overflow-scroll">
                 {shouldShowHeader && (
-                    <div className="p-[20px]">
+                    <div className=" max-md:p-[10px] p-[20px]">
                         <Header />
                     </div>
                 )}

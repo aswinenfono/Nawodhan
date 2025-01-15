@@ -67,16 +67,16 @@ const Lands = ({ setLandId }) => {
 	}
 	return (
 		<>
-			<div className='flex justify-end w-[100%]'>
-				<div className='w-[20%]'>
+			<div className='flex justify-center w-[100%]'>
+				<div className='max-md:w-[100%]  w-[20%]'>
 					<CusSelect value={district} disabledFilter={true} onChange={UpdateDistrict} label='Select district' options={districts} />
 				</div>
 			</div>
 			<div>
 				<ParagraphComp text='LANDS ' className='text-2xl font-semibold mt-[30px] text-[#0F75BC]' />
 			</div>
-			<div className='w-[100%] border-[3px] p-[20px] min-h-[40vh] mt-[20px] rounded-xl border-[#0F75BC] '>
-				<table className='w-[100%]'>
+			<div className='w-[100%] border-[3px] overflow-auto p-[20px] min-h-[40vh] mt-[20px] rounded-xl border-[#0F75BC] '>
+				<table className='w-[100%] '>
 					<thead>
 						<tr>
 							<th className=' p-[10px]'>No</th>
@@ -90,22 +90,22 @@ const Lands = ({ setLandId }) => {
 						{filteredDistricts?.length > 0 && filteredDistricts?.map((lnd, index) =>
 							<>
 								<tr style={{ marginTop: '10px' }} className='cursor-pointer' onClick={() => { updateData(lnd?.name) }} >
-									<td className={`text-center p-[10px] ${'rounded-l-xl justify-center flex '} bg-[#D9EFFF]`}>
+									<td className={`text-center h-auto p-[10px] ${'rounded-l-xl justify-center flex '} bg-[#D9EFFF]`}>
 										<div className='p-[10px] flex justify-center items-center w-[30px] h-[30px] text-[white] rounded-full bg-[#0F75BC]'>
 											<p>{index + 1}</p>
 										</div>
 									</td>
-									<td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.land_name}</td>
-									<td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_acres_}</td>
-									<td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.district}</td>
-									<td className='text-center text-[#0F75BC] font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_units_}</td>
+									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.land_name}</td>
+									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_acres_}</td>
+									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.district}</td>
+									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_units_}</td>
 								</tr>
 								<div className='mt-[10px]'></div>
 							</>
 						)}
 					</tbody>
 				</table>
-				{filteredDistricts?.length === 0 && <h6 className='text-center mt-8 font-bold text-[#0F75BC]'>No Data Found</h6>}
+				{filteredDistricts?.length === 0 && <h6 className='text-start mt-8 font-bold text-[#0F75BC]'>No Data Found</h6>}
 			</div>
 
 		</>

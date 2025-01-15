@@ -453,7 +453,7 @@ const ApplyForRFP = ({ setButtons }) => {
 	return (
 		<>
 
-			<div className='w-[100%] mt-[20px] rounded-xl p-[20px]'>
+			<div className='w-[100%] mt-[20px] rounded-xl max-md:p-[5px] p-[20px]'>
 				{/* <div className='flex justify-center'>
                     <div className='w-[500px] relative '>
                         <div className='flex justify-between'>
@@ -482,7 +482,7 @@ const ApplyForRFP = ({ setButtons }) => {
 				>
 					{({ values, handleChange }) => (
 						<Form className='w-[100%]'>
-							<div className='flex flex-wrap w-[100%] gap-[20px] mt-[20px]'>
+							<div className='flex max-md:flex-col flex-wrap w-[100%] gap-[20px] mt-[20px]'>
 								{QualificationForm.map(field =>
 
 									<>
@@ -492,16 +492,16 @@ const ApplyForRFP = ({ setButtons }) => {
 											</div>
 										}
 										{field.type.toLocaleLowerCase() === 'select' ?
-											<div className='w-[32%] mt-[20px]'>
+											<div className='w-[32%] max-md:w-[100%] mt-[20px]'>
 												<CusSelect value={values?.[field?.name]} onChange={handleChange} mappingKey={'option'} name={field?.name} options={field?.options?.length > 0 ? field?.options : [{ option: 'checking' }, { option: 'checking' }]} label={field?.label} />
 											</div>
 											:
 											field.type.toLocaleLowerCase() === 'file' ?
-												<div className='w-[32%] mt-[20px]'>
+												<div className='w-[32%] max-md:w-[100%]  mt-[20px]'>
 													<CustomFileInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} />
 												</div>
 												:
-												<div className='w-[32%] mt-[20px]'>
+												<div className='w-[32%] max-md:w-[100%]  mt-[20px]'>
 													<CusInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} type={field?.type} />
 												</div>
 										}

@@ -30,19 +30,18 @@ const Header = () => {
                         text="Welcome to Your Agricultural Dashboard"
                     />
                 </div>
-                <ImageComp className="h-[130px]" source="./images/Star Group.png" />
+
+                <ImageComp className="h-[130px] max-md:hidden " source="./images/Star Group.png" />
             </div>
             <div className="flex gap-[10px] mt-[30px]">
                 <ButtonComp
                     onClick={() => updateButton('Lands')}
-                    className={`w-[100%] shadow-md transition-[2s] p-[10px] justify-center flex gap-[7px] text-center ${
-                        isActive('lands') ? 'bg-[#0F75BC] text-white' : 'bg-[white] text-black'
-                    } rounded-lg`}
+                    className={`w-[100%] shadow-md transition-[2s] p-[10px] justify-center flex gap-[7px] text-center ${isActive('lands') ? 'bg-[#0F75BC] text-white' : 'bg-[white] text-black'
+                        } rounded-lg`}
                 >
                     <div
-                        className={`h-[30px] w-[30px] ${
-                            isActive('lands') ? 'bg-[white] text-[#0F75BC]' : 'bg-[#0F75BC] text-[white]'
-                        } flex justify-center items-center rounded-full`}
+                        className={`h-[30px] w-[30px] ${isActive('lands') ? 'bg-[white] text-[#0F75BC]' : 'bg-[#0F75BC] text-[white]'
+                            } flex justify-center items-center rounded-full`}
                     >
                         <NoteOutlinedIcon className="rotate-90" />
                     </div>
@@ -50,14 +49,12 @@ const Header = () => {
                 </ButtonComp>
                 <ButtonComp
                     onClick={() => updateButton('Apply for RFP')}
-                    className={`w-[100%] transition-[2s] shadow-md p-[10px] justify-center flex gap-[7px] text-center ${
-                        isActive('apply-for-rfp') ? 'bg-[#0F75BC] text-white' : 'bg-[white] text-black'
-                    } rounded-lg`}
+                    className={`w-[100%] transition-[2s] shadow-md p-[10px] justify-center flex gap-[7px] text-center ${isActive('apply-for-rfp') ? 'bg-[#0F75BC] text-white' : 'bg-[white] text-black'
+                        } rounded-lg`}
                 >
                     <div
-                        className={`h-[30px] w-[30px] ${
-                            isActive('apply-for-rfp') ? 'bg-[white] text-[#0F75BC]' : 'bg-[#0F75BC] text-[white]'
-                        } flex justify-center items-center rounded-full`}
+                        className={`h-[30px] w-[30px] ${isActive('apply-for-rfp') ? 'bg-[white] text-[#0F75BC]' : 'bg-[#0F75BC] text-[white]'
+                            } flex justify-center items-center rounded-full`}
                     >
                         <AdsClickOutlinedIcon />
                     </div>
