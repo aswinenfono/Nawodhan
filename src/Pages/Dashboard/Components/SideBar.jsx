@@ -7,9 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const SideBar = () => {
   const location = useLocation();
-  const subMenus = ['dashboard/lands', 'apply-for-rfp', 'submission-form', 'timer'];
+  const subMenus = ['/dashboard/lands', '/dashboard/apply-for-rfp', '/dashboard/submission-form', '/dashboard/timer'];
   const currentSub_tab = location?.pathname
-
 
   const navigate = useNavigate()
 
@@ -45,7 +44,7 @@ const SideBar = () => {
         <div className='max-md:flex max-md:gap-[10px]'>
           {menus?.map((menu, index) => {
             return (
-              <ButtonComp key={index} onClick={() => { updateBtnName(menu?.path) }} className={`text-start w-[100%] transition-[2s] py-[10px] px-[10px] mt-[15px] ${(menu?.path === location?.pathname || subMenus?.includes(currentSub_tab)) ? 'bg-[#0F75BC] text-[white]' : 'bg-[white] text-[#0F75BC]'} font-semibold  rounded-md`} text={menu?.label} />
+              <ButtonComp key={index} onClick={() => { updateBtnName(menu?.path) }} className={`text-start w-[100%] transition-[2s] py-[10px] px-[10px] mt-[15px] ${(menu?.path === location?.pathname || subMenus?.includes(currentSub_tab) && menu?.label === 'Home') ? 'bg-[#0F75BC] text-[white]' : 'bg-[white] text-[#0F75BC]'} font-semibold  rounded-md`} text={menu?.label} />
             )
           })}
         </div>
