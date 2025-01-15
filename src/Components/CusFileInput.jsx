@@ -60,7 +60,8 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
     const [filePreview, setFilePreview] = useState(value);
     const fileInputRef = useRef(null); // Use useRef
 
-    const handleIconClick = () => {
+    const handleIconClick = (event) => {
+        event.preventDefault();
         if (fileInputRef.current) {
             fileInputRef.current.click(); // Trigger the file input click
         }

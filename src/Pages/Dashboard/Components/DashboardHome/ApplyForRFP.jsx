@@ -503,7 +503,7 @@ const ApplyForRFP = ({ setButtons }) => {
 											:
 											field.type.toLocaleLowerCase() === 'file' ?
 												<div className='w-[32%] mt-[20px]'>
-													<CustomFileInput value={values?.[field?.name]}  name={field?.name} label={field?.label} />
+													<CustomFileInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} />
 												</div>
 												:
 												<div className='w-[32%] mt-[20px]'>
