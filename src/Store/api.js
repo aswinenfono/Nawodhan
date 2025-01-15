@@ -53,7 +53,7 @@ axios.interceptors.response.use(undefined, (err) => {
     if (statusCode === 401 && err.config && !err.config.__isRetryRequest) {
       // Got an unauthorized, logout the user
       localStorage.clear();
-      window.location.pathname = '/auth/sign-in';
+      window.location.pathname = '/auth/signin';
     }
     throw err;
   });
