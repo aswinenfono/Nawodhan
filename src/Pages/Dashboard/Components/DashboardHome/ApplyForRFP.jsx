@@ -314,7 +314,7 @@ const ApplyForRFP = ({ setButtons }) => {
 		{
 			parameter: language === 'en' ? 'Business Plan (For Youth/Agripreneurs Only)' : 'ബിസിനസ് പ്ലാൻ (യുവാക്കൾ/കർഷകർക്ക് മാത്രം)',
 			label: language === 'en' ? 'Proposed Agribusiness Plan (Attach a details)' : 'നിർദ്ദിഷ്ട അഗ്രിബിസിനസ് പ്ലാൻ (വിശദാംശങ്ങൾ അറ്റാച്ചുചെയ്യുക) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
-			name: 'full_name',
+			name: 'proposed_agribusiness_plan_attach_a_detailed_document',
 			type: 'file',
 		},
 		{
@@ -374,19 +374,14 @@ const ApplyForRFP = ({ setButtons }) => {
 		{
 			parameter: language === 'en' ? 'Attachments and Supporting Documents' : 'അറ്റാച്ചുമെൻ്റുകളും അനുബന്ധ രേഖകളും',
 			label: language === 'en' ? 'Financial Bank Statements (Last 2 years)' : 'ഫിനാൻഷ്യൽ ബാങ്ക് സ്റ്റേറ്റ്‌മെൻ്റുകൾ (കഴിഞ്ഞ 2 വർഷം) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
-			name: 'full_name',
+			name: 'financial_bank_statements_last_2_years',
 			type: 'file',
 		},
 		{
 			label: language === 'en' ? 'Business Plan Document (For Youth/Agripreneurs)' : 'ബിസിനസ് പ്ലാൻ ഡോക്യുമെൻ്റ് (യുവാക്കൾ/കർഷകർക്ക്) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
-			name: 'full_name',
+			name: 'business_plan_document_for_youthagripreneurs',
 			type: 'file',
-		},
-		{
-			label: language === 'en' ? 'Business Plan Document (For Youth/Agripreneurs)' : 'ബിസിനസ് പ്ലാൻ ഡോക്യുമെൻ്റ് (യുവാക്കൾ/കർഷകർക്ക്) ഫയൽ അപ്‌ലോഡ് ചെയ്യുക',
-			name: 'full_name',
-			type: 'file',
-		},
+		}
 
 
 	];
