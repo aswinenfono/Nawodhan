@@ -67,7 +67,7 @@ const Lands = ({ setLandId }) => {
 	}
 	return (
 		<>
-			<div className='flex justify-center w-[100%]'>
+			<div className='flex max-md:justify-center justify-end w-[100%]'>
 				<div className='max-md:w-[100%]  w-[20%]'>
 					<CusSelect value={district} disabledFilter={true} onChange={UpdateDistrict} label='Select district' options={districts} />
 				</div>
