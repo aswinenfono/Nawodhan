@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ParagraphComp } from '../../../../Components/ParagraphComp'
 import CusInput from '../../../../Components/CusInput'
 import ButtonComp from '../../../../Components/ButtonComp'
@@ -13,17 +13,19 @@ import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik'
 import ModalComp from '../../../../Components/ModalComp'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { ToWords } from 'to-words';
+import Loading from '../../../../Components/Loading'
 
 const SubmissionForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const language = localStorage.getItem('language');
+  const [isLoading, setIsLoading] = useState(true);
   const [noOfYears, setNoOfYears] = useState(0);
   const [fields, setFields] = useState([]);
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, '0');
   const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   const yyyy = today.getFullYear();
-  const currentDate = yyyy + '-' + mm + '-' + dd; 
+  const currentDate = yyyy + '-' + mm + '-' + dd;
 
   const [totalUnitPrice, setTotalUnitPrice] = useState(0);
   const [totalSubUnitPrice, setTotalSubUnitPrice] = useState(0);
@@ -158,7 +160,18 @@ const SubmissionForm = () => {
   ];
 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
 
+    // Cleanup timeout when the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
+
+
+
+  if (isLoading) return <><Loading /></>
   return (
     <>
       <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
@@ -172,7 +185,7 @@ const SubmissionForm = () => {
           <br />
         </ParagraphComp>
         <div className='sm:w-[49%] xs:w-[100%]  mt-3'>
-          
+
           <ParagraphComp text='Years of Proposal' className='text-md font-schibsted text-[black] font-bold mb-2' />
           <FormControl fullWidth sx={{ mt: 1 }}>
             <InputLabel id="demo-simple-select-label">Year</InputLabel>
@@ -251,7 +264,7 @@ const SubmissionForm = () => {
                                   }} />
                                 </div>
                               </div>
-                              
+
                             </div>
                           ))}
                           <div className='flex justify-end mt-10'>
@@ -314,7 +327,7 @@ const SubmissionForm = () => {
                                   }} />
                                 </div>
                               </div>
-   
+
                             </div>
                           ))}
                           <div className='flex justify-end mt-10'>

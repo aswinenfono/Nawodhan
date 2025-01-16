@@ -4,6 +4,7 @@ import CusSelect from '../../../../Components/CusSelect'
 import { useQuery } from 'react-query';
 import { LandDetailed } from '../../../../Store/DashBoard/DashBoard';
 import { useParams } from 'react-router-dom';
+import Loading from '../../../../Components/Loading';
 const LandDetailsPlus = () => {
   const { landId } = useParams();
 
@@ -19,7 +20,7 @@ const LandDetailsPlus = () => {
 
 
   if (isLoading) {
-    return <div>Loading...</div>; // Add loading state
+    return <><Loading /></>; // Add loading state
   }
 
   if (error) {

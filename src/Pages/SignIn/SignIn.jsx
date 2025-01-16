@@ -9,6 +9,7 @@ import { useMutation } from 'react-query'
 import { useSnackbar } from 'notistack';
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../Store/auth/Login'
+import Loading from '../../Components/Loading';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const SignIn = () => {
     }
   };
 
-  if (regLoading) return <h4>Loading...</h4>;
+  if (regLoading) return  <><Loading /></>;
 
   return (
     <>

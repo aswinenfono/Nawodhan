@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import CusSelect from '../../../Components/CusSelect';
 import { useMutation } from 'react-query';
 import { createUser } from '../../../Store/auth/registration';
+import Loading from '../../../Components/Loading';
 const Complete = ({ IntialForm }) => {
   const navigate = useNavigate()
   const FormInputs = [
@@ -121,7 +122,7 @@ const Complete = ({ IntialForm }) => {
   });
 
 
-  if (regLoading) return (<> <h4>Loading...</h4></>)
+  if (regLoading) return (<><Loading /></>)
   return (
     <>
       <div className='w-[100%] flex justify-center max-md:mt-[60px] '>

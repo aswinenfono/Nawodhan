@@ -10,6 +10,7 @@ import { useMutation } from 'react-query';
 import { enqueueSnackbar } from 'notistack';
 import { TechnicalPost } from '../../../../Store/DashBoard/DashBoard';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../../../Components/Loading';
 const ApplyForRFP = ({ setButtons }) => {
 
 	const language = localStorage.getItem('language');
@@ -442,7 +443,7 @@ const ApplyForRFP = ({ setButtons }) => {
 		enqueueSnackbar(message, { variant: 'error' });
 	};
 
-	const { mutateAsync: confirmSubmit } = useMutation({
+	const { mutateAsync: confirmSubmit, isLoading } = useMutation({
 		mutationFn: TechnicalPost,
 		onSuccess: handleCreateSuccess,
 		onError: (error) => {
@@ -450,6 +451,7 @@ const ApplyForRFP = ({ setButtons }) => {
 			handleCreateError(error);
 		},
 	});
+	if (isLoading) return <><Loading /></>
 	return (
 		<>
 

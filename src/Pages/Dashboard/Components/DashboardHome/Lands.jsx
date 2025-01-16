@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { LandsList } from '../../../../Store/DashBoard/DashBoard';
 import { useNavigate } from 'react-router-dom';
 import CusSelect from '../../../../Components/CusSelect';
+import Loading from '../../../../Components/Loading';
 
 const Lands = ({ setLandId }) => {
 	const navigate = useNavigate()
@@ -59,7 +60,7 @@ const Lands = ({ setLandId }) => {
 
 
 	if (isLoading) {
-		return <div>Loading...</div>; // Add loading state
+		return  <><Loading /></>; // Add loading state
 	}
 
 	if (error) {
@@ -79,11 +80,11 @@ const Lands = ({ setLandId }) => {
 				<table className='w-[100%] '>
 					<thead>
 						<tr>
-							<th className=' p-[10px]'>No</th>
-							<th className=' p-[10px]'>Land Name</th>
-							<th className=' p-[10px]'>Land in Acre</th>
-							<th className=' p-[10px]'>District</th>
-							<th className=' p-[10px]'>Land in Unit</th>
+							<th className='text-start p-[10px]'>No</th>
+							<th className='text-start p-[10px]'>Land Name</th>
+							<th className='text-start p-[10px]'>Land in Acre</th>
+							<th className='text-start p-[10px]'>District</th>
+							<th className='text-start p-[10px]'>Land in Unit</th>
 						</tr>
 					</thead>
 					<tbody >
