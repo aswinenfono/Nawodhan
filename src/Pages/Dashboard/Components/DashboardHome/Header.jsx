@@ -22,11 +22,11 @@ const Header = () => {
 
     return (
         <>
-            <div className="mt-[20px] flex justify-between w-[100%] bg-[#0F75BC] rounded-2xl">
+            <div className="mt-[20px] flex items-center justify-between w-[100%] bg-[#0F75BC] rounded-2xl">
                 <div className="p-[20px]">
-                    <ParagraphComp className="font-schibsted text-sm text-[white]" text="WELCOME AHAMMED" />
+                    {/* <ParagraphComp className="font-schibsted text-sm text-[white]" text="WELCOME AHAMMED" /> */}
                     <ParagraphComp
-                        className="font-schibsted text-xl mt-[6px] font-semibold text-[white]"
+                        className="font-schibsted max-md:text-xl text-3xl mt-[6px] font-semibold text-[white]"
                         text="Welcome to Your Agricultural Dashboard"
                     />
                 </div>
