@@ -46,7 +46,7 @@ const LandDetailsPlus = () => {
               </div>
             </div>
           }
-          {(LandsDt?.data?.contact_person_name || LandsDt?.data?.name_of_the_applicant) &&
+          {(LandsDt?.data?.contact_person_name) &&
             <div className='flex mt-[20px]'>
               <div className='flex max-md:w-[200px] w-[300px] justify-between'>
                 <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Name' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പേര്'} />
