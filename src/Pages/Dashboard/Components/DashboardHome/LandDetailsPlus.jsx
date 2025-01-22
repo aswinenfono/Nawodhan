@@ -35,66 +35,121 @@ const LandDetailsPlus = () => {
         </div>
         <div className='p-[20px] mt-[20px] rounded-lg bg-[#D9EFFF]'>
           <ParagraphComp className='font-bold text-xl' text={language === 'en' ? 'About the Institution' : 'സ്ഥാപനത്തെക്കുറിച്ച്'} />
-          <div className='flex mt-[20px]'>
-            <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-              <ParagraphComp className='font-semibold' text={language === 'en' ? 'Name Of Institution' : 'സ്ഥാപനത്തിൻ്റെ പേര്'} />
-              : &nbsp;
+          {(LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_institution) &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Name Of Institution' : 'സ്ഥാപനത്തിൻ്റെ പേര്'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_institution} />
+              </div>
             </div>
-            <div>
-              <ParagraphComp className='' text={LandsDt?.data?.name_of_the_institution} />
+          }
+          {(LandsDt?.data?.contact_person_name || LandsDt?.data?.name_of_the_applicant) &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Name' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പേര്'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.contact_person_name || LandsDt?.data?.name_of_the_applicant} />
+              </div>
             </div>
+          }
+          {LandsDt?.data?.organisation_name &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Organisation Name' : 'സ്ഥാപനത്തിന്റെ പേര്'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.organisation_name} />
+              </div>
+            </div>
+          }
+          {LandsDt?.data?.contact_person_name_designation &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Designations ' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പദവികൾ'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.contact_person_name_designation} />
+              </div>
+            </div>
+          }
+          {(LandsDt?.data?.contact_person_mobile || LandsDt?.data?.phone_number) &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Mobile' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ മൊബൈല്‍'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.contact_person_mobile || LandsDt?.data?.phone_number} />
+              </div>
+            </div>
+          }
+          {(LandsDt?.data?.contact_person_mail_id || LandsDt?.data?.email) &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Mail Id' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ മെയിൽ ഐഡി'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.contact_person_mail_id || LandsDt?.data?.email} />
+              </div>
+            </div>
+          }
+          {(LandsDt?.data?.permanentregistered_address) &&
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Permanent Registered Address' : 'സ്ഥിര വിലാസം'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.permanentregistered_address} />
+              </div>
+            </div>
+          }
+          {(LandsDt?.data?.incorporation_date_only_for_companyorganizationngostrust) &&
 
-          </div>
-          <div className='flex mt-[20px]'>
-            <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-              <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Name' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പേര്'} />
-              : &nbsp;
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Incorporation Date' : 'സ്ഥാപിതമായ തീയതി'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.incorporation_date_only_for_companyorganizationngostrust} />
+              </div>
             </div>
-            <div>
-              <ParagraphComp className='' text={LandsDt?.contact_person_name} />
-            </div>
+          }
+          {(LandsDt?.data?.office_address) &&
 
-          </div>
-          <div className='flex mt-[20px]'>
-            <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-              <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Designations ' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ പദവികൾ'} />
-              : &nbsp;
-            </div>
-            <div>
-              <ParagraphComp className='' text={LandsDt?.data?.contact_person_name_designation} />
-            </div>
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Office Address' : 'ഓഫീസ് വിലാസം'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.office_address} />
+              </div>
 
-          </div>
-          <div className='flex mt-[20px]'>
-            <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-              <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Mobile' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ മൊബൈല്‍'} />
-              : &nbsp;
             </div>
-            <div>
-              <ParagraphComp className='' text={LandsDt?.data?.contact_person_mobile} />
-            </div>
+          }
+          {(LandsDt?.data?.office_address_2) &&
 
-          </div>
-          <div className='flex mt-[20px]'>
-            <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-              <ParagraphComp className='font-semibold' text={language === 'en' ? 'Contact Person Mail Id' : 'ബന്ധപ്പെടാനുള്ള വ്യക്തിയുടെ മെയിൽ ഐഡി'} />
-              : &nbsp;
-            </div>
-            <div>
-              <ParagraphComp className='' text={LandsDt?.data?.contact_person_mail_id} />
-            </div>
+            <div className='flex mt-[20px]'>
+              <div className='flex max-md:w-[200px] w-[300px] justify-between'>
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Office Address 2' : 'ഓഫീസ് വിലാസം 2'} />
+                : &nbsp;
+              </div>
+              <div>
+                <ParagraphComp className='' text={LandsDt?.data?.office_address_2} />
+              </div>
 
-          </div>
-          <div className='flex mt-[20px]'>
-            <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-              <ParagraphComp className='font-semibold' text={language === 'en' ? 'Office Address' : 'ഓഫീസ് വിലാസം'} />
-              : &nbsp;
             </div>
-            <div>
-              <ParagraphComp className='' text={LandsDt?.data?.office_address} />
-            </div>
-
-          </div>
+          }
         </div>
 
         <div className='w-[100%] mt-[20px] max-md:flex-col justify-between flex'>
