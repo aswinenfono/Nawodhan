@@ -42,7 +42,7 @@ const LandDetailsPlus = () => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text={LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_institution} />
+                <ParagraphComp className='' text={LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_applicant} />
               </div>
             </div>
           }
