@@ -35,7 +35,7 @@ const LandDetailsPlus = () => {
         </div>
         <div className='p-[20px] mt-[20px] rounded-lg bg-[#D9EFFF]'>
           <ParagraphComp className='font-bold text-xl' text={language === 'en' ? 'About the Institution' : 'സ്ഥാപനത്തെക്കുറിച്ച്'} />
-          {(LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_institution) &&
+          {(LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_applicant) &&
             <div className='flex mt-[20px]'>
               <div className='flex max-md:w-[200px] w-[300px] justify-between'>
                 <ParagraphComp className='font-semibold' text={language === 'en' ? 'Name Of Institution' : 'സ്ഥാപനത്തിൻ്റെ പേര്'} />
@@ -53,7 +53,7 @@ const LandDetailsPlus = () => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text={LandsDt?.data?.contact_person_name || LandsDt?.data?.name_of_the_applicant} />
+                <ParagraphComp className='' text={LandsDt?.data?.contact_person_name} />
               </div>
             </div>
           }
