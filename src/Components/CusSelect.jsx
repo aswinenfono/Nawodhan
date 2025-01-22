@@ -139,7 +139,7 @@ const CusSelect = (
                     </div>
                 </li>
             )}
-            value={selectedOption}
+            value={value || selectedOption}
             onChange={(event, newValue) => {
                 onChange && onChange({
                     target: {
@@ -161,6 +161,7 @@ const CusSelect = (
             }
             renderInput={(params) => (
                 <CustomTextField
+                    value={value || selectedOption}
                     {...params}
                     label={label}
                     required={required}
