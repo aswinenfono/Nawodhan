@@ -174,7 +174,6 @@ const SubmissionForm = () => {
   if (isLoading) return <><Loading /></>
   return (
     <>
-
       <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
         <ParagraphComp text={language === 'en' ? 'FINANCIAL PROPOSAL SUBMISSION FORM 3.1' : 'സാമ്പത്തിക പ്രൊപ്പോസല്‍ സമർപ്പണ ഫോം 3.1'} className='text-md text-[#0F75BC] font-bold' />
         <ParagraphComp className='text-sm mt-[15px] font-schibsted leading-9 text-[black] ' >
@@ -225,16 +224,10 @@ const SubmissionForm = () => {
                         <>
                           {values?.table_uefd?.map((row, rowIndex) => (
                             <div key={rowIndex} className='grid sm:grid-cols-3 xs:grid-cols-1 gap-3 mt-6 items-center'>
-                              {console.log("row?.unit>>>>", row?.unit)}
                               <div className='mt-2'>
-                                <CusSelect
-                                  value={values?.['table_uefd'][rowIndex]?.['unit']}
-                                  onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)}
-                                  mappingKey={'option'}
-                                  name={`table_uefd[${rowIndex}].unit`}
-                                  options={units?.message?.map((item) => {
-                                    return { option: item?.unit };
-                                  })} label={'Select Unit'} />
+                                <CusSelect value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
+                                  return { option: item?.unit };
+                                })} label={'Select Unit'} />
                               </div>
                               {fields.map((_, index) => (<div key={index} className=' mt-2'>
                                 <Field
