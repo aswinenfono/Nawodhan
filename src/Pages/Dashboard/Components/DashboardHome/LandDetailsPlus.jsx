@@ -38,7 +38,7 @@ const LandDetailsPlus = () => {
           {(LandsDt?.data?.name_of_the_institution || LandsDt?.data?.name_of_the_applicant) &&
             <div className='flex mt-[20px]'>
               <div className='flex max-md:w-[200px] w-[300px] justify-between'>
-                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Name Of Institution' : 'സ്ഥാപനത്തിൻ്റെ പേര്'} />
+                <ParagraphComp className='font-semibold' text={language === 'en' ? 'Name of Applicant/Institution' : 'അപേക്ഷകൻ്റെ/സ്ഥാപനത്തിൻ്റെ പേര്'} />
                 : &nbsp;
               </div>
               <div>
