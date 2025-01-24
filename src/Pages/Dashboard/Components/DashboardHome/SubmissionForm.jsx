@@ -222,7 +222,7 @@ const SubmissionForm = () => {
                       {({ push, remove }) => (
                         <>
                           {values?.table_uefd?.map((row, rowIndex) => (
-                            <div key={rowIndex} className='grid sm:grid-cols-3 xs:grid-cols-1 gap-3 mt-6 items-center'>
+                            <div key={rowIndex} className='grid sm:grid-cols-2 xs:grid-cols-1 gap-3 mt-6 items-center'>
                               <div className='mt-2'>
                                 <CusSelect value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
                                   return { option: item?.unit };
@@ -286,7 +286,7 @@ const SubmissionForm = () => {
                       {({ push, remove }) => (
                         <>
                           {values?.table_uefd?.map((row, rowIndex) => (
-                            <div key={rowIndex} className='grid sm:grid-cols-3 xs:grid-cols-1 gap-3 mt-6 items-center'>
+                            <div key={rowIndex} className='grid sm:grid-cols-2 xs:grid-cols-1 gap-3 mt-6 items-center'>
                               <div className='mt-2'>
                                 <CusSelect value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={sub_units?.message?.map((item) => {
                                   return { option: item?.sub_unit };
