@@ -85,7 +85,6 @@ const Complete = ({ IntialForm }) => {
   }
   const DisplayFormikValues = () => {
     const { values, errors } = useFormikContext();
-    console.log(values, errors); // Access Formik values here
     return null; // You can return JSX or null if you just want to log the values
   };
 

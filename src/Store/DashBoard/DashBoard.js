@@ -26,7 +26,6 @@ export const LandDetailed = async (id) => {
       url: `${LandDetailedApi}/${id}`,
       method: 'GET',
     });
-    console.log(response.data); // Logging the response data
     return response.data; // Return the actual data part of the response
   } catch (error) {
     console.error('Error fetching Lands:', error);
