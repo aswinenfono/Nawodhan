@@ -47,7 +47,7 @@ const Lands = ({ setLandId }) => {
 
 	useEffect(() => {
 		if (district) {
-			const filteredData = Lands?.data?.filter(values => values?.district === district);
+			const filteredData = Lands?.data?.filter(values => values?.district2 === district);
 			if (filteredData?.length > 0) {
 				setFilteredDistricts(filteredData);
 			} else {
