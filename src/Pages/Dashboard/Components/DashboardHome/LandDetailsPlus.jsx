@@ -179,7 +179,7 @@ const LandDetailsPlus = () => {
                 : &nbsp;
               </div>
               <div>
-                <ParagraphComp className='' text={LandsDt?.data?.district} />
+                <ParagraphComp className='' text={LandsDt?.data?.district2} />
               </div>
             </div>
             <div className='flex mt-[20px]'>
