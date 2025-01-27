@@ -98,7 +98,7 @@ const Lands = ({ setLandId }) => {
 									</td>
 									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.land_name}</td>
 									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_acres_}</td>
-									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.district}</td>
+									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.district2}</td>
 									<td className='text-start text-[#0F75BC] whitespace-nowrap font-semibold p-[10px] bg-[#D9EFFF]' >{lnd?.total_availability_of_land_in_units_}</td>
 								</tr>
 								<div className='mt-[10px]'></div>
