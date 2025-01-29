@@ -10,6 +10,7 @@ import Timer from './Components/DashboardHome/Timer';
 import LandDetailsPlus from './Components/DashboardHome/LandDetailsPlus';
 import Profile from './Components/DashboardHome/DashboardProfile/Profile';
 import Faq from './Faq/Faq';
+import SuccessAnimation from './Components/DashboardHome/SuccessAnimation';
 
 const Dashboard = () => {
     const [landId, setLandId] = useState();
@@ -37,6 +38,7 @@ const Dashboard = () => {
                         <Route path="timer" element={<Timer />} />
                         <Route path="land-details-plus/:landId" element={<LandDetailsPlus landId={landId} />} />
                         <Route path="profile" element={<Profile landId={landId} />} />
+                        <Route path="success-form" element={<SuccessAnimation  />} />
                         <Route path="faq" element={<Faq />} />
                         <Route path="/" element={<Navigate to="lands" replace />} />
                     </Routes>

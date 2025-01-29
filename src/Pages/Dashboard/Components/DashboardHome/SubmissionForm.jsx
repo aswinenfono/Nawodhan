@@ -14,11 +14,13 @@ import ModalComp from '../../../../Components/ModalComp'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import { ToWords } from 'to-words';
 import Loading from '../../../../Components/Loading'
+import { useNavigate } from 'react-router-dom'
 
 const SubmissionForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const language = localStorage.getItem('language');
   const [isLoading, setIsLoading] = useState(true);
+  const [formData, setFormData] = useState();
   const [noOfYears, setNoOfYears] = useState(0);
   const [fields, setFields] = useState([]);
   const today = new Date();
@@ -26,10 +28,10 @@ const SubmissionForm = () => {
   const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   const yyyy = today.getFullYear();
   const currentDate = yyyy + '-' + mm + '-' + dd;
-
+  const [declarationStatus, setDeclarationStatus] = useState(false)
   const [totalUnitPrice, setTotalUnitPrice] = useState(0);
   const [totalSubUnitPrice, setTotalSubUnitPrice] = useState(0);
-
+  const navigate = useNavigate()
   const toWords = new ToWords({
     localeCode: 'en-IN',
     converterOptions: {
@@ -91,10 +93,7 @@ const SubmissionForm = () => {
   }
 
   const handleCreateSuccess = () => {
-    setTimeout(() => {
-      openModal()
-    }, 100);
-    enqueueSnackbar('Success', { variant: 'success' });
+    navigate('/dashboard/success-form')
   };
 
   const handleCreateError = (error) => {
@@ -102,7 +101,7 @@ const SubmissionForm = () => {
     enqueueSnackbar(message, { variant: 'error' });
   };
 
-  const { mutateAsync: confirmSubmit } = useMutation({
+  const { mutateAsync: confirmSubmit, isLoading: loadingPage } = useMutation({
     mutationFn: SubmissionFormPost,
     onSuccess: handleCreateSuccess,
     onError: (error) => {
@@ -118,7 +117,11 @@ const SubmissionForm = () => {
       total_in_figures: totalUnitPrice + totalSubUnitPrice > 0 ? toWords.convert(totalUnitPrice + totalSubUnitPrice) : ''
     }
     try {
-      await confirmSubmit(payload);
+      setFormData(payload)
+      setTimeout(() => {
+        openModal()
+      }, 100);
+
     } catch (error) {
       handleCreateError(error);
     }
@@ -169,8 +172,21 @@ const SubmissionForm = () => {
   }, []);
 
 
+  const submitDeclaration = async () => {
+    try {
+      if (declarationStatus) {
+        await confirmSubmit(formData);
+        closeModal()
+      } else {
+        enqueueSnackbar('Please confirm that you agree to the declaration', { variant: 'warning' })
+      }
+    } catch (error) {
+      console.log(error)
+    }
 
-  if (isLoading) return <><Loading /></>
+  }
+
+  if (isLoading || loadingPage) return <><Loading /></>
   return (
     <>
       <div className='rounded-lg border-2 p-[20px] h-[68vh] overflow-x-hidden overflow-y-scroll mt-[20px] border-[#0F75BC] '>
@@ -407,11 +423,11 @@ const SubmissionForm = () => {
             <ParagraphComp text='9. We hereby declare that our proposal submitted in response to this proposal/tender is made in good faith and the information contained is true and correct to the best of our knowledge and belief. ' className='text-start mt-[10px] text-md' />
             <ParagraphComp text='10. We, along with any of our sub-cultivators, subcontractors, suppliers, or service providers for any part of the contract, are not subject to, and not controlled by any entity or individual that is subject to, a temporary suspension or a debarment imposed by the Govt. of India or Govt. of Kerala.' className='text-start mt-[10px] text-md' />
             <label className='mt-[20px] flex items-center' >
-              <InputComp className='h-[20px] w-[20px] ' type='checkbox' />
-              <span className='ml-[10px]'>Agree And Continue</span>
+              <InputComp onChange={() => { setDeclarationStatus(true) }} className='h-[25px] w-[25px] ' type='checkbox' />
+              <span className='ml-[10px] text-lg'>Agree And Continue</span>
             </label>
             <div className='flex justify-end mt-[30px] '>
-              <ButtonComp onClick={() => { closeModal() }} className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' />
+              <ButtonComp onClick={() => { submitDeclaration() }} className='bg-[#0F75BC] px-[20px] p-[5px] text-white rounded-md border-none' text='Submit' />
             </div>
           </div>
         </ModalComp>
