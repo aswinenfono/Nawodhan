@@ -60,7 +60,7 @@ const Lands = ({ setLandId }) => {
 
 
 	if (isLoading) {
-		return  <><Loading /></>; // Add loading state
+		return <><Loading /></>; // Add loading state
 	}
 
 	if (error) {

@@ -10,6 +10,8 @@ import { useSnackbar } from 'notistack';
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../../Store/auth/Login'
 import Loading from '../../Components/Loading';
+import axios from 'axios';
+import { baseApi } from '../../config';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -68,11 +70,20 @@ const SignIn = () => {
     try {
       await confirmLogin(data);
     } catch (error) {
-      handleCreateError(error);
+      // handleCreateError(error);
     }
   };
-
-  if (regLoading) return  <><Loading /></>;
+  // const confirmLogin = async (data) => {
+  //   try {
+  //     const response = await axios.post(`${baseApi}/api/method/develop.rest.custom_login`, data);
+  //     console.log(data)
+  //     return response.data; // Returning only the response data
+  //   } catch (error) {
+  //     console.error('Login failed:', error.response?.data || error.message);
+  //     throw error; // Re-throwing the error to handle it in the calling function
+  //   }
+  // };
+  if (regLoading) return <><Loading /></>;
 
   return (
     <>
