@@ -131,7 +131,7 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
                 />
                 <div
                     style={{
-                        position: 'absolute',
+                        position: 'absolute ',
                         top: '50%',
                         right: '16px', // Adjust spacing from the right edge of the field
                         transform: 'translateY(-50%)', // Vertically center the button

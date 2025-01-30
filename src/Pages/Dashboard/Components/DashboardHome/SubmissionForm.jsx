@@ -240,12 +240,13 @@ const SubmissionForm = () => {
                           {values?.table_uefd?.map((row, rowIndex) => (
                             <div key={rowIndex} className='grid sm:grid-cols-2 xs:grid-cols-1 gap-3 mt-6 items-center'>
                               <div className='mt-2'>
-                                <CusSelect value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
+                                <CusSelect disabled={!noOfYears} value={row?.unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].unit`} options={units?.message?.map((item) => {
                                   return { option: item?.unit };
                                 })} label={'Select Unit'} />
                               </div>
                               {fields.map((_, index) => (<div key={index} className=' mt-2'>
                                 <Field
+
                                   onChange={(e) => {
                                     setFieldValue(`table_uefd.${rowIndex}.rate_per_unit_year_${index + 1}`, e.target.value);
                                     // Dynamically calculate the total for this row
@@ -270,7 +271,7 @@ const SubmissionForm = () => {
                               </div>))}
 
                               <div className='mt-2 flex items-center gap-2'>
-                                <CusInput value={row?.total_per_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_unit`} label={'Total'} type={'number'} />
+                                <CusInput disabled={!noOfYears} value={row?.total_per_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_unit`} label={'Total'} type={'number'} />
 
                                 <div>
                                   <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
@@ -304,7 +305,7 @@ const SubmissionForm = () => {
                           {values?.table_uefd?.map((row, rowIndex) => (
                             <div key={rowIndex} className='grid sm:grid-cols-2 xs:grid-cols-1 gap-3 mt-6 items-center'>
                               <div className='mt-2'>
-                                <CusSelect value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={sub_units?.message?.map((item) => {
+                                <CusSelect disabled={!noOfYears} value={row?.sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.sub_unit`, e.target.value)} mappingKey={'option'} name={`table_uefd[${rowIndex}].sub_unit`} options={sub_units?.message?.map((item) => {
                                   return { option: item?.sub_unit };
                                 })} label={'Select Unit'} />
                               </div>
@@ -334,7 +335,7 @@ const SubmissionForm = () => {
                                   type='number' />
                               </div>))}
                               <div className='mt-2 flex items-center gap-2'>
-                                <CusInput value={row?.total_per_sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_sub_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_sub_unit`} label={'Total'} type={'number'} />
+                                <CusInput disabled={!noOfYears} value={row?.total_per_sub_unit} onChange={(e) => setFieldValue(`table_uefd.${rowIndex}.total_per_sub_unit`, e.target.value)} name={`table_uefd[${rowIndex}].total_per_sub_unit`} label={'Total'} type={'number'} />
                                 <div>
                                   <DeleteIcon className='text-[red] cursor-pointer' onClick={(e) => {
                                     e.preventDefault()

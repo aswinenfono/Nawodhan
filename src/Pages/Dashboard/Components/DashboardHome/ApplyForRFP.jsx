@@ -399,6 +399,9 @@ const ApplyForRFP = ({ setButtons }) => {
 			if (field?.validation?.toLowerCase() === 'mobile') {
 				fieldValidation = fieldValidation.max(10, 'Invalid mobile number');
 			}
+			if (field?.type?.toLowerCase() === 'file') {
+				fieldValidation = Yup.object();
+			}
 			if (field?.validation?.toLowerCase() === 'email') {
 				fieldValidation = fieldValidation.email('Invalid Email Id');
 			}
@@ -415,11 +418,13 @@ const ApplyForRFP = ({ setButtons }) => {
 				values = { ...values, [ele?.name]: `${data?.[ele?.name]}` }
 			}
 		})
+		console.log("data>>>", data)
 		confirmSubmit(data)
 	}
 
 	const DisplayFormikValues = () => {
 		const { values, errors } = useFormikContext();
+		console.log(values, errors)
 		return null; // You can return JSX or null if you just want to log the values
 	};
 
@@ -449,6 +454,18 @@ const ApplyForRFP = ({ setButtons }) => {
 			handleCreateError(error);
 		},
 	});
+	const attachFile = (e, setFieldValue) => {
+		const file = e.target.files[0];
+		const name = e.target.name;
+		if (file) {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				const base64String = reader.result.split(',')[1];
+				setFieldValue(name, { attach_file: base64String, file_name: file.name });
+			};
+			reader.readAsDataURL(file);
+		}
+	};
 	if (isLoading) return <><Loading /></>
 	return (
 		<>
@@ -480,7 +497,7 @@ const ApplyForRFP = ({ setButtons }) => {
 						submitData(data)
 					}}
 				>
-					{({ values, handleChange }) => (
+					{({ values, handleChange, setFieldValue }) => (
 						<Form className='w-[100%]'>
 							<div className='flex max-md:flex-col flex-wrap w-[100%] gap-[20px] mt-[20px]'>
 								{QualificationForm.map(field =>
@@ -498,11 +515,11 @@ const ApplyForRFP = ({ setButtons }) => {
 											:
 											field.type.toLocaleLowerCase() === 'file' ?
 												<div className='w-[32%] max-md:w-[100%]  mt-[20px]'>
-													<CustomFileInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} />
+													<CustomFileInput onChange={(e) => attachFile(e, setFieldValue)} value={values?.[field?.name].file_name} name={field?.name} label={field?.label} />
 												</div>
 												:
 												<div className='w-[32%] max-md:w-[100%]  mt-[20px]'>
-													<CusInput value={values?.[field?.name]} onChange={handleChange} name={field?.name} label={field?.label} type={field?.type} />
+													<CusInput onChange={handleChange} value={values?.[field?.name]} name={field?.name} label={field?.label} type={field?.type} />
 												</div>
 										}
 									</>
