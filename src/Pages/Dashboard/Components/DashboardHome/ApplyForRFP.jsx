@@ -465,7 +465,7 @@ const ApplyForRFP = ({ setButtons }) => {
 		// 	};
 		// 	reader.readAsDataURL(file);
 		// }
-	};
+	}
 	if (isLoading) return <><Loading /></>
 	return (
 		<>
