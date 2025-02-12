@@ -1,5 +1,5 @@
 import { actionHandler } from "../api";
-const initialRegQ = '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district2%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]';
+const initialRegQ = '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district2%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]&limit_page_length=0';
 const LandDetailedApi = '/api/resource/EOI%20For%20Land'
 const TechnicalUrl = '/api/resource/Technical%20Proposal%20Submission%20Form'
 const SubmissionFormUrl = '/api/resource/FINANCIAL%20PROPOSAL%20SUBMISSION%20FORM'

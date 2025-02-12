@@ -455,16 +455,16 @@ const ApplyForRFP = ({ setButtons }) => {
 		},
 	});
 	const attachFile = (e, setFieldValue) => {
-		// const file = e.target.files[0];
-		// const name = e.target.name;
-		// if (file) {
-		// 	const reader = new FileReader();
-		// 	reader.onloadend = () => {
-		// 		const base64String = reader.result.split(',')[1];
-		// 		setFieldValue(name, { file: base64String, file_name: file.name });
-		// 	};
-		// 	reader.readAsDataURL(file);
-		// }
+		const file = e.target.files[0];
+		const name = e.target.name;
+		if (file) {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				const base64String = reader.result.split(',')[1];
+				setFieldValue(name, { file: base64String, file_name: file.name });
+			};
+			reader.readAsDataURL(file);
+		}
 	}
 	if (isLoading) return <><Loading /></>
 	return (
