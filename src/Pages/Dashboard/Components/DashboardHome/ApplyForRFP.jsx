@@ -12,7 +12,7 @@ import { TechnicalPost } from '../../../../Store/DashBoard/DashBoard';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../../../Components/Loading';
 const ApplyForRFP = ({ setButtons }) => {
-
+	const [tempFile, setTempFile] = useState()
 	const language = localStorage.getItem('language');
 
 	const QualificationForm = [
@@ -455,8 +455,10 @@ const ApplyForRFP = ({ setButtons }) => {
 		},
 	});
 	const attachFile = (e, setFieldValue) => {
-		// const file = e.target.files[0];
-		// const name = e.target.name;
+		const file = e.target.files[0];
+		const name = e.target.name;
+		setTempFile({ [e.target.name]: file.name })
+
 		// if (file) {
 		// 	const reader = new FileReader();
 		// 	reader.onloadend = () => {
@@ -514,7 +516,10 @@ const ApplyForRFP = ({ setButtons }) => {
 											:
 											field.type.toLocaleLowerCase() === 'file' ?
 												<div className='w-[32%] max-md:w-[100%]  mt-[20px]'>
-													<CustomFileInput onChange={(e) => attachFile(e, setFieldValue)} value={values?.[field?.name].file_name} name={field?.name} label={field?.label} />
+													<CustomFileInput onChange={(e) => attachFile(e, setFieldValue)}
+														value={tempFile?.[field?.name]}
+														name={field?.name}
+														label={field?.label} />
 												</div>
 												:
 												<div className='w-[32%] max-md:w-[100%]  mt-[20px]'>
