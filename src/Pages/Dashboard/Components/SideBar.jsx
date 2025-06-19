@@ -33,11 +33,11 @@ const SideBar = () => {
       label: 'Profile',
       path: '/dashboard/profile'
     }
-    // ,
-    // {
-    //   label: 'Update your project proposal',
-    //   path: '/dashboard/update-proposal'
-    // }
+    ,
+    {
+      label: 'Update your project proposal',
+      path: '/dashboard/update-proposal'
+    }
   ]
 
   return (

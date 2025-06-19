@@ -42,7 +42,7 @@ const Dashboard = () => {
                         <Route path="land-details-plus/:landId" element={<LandDetailsPlus landId={landId} />} />
                         <Route path="profile" element={<Profile landId={landId} />} />
                         <Route path="success-form" element={<SuccessAnimation />} />
-                        {/* <Route path="update-proposal" element={<UpdateProposal />} /> */}
+                        <Route path="update-proposal" element={<UpdateProposal />} />
                         <Route path="faq" element={<Faq />} />
                         <Route path="/" element={<Navigate to="lands" replace />} />
                     </Routes>
