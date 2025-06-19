@@ -9,8 +9,8 @@ const UpdateProposal = () => {
     const downloadTemplate = (lang) => {
         // Define file paths
         const templates = {
-            eng: './images/PROJECT OUTLINE - NAWODHAN Proposals (2).docx',  // Update the correct file path
-            mal: './images/നവോ-ധാൻ പദ്ധതി.docx' // Update the correct file path
+            eng: '/images/PROJECT OUTLINE - NAWODHAN Proposals (2).docx',  // Update the correct file path
+            mal: '/images/നവോ-ധാൻ പദ്ധതി.docx' // Update the correct file path
         };
         // Create a temporary link element
         const link = document.createElement('a');
