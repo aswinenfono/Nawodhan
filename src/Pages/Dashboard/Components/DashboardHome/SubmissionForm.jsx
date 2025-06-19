@@ -128,39 +128,6 @@ const SubmissionForm = () => {
   }
 
 
-  const years = [
-    {
-      option: 1
-    },
-    {
-      option: 2
-    },
-    {
-      option: 3
-    },
-    {
-      option: 4
-    },
-    {
-      option: 5
-    },
-    {
-      option: 6
-    },
-    {
-      option: 7
-    },
-    {
-      option: 8
-    },
-    {
-      option: 9
-    },
-    {
-      option: 10
-    },
-  ];
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -215,7 +182,7 @@ const SubmissionForm = () => {
                 setNoOfYears(e.target.value)
               }}
             >
-              {Array.from({ length: 100 }, (_, i) => i + 1).map((item) => (
+              {Array.from({ length: 30 }, (_, i) => i + 1).map((item) => (
                 <MenuItem key={item} value={item}>
                   {item}
                 </MenuItem>
