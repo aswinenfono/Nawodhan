@@ -11,13 +11,16 @@ import LandDetailsPlus from './Components/DashboardHome/LandDetailsPlus';
 import Profile from './Components/DashboardHome/DashboardProfile/Profile';
 import Faq from './Faq/Faq';
 import SuccessAnimation from './Components/DashboardHome/SuccessAnimation';
+import UpdateProposal from './Components/DashboardHome/UpdateProposal/UpdateProposal';
 
 const Dashboard = () => {
     const [landId, setLandId] = useState();
     const location = useLocation();
 
     // Determine if the Header should be displayed
-    const shouldShowHeader = location.pathname !== '/dashboard/profile' && location.pathname !== '/dashboard/faq';
+    const shouldShowHeader = location.pathname !== '/dashboard/profile'
+        && location.pathname !== '/dashboard/faq' &&
+        location.pathname !== '/dashboard/update-proposal';
 
     return (
         <div className="flex max-md:flex-col w-[100%]">
@@ -38,7 +41,8 @@ const Dashboard = () => {
                         <Route path="timer" element={<Timer />} />
                         <Route path="land-details-plus/:landId" element={<LandDetailsPlus landId={landId} />} />
                         <Route path="profile" element={<Profile landId={landId} />} />
-                        <Route path="success-form" element={<SuccessAnimation  />} />
+                        <Route path="success-form" element={<SuccessAnimation />} />
+                        {/* <Route path="update-proposal" element={<UpdateProposal />} /> */}
                         <Route path="faq" element={<Faq />} />
                         <Route path="/" element={<Navigate to="lands" replace />} />
                     </Routes>

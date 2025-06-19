@@ -33,6 +33,11 @@ const SideBar = () => {
       label: 'Profile',
       path: '/dashboard/profile'
     }
+    // ,
+    // {
+    //   label: 'Update your project proposal',
+    //   path: '/dashboard/update-proposal'
+    // }
   ]
 
   return (
@@ -41,7 +46,7 @@ const SideBar = () => {
         <HeaderCompo tagType='h3' className='text-xl max-md:mt-[0px] text-[#0F75BC] font-semibold' text='NAWO-DHAN' />
       </div>
       <div className='w-[100%] rounded-md bg-[#D9EFFF] justify-between flex flex-col h-[85vh] max-md:h-auto p-[10px]'>
-        <div className='max-md:flex max-md:gap-[10px]'>
+        <div className=' max-md:gap-[10px]'>
           {menus?.map((menu, index) => {
             return (
               <ButtonComp key={index} onClick={() => { updateBtnName(menu?.path) }} className={`text-start w-[100%] transition-[2s] py-[10px] px-[10px] mt-[15px] ${(menu?.path === location?.pathname || subMenus?.includes(currentSub_tab) && menu?.label === 'Home') ? 'bg-[#0F75BC] text-[white]' : 'bg-[white] text-[#0F75BC]'} font-semibold  rounded-md`} text={menu?.label} />
