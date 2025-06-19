@@ -127,9 +127,6 @@ const SubmissionForm = () => {
     }
   }
 
-const years = Array.from({ length: 30 }, (_, i) => ({
-  option: i + 1,
-}));
 
 
   useEffect(() => {
@@ -185,9 +182,12 @@ const years = Array.from({ length: 30 }, (_, i) => ({
                 setNoOfYears(e.target.value)
               }}
             >
-              {years?.map((item, index) => (
-                <MenuItem key={index} value={item?.option}>{item?.option}</MenuItem>
+              {Array.from({ length: 30 }, (_, i) => i + 1).map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
               ))}
+
             </Select>
           </FormControl>
           <ParagraphComp text='Select Land Unit' className='text-md font-schibsted text-[#0F75BC] font-bold mt-2' />
