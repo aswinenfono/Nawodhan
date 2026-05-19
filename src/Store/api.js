@@ -9,12 +9,12 @@ export const actionHandler = (payload) => {
 
   // Retrieve tokens
   const accessToken = localStorage.getItem('accessToken');
-  const landViewToken = '2dae90c706fcdf6:b244afc045982d8';
+  const landViewToken = '2dae90c706fcdf6:ac781637ac4da9c';
 
   if (payload?.url === 'api/method/develop.rest.custom_login') {
     // console.log("checking login>>>>>", payload?.url);
     // No token for login request
-  } else if (payload?.url === '/api/resource/EOI%20For%20Land?fields=[%22name%22,%22district2%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]&limit_page_length=0' ||
+  } else if (payload?.url === 'api/resource/EOI%20For%20Land?fields=[%22name%22,%22district2%22,%22land_name%22,%22total_availability_of_land_in_acres_%22,%20%22total_availability_of_land_in_units_%22]&limit_page_length=0' ||
     payload?.url === "/api/resource/EOI%20For%20Land") {
     headers["Authorization"] = "Token " + landViewToken;
   } else if (accessToken) {
@@ -54,8 +54,8 @@ axios.interceptors.response.use(undefined, (err) => {
   return new Promise(() => {
     if (statusCode === 401 && err.config && !err.config.__isRetryRequest) {
       // Clear localStorage and redirect to login on unauthorized
-      localStorage.clear();
-      window.location.pathname = '/signin';
+      // localStorage.clear();
+      // window.location.pathname = '/signin';
     }
     throw err;
   });
