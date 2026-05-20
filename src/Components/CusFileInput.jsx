@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { styled, TextField, InputAdornment } from '@mui/material';
+import { useRef } from 'react';
+import { styled, TextField } from '@mui/material';
 import ButtonComp from './ButtonComp';
-import { ParagraphComp } from './ParagraphComp';
 
-const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => ({
+const CustomTextField = styled(TextField)(({ paddingTop, inputType }) => ({
     '& .MuiOutlinedInput-root': {
         minHeight: '56px',
         borderRadius: '8px',
@@ -56,8 +55,6 @@ const CustomTextField = styled(TextField)(({ theme, paddingTop, inputType }) => 
 }));
 
 const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...props }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [filePreview, setFilePreview] = useState(value);
     const fileInputRef = useRef(null); // Use useRef
 
     const handleIconClick = (event) => {
@@ -70,10 +67,6 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setFilePreview({
-                url: URL.createObjectURL(file),
-                type: file?.type,
-            });
             onChange(event);
         }
     };
@@ -93,18 +86,6 @@ const CustomFileInput = ({ value, onChange, label, name, required, readOnly, ...
     };
 
     const paddingTop = calculatePaddingTop(label);
-
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
-    const openModal = () => {
-        setIsOpen(true);
-    };
-
-    const isPDF = (base64) => {
-        return base64?.startsWith("JVBERi0") || base64?.startsWith("data:application/pdf;base64,");
-    };
 
     return (
         <>
